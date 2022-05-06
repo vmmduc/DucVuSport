@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/cart-detail.css" />
+
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- light slider -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.css" />
+
+  <!-- Boostrap -->
+  <link rel="stylesheet" href="bootstrap-5.1.3/css/bootstrap.min.css">
+
+  <!-- Jquery -->
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="bootstrap-5.1.3/js/bootstrap.min.js"></script>
+  <script src="bootstrap-5.1.3/js/bootstrap.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"></script>
+
+  <title>Trang chủ</title>
+</head>
+
+<body>
+  <!-- header section starts  -->
+  <header class="header">
+
+    <a href="#home" class="header__logo"> <i class="fas fa-shopping-basket"></i> SStore </a>
+    <nav class="header__menu">
+      <a href="#" class="header__menu-item">Trang chủ</a>
+      <a href="#" class="header__menu-item">Sản phẩm</a>
+      <a href="#" class="header__menu-item">Tin tức</a>
+      <a href="#" class="header__menu-item">Giới thiệu</a>
+    </nav>
+
+    <div class="header__icons">
+      <div id="search-btn"><i class="fas fa-search"></i></div>
+      <div id="cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class=" header__cart--notice">3</span>
+      </div>
+      <div id="account-btn" data-toggle="modal" data-target="#accountForm"><i class="fas fa-user"></i></div>
+      <div id="menu-btn"><i class="fas fa-bars"></i></div>
+    </div>
+
+    <form action="" class="header__search">
+      <input type="search" id="search-box" placeholder="search here...">
+      <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+    <div class="header__cart">
+      <div class="header__no-cart">
+        <img src="images/banners/no-cart.png" alt="">
+        <span>Bạn chưa có sản phẩm nào</span>
+      </div>
+
+      <div class="header__has-cart">
+        <div class="header__has-cart--style">Sản phẩm bạn đã chọn</div>
+        <!-- Item -->
+        <ul class="box header__cart-list">
+          <li class="header__cart-list-item">
+            <img src="images/Bronson-Vitamin-K2-D3-250-viên.jpg" alt="" class="header__cart-list-item-img">
+            <div class="header__cart-list-item-info">
+
+              <div class="header__cart-list-item-head">
+                <h5 class="header__cart-list-item-name">Tên của sản phẩm</h5>
+
+                <div class="header__cart-list-item-rice-wrap">
+                  <span class="header__cart-list-item-price">2.000.000đ</span>
+                  <span class="header__cart-list-item-mul">x</span>
+                  <span class="header__cart-list-item-quantity">3</span>
+                </div>
+
+              </div>
+
+              <div class="header__cart-list-item-body">
+                <span class="header__cart-list-item-type">Phân loại: Bạc sỉu</span>
+                <span class="header__cart-list-item-trash" id="">Xoá</span>
+              </div>
+
+            </div>
+          </li>
+          <hr width="90%" style="margin: 0 auto;" />
+          <!-- ===================================================================== -->
+        </ul>
+
+        <div class="header__cart-total">
+          <div class="total"> Tổng cộng: <span>18.000.000đ</span> </div>
+          <a href="#" class="header__cart-check-btn">Kiểm tra giỏ hàng</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-5 col-md-3 header__account">
+      <a class="header__account-item" data-bs-toggle="modal" data-bs-target="#account-modal" id="login_btn">
+        Đăng nhập</a>
+      <a class="header__account-item" data-bs-toggle="modal" data-bs-target="#account-modal" id="register_btn">
+        Đăng ký</a>
+    </div>
+  </header>
+
+  <!-- account modal -->
+  <div class="modal fade" id="account-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header nav-tabs">
+          <ul class="modal-header__tab nav nav-pills" role="tablist">
+
+            <li class="nav-item">
+              <button class="modal-header__login" data-bs-toggle="pill" data-bs-target="#login">Đăng nhập</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="modal-header__register" data-bs-toggle="pill" data-bs-target="#register">Đăng ký</button>
+            </li>
+
+          </ul>
+          <button type="button" class="modal-header__btn close" data-bs-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body tab-content">
+
+          <div class="modal-body__login tab-pane show" id="login">
+            <form class="account__form" action="" method="post">
+              <div class="form__message">Bạn chưa nhập tài khoản và mật khẩu</div>
+              <div class="form__input">
+                <input type="text" placeholder="Email hoặc số điện thoại">
+                <div class="form__icon"><i class="fas fa-user-circle"></i></div>
+              </div>
+
+              <div class="form__input">
+                <input type="password" placeholder="Mật khẩu" id="pw">
+                <div class="form__icon"><i class="fa fa-eye-slash" id="show--hide"></i></div>
+              </div>
+
+              <div class="form__check">
+                <div class="form__checkbox">
+                  <input type="checkbox" id="remember-me" checked="true">
+                  <label for="remember-me">Nhớ mật khẩu</label>
+                </div>
+                <div class="form__forgot-password">
+                  <a href="#">Quên mật khẩu</a>
+                </div>
+              </div>
+
+              <div class="btn">
+                <button>Đăng nhập</button>
+              </div>
+
+              <div class="form__line">
+                <hr>
+                <div>Hoặc</div>
+                <hr>
+              </div>
+
+              <div class="form__other">
+                <a href="#" class="facebook"><img class="img--style" src="images/banners/facebook.png"></a>
+                <a href="#" class="google"><img class="img--style" src="images/banners/google.png"></a>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-body__register tab-pane" id="register">
+
+            <form class="account__form" action="" method="post">
+              <div class="form__input">
+                <input type="text" placeholder="Họ và tên">
+                <div class="form__icon"><i class="fas fa-user-circle"></i></div>
+              </div>
+
+              <div class="form__input">
+                <input type="text" placeholder="Email">
+                <div class="form__icon"><i class="fas fa-envelope"></i></div>
+              </div>
+
+              <div class="form__input">
+                <input type="text" placeholder="Số điện thoại">
+                <div class="form__icon"><i class="fas fa-phone"></i></div>
+              </div>
+
+              <div class="form__input">
+                <input type="password" placeholder="Mật khẩu" id="pw">
+                <div class="form__icon"><i class="fa fa-eye-slash" id="show--hide"></i></div>
+              </div>
+
+              <div class="form__input">
+                <input type="password" placeholder="Xác nhận mật khẩu" id="pw">
+                <div class="form__icon"><i class="fa fa-eye-slash" id="show--hide"></i></div>
+              </div>
+
+              <div class="form__check">
+                <div class="form__checkbox">
+                  <input type="checkbox" id="accept-me" checked="true">
+                  <label for="accept-me">Đồng ý với các điều khoản</label>
+                </div>
+              </div>
+
+              <div class="btn">
+                <button>Đăng kí</button>
+              </div>
+
+              <div class="form__line">
+                <hr>
+                <div>Hoặc</div>
+                <hr>
+              </div>
+
+              <div class="form__other">
+                <a href="#" class="facebook"><img class="img--style" src="images/banners/facebook.png"></a>
+                <a href="#" class="google"><img class="img--style" src="images/banners/google.png"></a>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- header section ends -->
+
+  <!-- Home conten -->
+  <div class="body">
+    <div class="body-container" id="body">
+      <div class="body__path">
+        <span>Trang chủ</span>
+        <i class="fa fa-angle-double-right"></i>
+        <span>Giỏ hàng</span>
+      </div>
+
+      <div class="cart__detail">
+        <div class="detail__no-cart">
+          <div class="no-cart__img">
+            <img src="images/banners/no-cart.png" alt="">
+          </div>
+          <div class="no-cart__title">
+            Bạn chưa chọn sản phẩm nào
+          </div>
+          <div class="btn"> <a href="#">Mua hàng</a></div>
+        </div>
+
+        <div class="detail__has-cart">
+          <div class="has-cart__left col-md-8 col-12">
+            <div class="cart__title">
+              <div class="col-md-4 col-4">Tên sản phẩm</div>
+              <div class="col-md-2 col-2">Loại sản phẩm</div>
+              <div class="col-md-2 col-2">Đơn giá</div>
+              <div class="col-md-2 col-2">Số lượng</div>
+              <div class="col-md-2 col-2">Thành tiền</div>
+            </div>
+
+            <div class="cart__item">
+              <div class="__product col-md-4 col-4">
+                <div class="__product_img col-md-4"><img src="images/ABE-Pre-Workout-30-servings.jpg" alt=""></div>
+                <div class="__product_name col-md-8">Tên sản phẩm sẽ nằm ở đây</div>
+              </div>
+              <div class="__category col-md-2 col-2">
+                <div class="__category_name">
+                  <select class="form-select">
+                    <option value="">Option 1</option>
+                    <option value="">Option 2</option>
+                    <option value="">Option 3</option>
+                    <option value="">Option 4</option>
+                  </select>
+                </div>
+              </div>
+              <div class="__price col-md-2 col-2">
+                <div class="__old-price">$12.000.000</div>
+                <div class="__new-price">$12.000.000</div>
+              </div>
+              <div class="__amount col-md-2 col-2">
+                <div class="buttons_added">
+                  <input class="minus is-form" type="button" value="-">
+                  <input aria-label="quantity" class="input-qty" max="100" min="1" type="number" value="1">
+                  <input class="plus is-form" type="button" value="+">
+                </div>
+              </div>
+
+              <div class="__total col-md-2 col-2">
+                <span>12.000.000</span>
+              </div>
+              <div class="__action">
+                <a href="#" class="__update">Sửa</a>
+                <a href="#" class="__delete">Xoá</a>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="has-cart__right col-md-4 col-12">
+            <div class="__cart-total">
+              <div class="__voucher">
+                <input type="text" placeholder="Nhập mã giảm giá ...">
+                <button id="btn-ok" class="ok__btn">OK</button>
+              </div>
+
+              <div class="__total-detail">
+                <div>
+                  <span>Tổng cộng:</span>
+                  <span>12.000.000đ</span>
+                </div>
+                <div>
+                  <span>Giảm giá:</span>
+                  <span>-1.000.000đ</span>
+                </div>
+                <div>
+                  <span>VAT:</span>
+                  <span>500.000đ</span>
+                </div>
+                <div>
+                  <span>Thành tiền:</span>
+                  <span>12.000.000đ</span>
+                </div>
+              </div>
+
+              <div class="__payment">
+                <a href="#" class="__payment-btn">Thanh toán</a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer section starts  -->
+  <footer class="footer">
+    <div class="footer__box-container">
+
+      <div class="box">
+        <h3 class="box__h3--style"> SSport <i class="fas fa-shopping-basket icon--color"></i> </h3>
+        <p>Cửa hàng chuyên cung cấp thực phẩm bổ sung và dụng cụ hỗ trợ tập luyện thể thao và phục hồi chức năng vận
+          động</p>
+        <div class="box__share">
+          <a href="#" class="fab fa-facebook-f"></a>
+          <a href="#" class="fab fa-google"></a>
+          <a href="#" class="fab fa-instagram"></a>
+          <a href="#" class="fab fa-linkedin"></a>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3 class="box__h3--style">Liên hệ</h3>
+        <a href="#" class="box__links"> <i class="fas fa-phone icon--color"></i> (+84) 961037969 </a>
+        <a href="#" class="box__links"> <i class="fas fa-envelope icon--color"></i> vmmduc@gmail.com </a>
+        <a href="#" class="box__links"> <i class="fas fa-map-marker-alt icon--color"></i> Hà Nội, Việt Nam </a>
+      </div>
+
+      <div class="box">
+        <h3 class="box__h3--style">Đăng kí nhận thông tin</h3>
+        <input type="email" placeholder="Email ..." class="box__email">
+        <div class="btn"><button>Đăng ký</button></div>
+        <img src="images/banners/payment.png" class="box__payment" alt="">
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- footer section ends -->
+  <script src="js/event.js"></script>
+</body>
+
+</html>

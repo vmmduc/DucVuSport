@@ -1,0 +1,248 @@
+@import url("..css/style.css");
+
+.cart__detail{
+    width: 100%;
+}
+
+/* no cart */
+.detail__no-cart {
+    background-color: white;
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    box-shadow: var(--box-shadow);
+    border-radius: 1rem;
+}
+
+.detail__no-cart img {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.detail__no-cart span {
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.detail__no-cart div {
+    margin-bottom: 2rem;
+}
+
+/* has product */
+.detail__has-cart {
+    width: 95%;
+    display: flex;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background-color: var(--white);
+    border-radius: 1rem;
+}
+.cart__title {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    padding: 1rem 0 1rem 0;
+    border-bottom: solid 1px var(--light-color);
+}
+
+.cart__item {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    margin: 1rem 0 1rem 0;
+    padding: 2rem;
+    box-shadow: var(--bold-box-shadow);
+    border-radius: 1rem;
+}
+.cart__item:hover{
+    background-color: var(--bg-color);
+}
+.__product {
+    display: flex;
+}
+
+.__product_img img {
+    width: 100%;
+}
+
+.__product_name {
+    padding: 1rem 1rem 1rem 1rem;
+    font-weight: bold;
+}
+
+.__category {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.__price {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.__old-price {
+    font-size: var(--size);
+    color: var(--light-color);
+    text-decoration: line-through;
+}
+
+.__new-price {
+    font-size: var(--size);
+    color: var(--main-color);
+}
+
+/* Amount */
+.__amount {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.6rem;
+}
+
+.buttons_added {
+    opacity: 1;
+    display: inline-block;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.is-form {
+    overflow: hidden;
+    position: relative;
+    background-color: #f9f9f9;
+    height: 3rem;
+    width: 2rem;
+    padding: 0;
+    text-shadow: 1px 1px 1px #fff;
+    border: 1px solid #ddd;
+}
+
+.is-form:focus, .input-text:focus {
+    outline: none;
+}
+
+.is-form.minus {
+    border-radius: 4px 0 0 4px;
+}
+
+.is-form.plus {
+    border-radius: 0 4px 4px 0;
+}
+
+.input-qty {
+    background-color: #fff;
+    height: 3rem;
+    text-align: center;
+    font-size: 1.6rem;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 0;
+    border-right: 0;
+    padding: 0;
+}
+
+.input-qty::-webkit-outer-spin-button, .input-qty::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.__total{
+    margin-top: 2rem;
+    text-align: center;
+    font-size: var(--size);
+    color: var(--main-color);
+}
+
+.__action{
+    position: absolute;
+    right: 1rem;
+    bottom: .5rem;
+    display: flex;
+}
+.__update,
+.__delete{
+    font-size: var(--size);
+    margin-left: 1rem;
+    padding: .5rem;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    color: var(--white);
+}
+.__update:hover,
+.__delete:hover{
+    opacity: 0.5;
+    color: white;
+}
+
+.has-cart__left{
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.__voucher{
+    color: var(--light-grey);
+    width: 80%;
+    margin: 0 auto;
+    padding: .5rem;
+    border-bottom: solid 1px black;
+}
+.__voucher input{
+    width: 85%;
+    font-size: 1.6rem;
+    padding-left: 1rem;
+}
+.ok__btn{
+    width: 10%;
+    padding: .3rem;
+    color: var(--main-color);
+    border-radius: 2rem;
+}
+.__cart-total{
+    box-shadow: var(--bold-box-shadow);
+    border-radius: 1rem;
+    margin: 2rem;
+    width: 95%;
+    margin: 0 auto;
+}
+.__total-detail{
+    width:80%;
+    margin: 0 auto;
+    padding: 1rem 0 1rem 0;
+}
+.__total-detail div{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    font-size: var(--size);
+}
+.__payment{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+.__payment-btn{
+    background-color: var(--main-color);
+    padding: .5rem 10rem .5rem 10rem;
+    border-radius: 2rem;
+    color:var(--white);
+}
+.__payment-btn:hover{
+    color: var(--white);
+    opacity: .8;
+}
+@media only screen and (max-width: 768px){
+    .detail__has-cart{
+        display: block;
+    }
+}

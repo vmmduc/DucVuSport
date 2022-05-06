@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var user = Session["user"] as DataAccessLib.Entities.tbUser;
+}
+
+<div class="body__sale">
+    @if (user != null)
+    {
+        <ul>
+            <li>@user.email</li>
+            <li>@user.fullName</li>
+            <li>@user.phoneNumber</li>
+            <li>@user.passwordHash</li>
+        </ul>
+    }
+</div>
+
+<div class="feature-product">
+    <div class="feature-product__heading">
+        <h1>Sản phẩm nổi bật</h1>
+    </div>
+    <!-- product-box -->
+    <div class="feature-product__body">
+        <ul id="autoWidth" class="cs-hidden">
+
+            <!-- for each here-->
+            @for (var i = 0; i < 10; i++)
+            {
+                <li class="">
+                    <div class="product align-items-center">
+                        <img class="product__img" src="~/Content/images/BangCuonGoi.jpg">
+                        <h5 class="product__name">Product name</h5>
+                        <div class="product__price">
+                            <div class="new__price">$12.000.00</div>
+                            <div class="old__price text-decoration-line-through">$12.000.00</div>
+                        </div>
+                        <div class="item__star">
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star active"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="add-cart__btn">
+                            <span>Thêm vào giỏ</span>
+                        </div>
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </div>
+</div>
+
+<div class="body__get-info">
+
+</div>

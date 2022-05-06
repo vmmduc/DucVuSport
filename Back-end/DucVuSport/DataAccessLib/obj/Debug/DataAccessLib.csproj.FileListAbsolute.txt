@@ -1,0 +1,12 @@
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\bin\Debug\DataAccessLib.dll.config
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\bin\Debug\DataAccessLib.dll
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\bin\Debug\DataAccessLib.pdb
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\bin\Debug\EntityFramework.dll
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\bin\Debug\EntityFramework.SqlServer.dll
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\bin\Debug\EntityFramework.xml
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\bin\Debug\EntityFramework.SqlServer.xml
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csproj.AssemblyReference.cache
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csproj.CoreCompileInputs.cache
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csproj.CopyComplete
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.dll
+D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.pdb
