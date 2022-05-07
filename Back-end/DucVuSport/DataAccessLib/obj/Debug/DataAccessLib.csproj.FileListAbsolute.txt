@@ -10,3 +10,15 @@ D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csproj.
 D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csproj.CopyComplete
 D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.dll
 D:\DATN\ssport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.pdb
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\DataAccessLib.dll.config
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\DataAccessLib.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\DataAccessLib.pdb
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\EntityFramework.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\EntityFramework.SqlServer.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\EntityFramework.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\EntityFramework.SqlServer.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csproj.AssemblyReference.cache
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csproj.CoreCompileInputs.cache
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csproj.CopyComplete
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.pdb

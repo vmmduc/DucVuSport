@@ -263,10 +263,9 @@ ul li {
 
 .header__has-cart--style {
     text-align: left;
-    margin: 8px 0 8px 12;
+    margin: 8px 0 8px 12px;
     font-size: var(--size);
     color: #999;
-    font-weight: none;
 }
 
 .header__cart-list-item {
@@ -303,7 +302,7 @@ ul li {
 
 .header__cart-list-item-price {
     font-size: var(--size);
-    font-weight: 500px;
+    font-weight: 500;
     color: var(--main-color);
 }
 
@@ -590,10 +589,11 @@ ul li {
 }
 
 .product__name {
-    width: 80%;
+    width: 95%;
+    height: 4rem;
     text-align: center;
-    font-size: 2rem;
-    overflow: hidden;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .product__price {

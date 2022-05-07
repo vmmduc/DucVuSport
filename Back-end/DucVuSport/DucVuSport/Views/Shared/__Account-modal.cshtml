@@ -31,9 +31,9 @@
                             <div class="form__icon"><i class="fas fa-user-circle"></i></div>
                         </div>
 
-                        <div class="form__input">
-                            @Html.PasswordFor(m => m.passwd, new { @placeholder = "Mật khẩu", @id = "pw" })
-                            <div class="form__icon"><i class="fa fa-eye-slash" id="show--hide"></i></div>
+                        <div class="form__input pwd-input">
+                            @Html.PasswordFor(m => m.passwd, new { @placeholder = "Mật khẩu", @class = "pw" })
+                            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
                         </div>
 
                         <div class="form__check">
@@ -71,14 +71,14 @@
                             <div class="form__icon"><i class="fas fa-phone"></i></div>
                         </div>
 
-                        <div class="form__input">
-                            <input type="password" placeholder="Mật khẩu" id="pw">
-                            <div class="form__icon"><i class="fa fa-eye-slash" id="show--hide"></i></div>
+                        <div class="form__input pwd-input">
+                            <input type="password" placeholder="Mật khẩu" class="pw">
+                            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
                         </div>
 
-                        <div class="form__input">
-                            <input type="password" placeholder="Xác nhận mật khẩu" id="pw">
-                            <div class="form__icon"><i class="fa fa-eye-slash" id="show--hide"></i></div>
+                        <div class="form__input pwd-input">
+                            <input type="password" placeholder="Xác nhận mật khẩu" class="pw">
+                            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
                         </div>
 
                         <div class="form__check">

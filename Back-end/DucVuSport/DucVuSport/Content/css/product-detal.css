@@ -1,4 +1,4 @@
-@import url("..css/style.css");
+@import url("style.css");
 .body__product-detail {
     background-color: var(--white);
     width: 70%;
@@ -33,13 +33,13 @@
 
 .images {
     display: flex;
-    justify-content: space-between;
     width: 100%;
     margin-top: 1rem;
 }
 
 .small__img {
     width: 6rem;
+    margin-left: 1rem;
     overflow: hidden;
     border: 1.5px solid var(--main-color);
 }
@@ -55,7 +55,7 @@
 }
 
 .right {
-    padding-left: 5rem;
+    padding-left: 1rem;
 }
 
 .__product__name {
@@ -68,10 +68,6 @@
     font-size: var(--size);
     font-weight: 500;
     margin: 1.4rem 0;
-}
-
-.category {
-    display: flex;
 }
 
 .type {

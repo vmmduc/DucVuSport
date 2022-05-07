@@ -1,5 +1,6 @@
-﻿@{ 
+﻿@{
     var product = ViewBag.detail as DataAccessLib.Entities.Product;
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 <link href="~/Content/css/product-detal.css" rel="stylesheet" />
 <div class="body__product-detail">
@@ -10,10 +11,10 @@
             </div>
             <div class="images">
                 <div class="small__img">
-                    <img src="~/Content/images/Air-salonpas.png" alt="">
+                    <img src="~/Content/images/BangCuonGoi.jpg" alt="">
                 </div>
                 <div class="small__img">
-                    <img src="~/Content/images/Air-salonpas.png" alt="">
+                    <img src="~/Content/images/BangDaBoxing.jpg" alt="">
                 </div>
                 <div class="small__img">
                     <img src="~/Content/images/Air-salonpas.png" alt="">
@@ -23,6 +24,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="right col-md-9 col-9">
             <div class="__product__name">@product.productName</div>
             <div class="item__star">
@@ -32,14 +34,8 @@
                 <i class="fa fa-star active"></i>
                 <i class="fa fa-star"></i>
             </div>
-            <div class="price">@product.price</div>
-            <div class="col-12">@product.shotDescribe</div>
-            <div class="category">
-                <div class="type active">1</div>
-                <div class="type">2</div>
-                <div class="type">3</div>
-                <div class="type">4</div>
-            </div>
+            <div class="price">@String.Format(format, "{0:c0}", @product.price)</div>
+            <div class="col-10">@product.shotDescribe</div>
             <div class="quantity">
                 <div>Số lượng:</div>
                 <div class="buttons_added">
