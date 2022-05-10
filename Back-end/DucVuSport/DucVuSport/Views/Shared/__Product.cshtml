@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<DataAccessLib.Entities.Product>
 @foreach (var item in Model)
 {
-    
-    <a class="product__item" href="/Product/Detail/@item.productID">
-        <div class="product align-items-center">
+
+    <div class="product__item">
+        <a class="product__content align-items-center" href="/Product/Detail/@item.productID">
             @{
                 var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
                 var price = item.price - item.price * item.discount;
                 var discount = item.discount * 100;
             }
-            <div class="product__discount">-@item.discount%</div>
+            <div class="product__discount">-@discount%</div>
             @if (@item.img == null)
             {
                 <img class="product__img" src="~/Content/images/banners/no-image.jpg">
@@ -30,9 +30,34 @@
                 <i class="fa fa-star active"></i>
                 <i class="fa fa-star"></i>
             </div>
-            <div class="add-cart__btn">
-                <span>Thêm vào giỏ</span>
-            </div>
+        </a>
+        <div class="add-cart__btn add-to-cart" id="@item.productID">
+            <span>Thêm vào giỏ</span>
         </div>
-    </a>
+    </div>
 }
+
+<script>
+    $('.add-to-cart').each(function () {
+        $(this).click(function () {
+            var model = {};
+            model.id = $(this).attr('id');
+            model.quantity = 1;
+        
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data: JSON.stringify(model),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    location.reload();
+                    alert("Thêm thành công!")
+                },
+                error: function () {
+                    alert("Thêm thất bại!");
+                }
+            });
+        });
+    })
+</script>

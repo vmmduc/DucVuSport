@@ -1,4 +1,9 @@
-﻿<a href="#home" class="header__logo"> <i class="fas fa-shopping-basket"></i> SStore </a>
+﻿@{
+    var cart = Session["Cart"] as List<DucVuSport.Models.CartModel>;
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    var total = 0;
+}
+<a href="#home" class="header__logo"> <i class="fas fa-shopping-basket"></i> SStore </a>
 <nav class="header__menu">
     <a href="/Home/Index" class="header__menu-item">Trang chủ</a>
     <a href="/Product/Index" class="header__menu-item">Sản phẩm</a>
@@ -10,7 +15,12 @@
     <div id="search-btn"><i class="fas fa-search"></i></div>
     <div id="cart-btn">
         <i class="fas fa-shopping-cart"></i>
-        <span class=" header__cart--notice">3</span>
+        <span class="header__cart--notice">@Session["Count"]</span>
+        <script>
+            var content = $('.header__cart--notice').text();
+            if (content == "") $('.header__cart--notice').css({ 'display': 'none' });
+            else $('.header__cart--notice').css({ 'display': 'block' });
+        </script>
     </div>
     <div id="account-btn" data-toggle="modal" data-target="#accountForm"><i class="fas fa-user"></i></div>
     <div id="menu-btn"><i class="fas fa-bars"></i></div>
@@ -20,51 +30,62 @@
     <input type="search" id="search-box" placeholder="search here...">
     <label for="search-box" class="fas fa-search"></label>
 </form>
-
 <!--Header cart start-->
 <div class="header__cart">
-    @*No item*@
-    <div class="header__no-cart">
-        <img src="~/Content/images/banners/no-cart.png" alt="">
-        <span>Bạn chưa có sản phẩm nào</span>
-    </div>
-    @*Has item*@
-    <div class="header__has-cart">
-        <div class="header__has-cart--style">Sản phẩm bạn đã chọn</div>
-        <ul class="box header__cart-list">
-            <!-- Item -->
-            <li class="header__cart-list-item">
-                <img src="~/Content/images/Air-salonpas.png" alt="" class="header__cart-list-item-img">
-                <div class="header__cart-list-item-info">
-
-                    <div class="header__cart-list-item-head">
-                        <h5 class="header__cart-list-item-name">Tên của sản phẩm</h5>
-
-                        <div class="header__cart-list-item-rice-wrap">
-                            <span class="header__cart-list-item-price">2.000.000đ</span>
-                            <span class="header__cart-list-item-mul">x</span>
-                            <span class="header__cart-list-item-quantity">3</span>
-                        </div>
-
-                    </div>
-
-                    <div class="header__cart-list-item-body">
-                        <span class="header__cart-list-item-type">Phân loại: Loại hàng</span>
-                        <span class="header__cart-list-item-trash" id="">Xoá</span>
-                    </div>
-
-                </div>
-            </li>
-            <li> <hr width="90%" style="margin: 0 auto;" /> </li>
-
-
-
-        </ul>
-        <div class="header__cart-total">
-            <div class="total"> Tổng cộng: <span>18.000.000đ</span> </div>
-            <a href="#" class="header__cart-check-btn">Kiểm tra giỏ hàng</a>
+    @if (cart == null)
+    {
+        @*No item*@
+        <div class="header__no-cart">
+            <img src="~/Content/images/banners/no-cart.png" alt="">
+            <span>Bạn chưa có sản phẩm nào</span>
+            <a href="/Product/Index">Mua sắm ngay</a>
         </div>
-    </div>
+    }
+    else
+    {
+        @*Has item*@
+        <div class="header__has-cart">
+            <div class="header__has-cart--style">Sản phẩm bạn đã chọn</div>
+            <ul class="box header__cart-list">
+                @foreach (var item in cart)
+                {
+                    <!-- Item -->
+                    <li class="header__cart-list-item">
+                        @if (item.product.img == null)
+                        {
+                            <img src="~/Content/images/banners/no-image.jpg" alt="" class="header__cart-list-item-img">
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/@item.product.img" alt="" class="header__cart-list-item-img">
+                        }
+                        <div class="header__cart-list-item-info">
+                            <div class="header__cart-list-item-head">
+                                <h5 class="header__cart-list-item-name">@item.product.productName</h5>
+                            </div>
+                            @{
+                                var price = item.product.price - item.product.price * item.product.discount;
+                                total += Convert.ToInt32(price * item.quantity);
+                            }
+                            <div class="header__cart-list-item-body">
+                                <div class="header__cart-list-item-rice-wrap">
+                                    <span class="header__cart-list-item-price">@String.Format(format, "{0:c0}", price)</span>
+                                    <span class="header__cart-list-item-mul">x</span>
+                                    <span class="header__cart-list-item-quantity">@item.quantity</span>
+                                </div>
+                                <span class="header__cart-list-item-trash" id="">Xoá</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li><hr width="90%" style="margin: 0 auto;" /></li>
+                }
+            </ul>
+            <div class="header__cart-total">
+                <div class="total"> Tổng cộng: <span>@String.Format(format, "{0:c0}", total)</span> </div>
+                <a href="/Cart/Index" class="header__cart-check-btn">Kiểm tra giỏ hàng</a>
+            </div>
+        </div>
+    }
 </div>
 <!--Header cart end-->
 
@@ -78,7 +99,7 @@
         </a>
 
 
-        <a class="header__account-item">
+        <a class="header__account-item" href="/Account/LogOut">
 
             Đăng xuất
 
@@ -101,8 +122,6 @@
 
         </a>
     }
-
-
 </div>
 
 

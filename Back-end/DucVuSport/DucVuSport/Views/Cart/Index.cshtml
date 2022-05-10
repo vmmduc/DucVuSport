@@ -1,0 +1,108 @@
+﻿@{
+    var cart = Session["Cart"] as List<DucVuSport.Models.CartModel>;
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    var total = 0;
+    var discount = 0;
+}
+<div class="cart__detail">
+    @if (cart == null)
+    {
+        <div class="detail__no-cart">
+            <div class="no-cart__img">
+                <img src="~/Content/images/banners/no-cart.png" alt="">
+            </div>
+            <div class="no-cart__title">
+                Bạn chưa chọn sản phẩm nào
+            </div>
+            <div class="btn"> <a href="/Product/Index">Mua hàng</a></div>
+        </div>
+    }
+    else
+    {
+        <div class="detail__has-cart">
+            <div class="has-cart__left col-md-8 col-12">
+                <div class="cart__title">
+                    <div class="col-md-5 col-5">Tên sản phẩm</div>
+                    <div class="col-md-3 col-3">Đơn giá</div>
+                    <div class="col-md-2 col-2">Số lượng</div>
+                    <div class="col-md-2 col-2">Thành tiền</div>
+                </div>
+                @foreach (var item in cart)
+                {
+                    <div class="cart__item">
+                        <div class="__product col-md-5 col-5">
+                            <div class="__product_img col-md-2"><img src="~/Content/images/@item.product.img" alt=""></div>
+                            <div class="__product_name col-md-10">@item.product.productName</div>
+                        </div>
+
+                        <div class="__price col-md-3 col-3">
+                            @{
+                                var price = item.product.price - item.product.price * item.product.discount;
+                                var total_money = price * item.quantity;
+                                total += Convert.ToInt32(total_money);
+                                discount += Convert.ToInt32(item.product.price * item.product.discount * item.quantity);
+                            }
+
+                            <div class="__old-price text-decoration-line-through">@String.Format(format, "{0:c0}", item.product.price)</div>
+                            <div class="__new-price">@String.Format(format, "{0:c0}", price)</div>
+                        </div>
+                        <div class="__amount col-md-2 col-2">
+                            <div class="buttons_added">
+                                <input class="minus is-form" type="button" value="-">
+                                <input aria-label="quantity" class="input-qty" max="100" min="1" type="number" value="@item.quantity">
+                                <input class="plus is-form" type="button" value="+">
+                            </div>
+                        </div>
+
+                        <div class="__total col-md-2 col-2">
+                            <span>@String.Format(format, "{0:c0}", total_money)</span>
+                        </div>
+                        <div class="__action">
+                            <a href="#" class="__update">Sửa</a>
+                            <a href="#" class="__delete">Xoá</a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+            <div class="has-cart__right col-md-4 col-12">
+                <div class="__cart-total">
+                    <div class="__voucher">
+                        <input type="text" placeholder="Nhập mã giảm giá ...">
+                        <button id="btn-ok" class="ok__btn">OK</button>
+                    </div>
+
+                    <div class="__total-detail">
+                        @{
+                            var VAT = total * 0.1;
+                            var total_and_VAT = total + VAT - discount;
+                        }
+                        <div>
+                            <span>Tổng cộng:</span>
+                            <span>@String.Format(format, "{0:c0}", total)</span>
+                        </div>
+                        <div>
+                            <span>Giảm giá:</span>
+                            <span>-@String.Format(format, "{0:c0}", discount)</span>
+                        </div>
+                        <div>
+                            <span>VAT:</span>
+                            <span>@String.Format(format, "{0:c0}", VAT)</span>
+                        </div>
+                        <hr style="border: 1px solid black;" />
+                        <div>
+                            <span>Thành tiền:</span>
+                            <span>@String.Format(format, "{0:c0}", total_and_VAT)</span>
+                        </div>
+                    </div>
+
+                    <div class="__payment">
+                        <a href="#" class="__payment-btn">Thanh toán</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+}
+</div>

@@ -18,7 +18,7 @@ namespace DucVuSport.Controllers
             if (ModelState.IsValid)
             {
                 UserDAO user = new UserDAO();
-                var result = user.getUser(model.email, model.passwd);
+                var result = user.Login(model.email, model.passwd);
                 if (result != null)
                 {
                     Session["user"] = result;
@@ -32,6 +32,12 @@ namespace DucVuSport.Controllers
             {
                 ModelState.AddModelError("", "Bạn chưa nhập email hoặc mật khẩu");
             }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult LogOut()
+        {
+            Session["user"] = null;
             return RedirectToAction("Index", "Home");
         }
     }

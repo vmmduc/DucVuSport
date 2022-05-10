@@ -23,6 +23,11 @@ namespace DataAccessLib.DAO
             return data.Categories.ToList();
         }
         
+        public Product getProductByID(string id)
+        {
+            return data.Products.Where(x=>x.productID == id).FirstOrDefault();
+        }
+
         public List<Product> getProductByCat(string cartID)
         {
             return data.Products.Where(x=>x.categoryID == cartID).ToList(); 
@@ -31,6 +36,10 @@ namespace DataAccessLib.DAO
         public Product getProductDetail(string productID)
         {
             return data.Products.Where(x=>x.productID == productID).FirstOrDefault();
+        }
+        public List<Image> getImage(string productID)
+        {
+            return data.Images.Where(x=>x.productID == productID).ToList();
         }
     }
 }

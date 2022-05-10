@@ -54,7 +54,12 @@ $(document).ready(function () {
         shoppingCart.removeClass('active');
     });
 
-
+    $('.body').click(function () {
+        searchForm.removeClass('active');
+        navbar.removeClass('active');
+        shoppingCart.removeClass('active');
+        account.removeClass('active');
+    })
 
     $('#login_btn').click(function () {
         if ($('.modal-body__register').hasClass('active')) {
@@ -77,6 +82,7 @@ $(document).ready(function () {
         }
     });
 
+    /*Show/hide password*/
     $('.pwd-input').each(function (index, value) {
         let temp = $(this).find('.pw');
         $(this).find('i').click(function () {

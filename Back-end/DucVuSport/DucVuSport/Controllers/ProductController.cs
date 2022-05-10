@@ -19,21 +19,22 @@ namespace DucVuSport.Controllers
         }
         public ActionResult getProduct()
         {
-            dataContext data = new dataContext();
-            List<Product> li = data.Products.ToList();
+            ProductDAO products = new ProductDAO(); 
+            List<Product> li = products.getAllProduct();
             return PartialView("__Product", li);
         }
 
         public ActionResult getProductByCart(string id)
         {
-            dataContext data = new dataContext();
-            List<Product> li = data.Products.Where(x=>x.categoryID == id).ToList();
+            ProductDAO products = new ProductDAO();
+            List<Product> li = products.getProductByCat(id);
             return PartialView("__Product", li);
         }
         public ActionResult Detail(string id)
         {
             ProductDAO products = new ProductDAO();
             ViewBag.detail = products.getProductDetail(id);
+            ViewBag.image = products.getImage(id);
             return View();
         }
 

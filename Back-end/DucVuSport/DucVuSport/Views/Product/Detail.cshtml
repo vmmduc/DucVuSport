@@ -1,30 +1,34 @@
 ﻿@{
     var product = ViewBag.detail as DataAccessLib.Entities.Product;
+    var images = ViewBag.Image as List<DataAccessLib.Entities.Image>;
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 <link href="~/Content/css/product-detal.css" rel="stylesheet" />
 <div class="body__product-detail">
     <div class="header__product-detail">
         <div class="left col-md-4 col-4">
-            <div class="big__img">
-                <img src="~/Content/images/Air-salonpas.png" alt="">
-            </div>
+            @if (product.img == null)
+            {
+                <div class="big__img">
+                    <img src="~/Content/images/banners/no-image.jpg" alt="">
+                </div>
+            }
+            else
+            {
+                <div class="big__img">
+                    <img src="~/Content/images/@product.img" alt="">
+                </div>
+            }
             <div class="images">
-                <div class="small__img">
-                    <img src="~/Content/images/BangCuonGoi.jpg" alt="">
-                </div>
-                <div class="small__img">
-                    <img src="~/Content/images/BangDaBoxing.jpg" alt="">
-                </div>
-                <div class="small__img">
-                    <img src="~/Content/images/Air-salonpas.png" alt="">
-                </div>
-                <div class="small__img">
-                    <img src="~/Content/images/Air-salonpas.png" alt="">
-                </div>
+                @foreach (var image in images)
+                {
+                    <div class="small__img">
+                        <img src="~/Content/images/@image.url" alt="">
+                    </div>
+                }
             </div>
         </div>
-        
+
         <div class="right col-md-9 col-9">
             <div class="__product__name">@product.productName</div>
             <div class="item__star">
@@ -44,9 +48,13 @@
                     <input class="plus is-form" type="button" value="+">
                 </div>
             </div>
-            <div class="btn">
-                <button>Thêm vào giỏ</button>
-                <button>Mua ngay</button>
+            <div id="@product.productID">
+                <div class="detail-btn add-to-cart">
+                    <span>Thêm vào giỏ</span>
+                </div>
+                <div class="detail-btn buy-now" id="">
+                    <span>Mua ngay</span>
+                </div>
             </div>
         </div>
     </div>
@@ -97,148 +105,6 @@
                             </div>
                         </div>
                         <hr style="width: 100%">
-                        <!-- Cut =========================================== -->
-                        <div class="rate__content-item">
-                            <div class="rate__top">
-                                <div class="custommer">
-                                    <div class="avatar">
-                                        <img class="avatar" src="images/banners/user-image.jpeg" alt="">
-                                    </div>
-                                    <div class="custommer__detail">
-                                        <div class="custommer__name">Vũ Mạnh Đức</div>
-                                        <div class="item__star">
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cmt__date">20/03/2022 18:05</div>
-                            </div>
-                            <div class="rate__cmd">
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                            </div>
-                        </div>
-                        <hr style="width: 100%">
-                        <div class="rate__content-item">
-                            <div class="rate__top">
-                                <div class="custommer">
-                                    <div class="avatar">
-                                        <img class="avatar" src="images/banners/user-image.jpeg" alt="">
-                                    </div>
-                                    <div class="custommer__detail">
-                                        <div class="custommer__name">Vũ Mạnh Đức</div>
-                                        <div class="item__star">
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cmt__date">20/03/2022 18:05</div>
-                            </div>
-                            <div class="rate__cmd">
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                            </div>
-                        </div>
-                        <hr style="width: 100%">
-                        <div class="rate__content-item">
-                            <div class="rate__top">
-                                <div class="custommer">
-                                    <div class="avatar">
-                                        <img class="avatar" src="images/banners/user-image.jpeg" alt="">
-                                    </div>
-                                    <div class="custommer__detail">
-                                        <div class="custommer__name">Vũ Mạnh Đức</div>
-                                        <div class="item__star">
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cmt__date">20/03/2022 18:05</div>
-                            </div>
-                            <div class="rate__cmd">
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                            </div>
-                        </div>
-                        <hr style="width: 100%">
-                        <div class="rate__content-item">
-                            <div class="rate__top">
-                                <div class="custommer">
-                                    <div class="avatar">
-                                        <img class="avatar" src="images/banners/user-image.jpeg" alt="">
-                                    </div>
-                                    <div class="custommer__detail">
-                                        <div class="custommer__name">Vũ Mạnh Đức</div>
-                                        <div class="item__star">
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cmt__date">20/03/2022 18:05</div>
-                            </div>
-                            <div class="rate__cmd">
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                            </div>
-                        </div>
-                        <hr style="width: 100%">
-                        <div class="rate__content-item">
-                            <div class="rate__top">
-                                <div class="custommer">
-                                    <div class="avatar">
-                                        <img class="avatar" src="images/banners/user-image.jpeg" alt="">
-                                    </div>
-                                    <div class="custommer__detail">
-                                        <div class="custommer__name">Vũ Mạnh Đức</div>
-                                        <div class="item__star">
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star active"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cmt__date">20/03/2022 18:05</div>
-                            </div>
-                            <div class="rate__cmd">
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                                Sản phẩm tuyệt vời. giao hàng nhanh, tư vấn nhiệt tình
-                            </div>
-                        </div>
-                        <hr style="width: 100%">
-                        <!-- Cut =========================================== -->
                     </div>
                     <div class="rate__right col-md-4 col-4">
                         <div class="rate__detail">
@@ -300,3 +166,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('.add-to-cart').click(function () {
+        var model = {};
+        model.id = $(this).parent().attr('id');
+        model.quantity = $('.input-qty').val();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddToCart", "Cart")',
+            data: JSON.stringify(model),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                location.reload();
+                alert("Thêm thành công!")
+            },
+            error: function () {
+                alert("Thêm thất bại!");
+            }
+        });
+    })
+</script>
