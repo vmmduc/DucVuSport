@@ -4,96 +4,25 @@
         <div class="modal-content">
             <div class="modal-header nav-tabs">
                 <ul class="modal-header__tab nav nav-pills" role="tablist">
-
                     <li class="nav-item">
                         <button class="modal-header__login" data-bs-toggle="pill" data-bs-target="#login">Đăng nhập</button>
                     </li>
-
                     <li class="nav-item">
                         <button class="modal-header__register" data-bs-toggle="pill" data-bs-target="#register">Đăng ký</button>
                     </li>
-
                 </ul>
                 <button type="button" class="modal-header__btn close" data-bs-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body tab-content">
                 @*Login*@
                 <div class="modal-body__login tab-pane show" id="login">
-                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "account__form" }))
-                    {
-                        @model DucVuSport.Models.LoginModel
-                        @Html.AntiForgeryToken()
-
-                        @Html.ValidationSummary(true, null, new { @class = "form__message" })
-
-                        <div class="form__input">
-                            @Html.TextBoxFor(m => m.email, new { @placeholder = "Email hoặc số điện thoại" })
-                            <div class="form__icon"><i class="fas fa-user-circle"></i></div>
-                        </div>
-
-                        <div class="form__input pwd-input">
-                            @Html.PasswordFor(m => m.passwd, new { @placeholder = "Mật khẩu", @class = "pw" })
-                            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
-                        </div>
-
-                        <div class="form__check">
-                            <div class="form__checkbox">
-                                <input type="checkbox" id="remember-me" checked="checked">
-                                <label for="remember-me">Nhớ mật khẩu</label>
-                            </div>
-                            <div class="form__forgot-password">
-                                <a href="#">Quên mật khẩu</a>
-                            </div>
-                        </div>
-
-                        <div class="btn">
-                            <button type="submit">Đăng nhập</button>
-                        </div>
-                    }
+                    @Html.Partial("__Form-login")
                 </div>
 
                 @*Register*@
-                <div class="modal-body__register tab-pane" id="register">
-
-                    <form class="account__form" action="" method="post">
-                        <div class="form__input">
-                            <input type="text" placeholder="Họ và tên">
-                            <div class="form__icon"><i class="fas fa-user-circle"></i></div>
-                        </div>
-
-                        <div class="form__input">
-                            <input type="text" placeholder="Email">
-                            <div class="form__icon"><i class="fas fa-envelope"></i></div>
-                        </div>
-
-                        <div class="form__input">
-                            <input type="text" placeholder="Số điện thoại">
-                            <div class="form__icon"><i class="fas fa-phone"></i></div>
-                        </div>
-
-                        <div class="form__input pwd-input">
-                            <input type="password" placeholder="Mật khẩu" class="pw">
-                            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
-                        </div>
-
-                        <div class="form__input pwd-input">
-                            <input type="password" placeholder="Xác nhận mật khẩu" class="pw">
-                            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
-                        </div>
-
-                        <div class="form__check">
-                            <div class="form__checkbox">
-                                <input type="checkbox" id="accept-me" checked="checked">
-                                <label for="accept-me">Đồng ý với các điều khoản</label>
-                            </div>
-                        </div>
-
-                        <div class="btn">
-                            <button>Đăng kí</button>
-                        </div>
-
-                    </form>
-                </div>
+            <div class="modal-body__register tab-pane" id="register">
+                @Html.Partial("__Form-register")
+            </div>
 
                 @*Login by Google and Facebook*@
                 <div class="form__line">

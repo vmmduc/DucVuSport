@@ -12,9 +12,10 @@ namespace DataAccessLib.Entities
         {
         }
 
+        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Image> Images { get; set; }
-        public virtual DbSet<Option> Options { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<tbUser> tbUsers { get; set; }
@@ -23,13 +24,24 @@ namespace DataAccessLib.Entities
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Option>()
-                .Property(e => e.price)
-                .HasPrecision(19, 4);
+            modelBuilder.Entity<Customer>()
+                .Property(e => e.phoneNumber)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.img)
                 .IsFixedLength();
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.Carts)
+                .WithRequired(e => e.Product)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<tbUser>()
+                .HasMany(e => e.Carts)
+                .WithRequired(e => e.tbUser)
+                .HasForeignKey(e => e.userID)
+                .WillCascadeOnDelete(false);
         }
     }
 }

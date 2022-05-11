@@ -12,10 +12,13 @@ namespace DataAccessLib.Entities
         [Key]
         public int imgID { get; set; }
 
-        [StringLength(50)]
-        public string productID { get; set; }
+        public int? productID { get; set; }
 
         public string url { get; set; }
+
+        public DateTime? create_at { get; set; }
+
+        public bool? status { get; set; }
 
         public virtual Product Product { get; set; }
     }

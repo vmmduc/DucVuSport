@@ -10,8 +10,8 @@ namespace DataAccessLib.Entities
     {
         [Key]
         [Column(Order = 0)]
-        [StringLength(100)]
-        public string userID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int userID { get; set; }
 
         [Key]
         [Column(Order = 1)]

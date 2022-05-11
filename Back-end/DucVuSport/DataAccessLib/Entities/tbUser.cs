@@ -8,9 +8,13 @@ namespace DataAccessLib.Entities
 
     public partial class tbUser
     {
-        [Key]
-        [StringLength(100)]
-        public string userID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbUser()
+        {
+            Carts = new HashSet<Cart>();
+        }
+
+        public int id { get; set; }
 
         [StringLength(100)]
         public string fullName { get; set; }
@@ -18,15 +22,16 @@ namespace DataAccessLib.Entities
         [StringLength(100)]
         public string email { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
         public string phoneNumber { get; set; }
-
-        public string address { get; set; }
-
-        public DateTime? lockOutEndDate { get; set; }
 
         public string passwordHash { get; set; }
 
+        public DateTime? lastActivity { get; set; }
+
         public bool? unlock { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
     }
 }

@@ -15,11 +15,15 @@ namespace DataAccessLib.Entities
             Products = new HashSet<Product>();
         }
 
-        [StringLength(50)]
-        public string id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int id { get; set; }
 
         [StringLength(50)]
         public string name { get; set; }
+
+        public DateTime? ceate_date { get; set; }
+
+        public bool? status { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

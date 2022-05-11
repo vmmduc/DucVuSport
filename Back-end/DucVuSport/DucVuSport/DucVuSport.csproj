@@ -147,6 +147,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\app.css" />
+    <Content Include="Areas\Admin\Content\css\grid.css" />
+    <Content Include="Areas\Admin\Content\images\backpack.jpg" />
+    <Content Include="Areas\Admin\Content\images\headphone.jpg" />
+    <Content Include="Areas\Admin\Content\images\logo-lg.png" />
+    <Content Include="Areas\Admin\Content\images\logo-mb.png" />
+    <Content Include="Areas\Admin\Content\images\sneaker.jpg" />
+    <Content Include="Areas\Admin\Content\images\thumb-7.jpg" />
+    <Content Include="Areas\Admin\Content\images\user-image-2.png" />
+    <Content Include="Areas\Admin\Content\images\user-image-3.png" />
+    <Content Include="Areas\Admin\Content\images\user-image.jpeg" />
+    <Content Include="Areas\Admin\Content\js\app.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -197,8 +209,12 @@
     <Content Include="Content\images\banners\banner-bg.webp" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Admin_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Content\images\.DS_Store" />
+    <Content Include="Areas\Admin\Views\Shared\__Sidebar-menu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\__Product-list.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\__Top-product.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -230,6 +246,8 @@
     <Content Include="Views\Shared\__Product.cshtml" />
     <Content Include="Views\Shared\__Account-modal.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Shared\__Form-register.cshtml" />
+    <Content Include="Views\Shared\__Form-login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

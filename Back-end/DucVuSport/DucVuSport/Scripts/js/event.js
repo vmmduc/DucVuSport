@@ -101,7 +101,6 @@ $(document).ready(function () {
 
 
     // Product slider
-    $(document).ready(function () {
         $('#autoWidth').lightSlider({
             autoWidth: true,
             loop: true,
@@ -109,9 +108,7 @@ $(document).ready(function () {
                 $('#autoWidth').removeClass('cs-hidden');
             }
         });
-    });
 
-    $(document).ready(function () {
         $('#imageGallery').lightSlider({
             gallery: true,
             item: 1,
@@ -126,7 +123,6 @@ $(document).ready(function () {
                 });
             }
         });
-    });
 
 
 

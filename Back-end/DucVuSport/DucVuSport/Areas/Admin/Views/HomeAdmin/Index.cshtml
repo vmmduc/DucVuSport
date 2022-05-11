@@ -1,7 +1,220 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿<div class="main-header">
+    <div class="mobile-toggle" id="mobile-toggle">
+        <i class='bx bx-menu-alt-right'></i>
+    </div>
+    <div class="main-title">
+        dashboard
+    </div>
+</div>
+<div class="main-content">
+    <div class="row">
+        <div class="col-3 col-md-6 col-sm-12">
+            <div class="box box-hover">
+                <!-- COUNTER -->
+                <div class="counter">
+                    <div class="counter-title">
+                        total order
+                    </div>
+                    <div class="counter-info">
+                        <div class="counter-count">
+                            6578
+                        </div>
+                        <i class='bx bx-shopping-bag'></i>
+                    </div>
+                </div>
+                <!-- END COUNTER -->
+            </div>
+        </div>
+        <div class="col-3 col-md-6 col-sm-12">
+            <div class="box box-hover">
+                <!-- COUNTER -->
+                <div class="counter">
+                    <div class="counter-title">
+                        conversion rate
+                    </div>
+                    <div class="counter-info">
+                        <div class="counter-count">
+                            30.5%
+                        </div>
+                        <i class='bx bx-chat'></i>
+                    </div>
+                </div>
+                <!-- END COUNTER -->
+            </div>
+        </div>
+        <div class="col-3 col-md-6 col-sm-12">
+            <div class="box box-hover">
+                <!-- COUNTER -->
+                <div class="counter">
+                    <div class="counter-title">
+                        total profit
+                    </div>
+                    <div class="counter-info">
+                        <div class="counter-count">
+                            $9,780
+                        </div>
+                        <i class='bx bx-line-chart'></i>
+                    </div>
+                </div>
+                <!-- END COUNTER -->
+            </div>
+        </div>
+        <div class="col-3 col-md-6 col-sm-12">
+            <div class="box box-hover">
+                <!-- COUNTER -->
+                <div class="counter">
+                    <div class="counter-title">
+                        daily visitors
+                    </div>
+                    <div class="counter-info">
+                        <div class="counter-count">
+                            690
+                        </div>
+                        <i class='bx bx-user'></i>
+                    </div>
+                </div>
+                <!-- END COUNTER -->
+            </div>
+        </div>
+    </div>
 
-<h2>Đây là trang admin</h2>
-
+    <div class="row">
+        <div class="col-3 col-md-6 col-sm-12">
+            @Html.Partial("__Top-product")
+        </div>
+        <div class="col-4 col-md-6 col-sm-12">
+            <!-- CATEGORY CHART -->
+            <div class="box f-height">
+                <div class="box-body">
+                    <div id="category-chart"></div>
+                </div>
+            </div>
+            <!-- END CATEGORY CHART -->
+        </div>
+        <div class="col-5 col-md-12 col-sm-12">
+            <!-- CUSTOMERS CHART -->
+            <div class="box f-height">
+                <div class="box-header">
+                    customers
+                </div>
+                <div class="box-body">
+                    <div id="customer-chart"></div>
+                </div>
+            </div>
+            <!-- END CUSTOMERS CHART -->
+        </div>
+        <div class="col-12">
+            <!-- ORDERS TABLE -->
+            <div class="box">
+                <div class="box-header">
+                    Recent orders
+                </div>
+                <div class="box-body overflow-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Order status</th>
+                                <th>Payment status</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#2345</td>
+                                <td>
+                                    <div class="order-owner">
+                                        <img src="~/Areas/Admin/Content/images/user-image-2.png" alt="user image">
+                                        <span>John doe</span>
+                                    </div>
+                                </td>
+                                <td>2021-05-09</td>
+                                <td>
+                                    <span class="order-status order-shipped">
+                                        Shipped
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="payment-status payment-paid">
+                                        <div class="dot"></div>
+                                        <span>Paid</span>
+                                    </div>
+                                </td>
+                                <td>$123.45</td>
+                            </tr>
+                            <tr>
+                                <td>#2345</td>
+                                <td>
+                                    <div class="order-owner">
+                                        <img src="~/Areas/Admin/Content/images/user-image-3.png" alt="user image">
+                                        <span>evelyn</span>
+                                    </div>
+                                </td>
+                                <td>2021-05-09</td>
+                                <td>
+                                    <span class="order-status order-shipped">
+                                        Shipped
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="payment-status payment-paid">
+                                        <div class="dot"></div>
+                                        <span>Paid</span>
+                                    </div>
+                                </td>
+                                <td>$123.45</td>
+                            </tr>
+                            <tr>
+                                <td>#2345</td>
+                                <td>
+                                    <div class="order-owner">
+                                        <img src="~/Areas/Admin/Content/images/user-image-2.png" alt="user image">
+                                        <span>John doe</span>
+                                    </div>
+                                </td>
+                                <td>2021-05-09</td>
+                                <td>
+                                    <span class="order-status order-shipped">
+                                        Shipped
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="payment-status payment-paid">
+                                        <div class="dot"></div>
+                                        <span>Paid</span>
+                                    </div>
+                                </td>
+                                <td>$123.45</td>
+                            </tr>
+                            <tr>
+                                <td>#2345</td>
+                                <td>
+                                    <div class="order-owner">
+                                        <img src="~/Areas/Admin/Content/images/user-image-3.png" alt="user image">
+                                        <span>evelyn</span>
+                                    </div>
+                                </td>
+                                <td>2021-05-09</td>
+                                <td>
+                                    <span class="order-status order-shipped">
+                                        Shipped
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="payment-status payment-paid">
+                                        <div class="dot"></div>
+                                        <span>Paid</span>
+                                    </div>
+                                </td>
+                                <td>$123.45</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END ORDERS TABLE -->
+        </div>
+    </div>
+</div>

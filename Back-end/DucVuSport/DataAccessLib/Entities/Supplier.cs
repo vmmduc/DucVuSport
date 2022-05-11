@@ -28,6 +28,10 @@ namespace DataAccessLib.Entities
 
         public string address { get; set; }
 
+        public DateTime? create_at { get; set; }
+
+        public bool? status { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }

@@ -8,10 +8,13 @@ namespace DucVuSport.Areas.Admin.Controllers
 {
     public class HomeAdminController : Controller
     {
-        // GET: Admin/Home
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult Product()
+        {
+            return PartialView("__Product-list");
         }
     }
 }

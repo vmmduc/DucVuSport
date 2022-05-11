@@ -9,8 +9,8 @@ namespace DataAccessLib.Entities
     public partial class tbRole
     {
         [Key]
-        [StringLength(100)]
-        public string roleID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int roleID { get; set; }
 
         public string Name { get; set; }
     }

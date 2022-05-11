@@ -24,13 +24,13 @@ namespace DucVuSport.Controllers
             return PartialView("__Product", li);
         }
 
-        public ActionResult getProductByCart(string id)
+        public ActionResult getProductByCart(int id)
         {
             ProductDAO products = new ProductDAO();
             List<Product> li = products.getProductByCat(id);
             return PartialView("__Product", li);
         }
-        public ActionResult Detail(string id)
+        public ActionResult Detail(int id)
         {
             ProductDAO products = new ProductDAO();
             ViewBag.detail = products.getProductDetail(id);

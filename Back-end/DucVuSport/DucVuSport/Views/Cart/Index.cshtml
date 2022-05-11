@@ -5,7 +5,7 @@
     var discount = 0;
 }
 <div class="cart__detail">
-    @if (cart == null)
+    @if (Convert.ToInt32(Session["Count"]) == 0)
     {
         <div class="detail__no-cart">
             <div class="no-cart__img">
@@ -58,13 +58,29 @@
                             <span>@String.Format(format, "{0:c0}", total_money)</span>
                         </div>
                         <div class="__action">
-                            <a href="#" class="__update">Sửa</a>
-                            <a href="#" class="__delete">Xoá</a>
+                            <div class="__update">Sửa</div>
+                            <div class="__delete" id="@item.product.productID">Xoá</div>
                         </div>
                     </div>
                 }
             </div>
-
+            <script>
+                $('.__delete').click(function () {
+                    var model = {};
+                    model.id = $(this).attr('id');
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Remove", "Cart")',
+                        data: JSON.stringify(model),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            location.reload();
+                            alert("Xóa thành công");
+                        }
+                    });
+                })
+            </script>
 
             <div class="has-cart__right col-md-4 col-12">
                 <div class="__cart-total">
@@ -104,5 +120,5 @@
                 </div>
             </div>
         </div>
-}
+    }
 </div>

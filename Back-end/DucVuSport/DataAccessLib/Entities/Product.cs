@@ -12,12 +12,12 @@ namespace DataAccessLib.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            Carts = new HashSet<Cart>();
             Images = new HashSet<Image>();
-            Options = new HashSet<Option>();
         }
 
-        [StringLength(50)]
-        public string productID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int productID { get; set; }
 
         [StringLength(50)]
         public string productName { get; set; }
@@ -29,8 +29,7 @@ namespace DataAccessLib.Entities
         [StringLength(100)]
         public string img { get; set; }
 
-        [StringLength(50)]
-        public string categoryID { get; set; }
+        public int? categoryID { get; set; }
 
         public int? supplierID { get; set; }
 
@@ -43,13 +42,17 @@ namespace DataAccessLib.Entities
         [Column(TypeName = "date")]
         public DateTime? createDate { get; set; }
 
+        public int? view_count { get; set; }
+
+        public bool? status { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
+
         public virtual Category Category { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Option> Options { get; set; }
 
         public virtual Supplier Supplier { get; set; }
     }

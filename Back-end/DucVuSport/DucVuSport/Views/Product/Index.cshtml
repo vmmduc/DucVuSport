@@ -16,12 +16,10 @@
 
 <div class="products">
     <div class="product__nav active col-md-2">
-        <div class="nav__category">
             @foreach (var item in _category_list)
             {
-                <div class="nav__category-item category-btn" id="@item.id">@item.name</div>
+                <div class="product__nav-item category-btn" id="@item.id">@item.name</div>
             }
-        </div>
     </div>
 
     <div class="product__list col-md-10">

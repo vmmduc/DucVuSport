@@ -1,0 +1,26 @@
+﻿@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "account__form" }))
+{
+    @model DucVuSport.Models.LoginModel
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, null, new { @class = "form__message" })
+    <div class="form__input">
+        @Html.TextBoxFor(m => m.email, new { @placeholder = "Email" })
+        <div class="form__icon"><i class="fas fa-user-circle"></i></div>
+    </div>
+    <div class="form__input pwd-input">
+        @Html.PasswordFor(m => m.passwd, new { @placeholder = "Mật khẩu", @class = "pw" })
+        <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
+    </div>
+    <div class="form__check">
+        <div class="form__checkbox">
+            @Html.CheckBoxFor(m=>m.remember, htmlAttributes: new { @id = "remember-me" })
+            <label for="remember-me">Nhớ mật khẩu</label>
+        </div>
+        <div class="form__forgot-password">
+            <a href="#">Quên mật khẩu</a>
+        </div>
+    </div>
+    <div class="btn">
+        <button type="submit">Đăng nhập</button>
+    </div>
+}

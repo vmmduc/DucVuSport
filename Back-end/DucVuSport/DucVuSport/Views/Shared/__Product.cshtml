@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<DataAccessLib.Entities.Product>
 @foreach (var item in Model)
 {
-
     <div class="product__item">
         <a class="product__content align-items-center" href="/Product/Detail/@item.productID">
             @{
@@ -53,9 +52,6 @@
                 success: function () {
                     location.reload();
                     alert("Thêm thành công!")
-                },
-                error: function () {
-                    alert("Thêm thất bại!");
                 }
             });
         });
