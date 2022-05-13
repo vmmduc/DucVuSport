@@ -17,34 +17,36 @@ namespace DataAccessLib.Entities
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int productID { get; set; }
+        public int ID { get; set; }
 
         [StringLength(50)]
-        public string productName { get; set; }
+        public string ProductName { get; set; }
 
-        public string shotDescribe { get; set; }
+        public string ShotDescribe { get; set; }
 
-        public string describe { get; set; }
+        public string Describe { get; set; }
 
         [StringLength(100)]
-        public string img { get; set; }
+        public string Image { get; set; }
 
-        public int? categoryID { get; set; }
+        public int? CategoryID { get; set; }
 
-        public int? supplierID { get; set; }
+        public int? SupplierID { get; set; }
 
-        public long? price { get; set; }
+        public long? Price { get; set; }
 
-        public double? discount { get; set; }
+        public double? Discount { get; set; }
 
-        public int? quantity { get; set; }
+        public int? Quantity { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? createDate { get; set; }
+        public DateTime? Create_date { get; set; }
 
-        public int? view_count { get; set; }
+        public int? Sold { get; set; }
 
-        public bool? status { get; set; }
+        public int? View_count { get; set; }
+
+        public bool? Status { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }

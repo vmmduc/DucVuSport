@@ -2,25 +2,25 @@
 @foreach (var item in Model)
 {
     <div class="product__item">
-        <a class="product__content align-items-center" href="/Product/Detail/@item.productID">
+        <a class="product__content align-items-center" href="/Product/Detail/@item.ID">
             @{
                 var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-                var price = item.price - item.price * item.discount;
-                var discount = item.discount * 100;
+                var price = item.Price - item.Price * item.Discount;
+                var discount = item.Discount * 100;
             }
             <div class="product__discount">-@discount%</div>
-            @if (@item.img == null)
+            @if (@item.Image == null)
             {
                 <img class="product__img" src="~/Content/images/banners/no-image.jpg">
             }
             else
             {
-                <img class="product__img" src="~/Content/images/@item.img">
+                <img class="product__img" src="~/Content/images/@item.Image">
             }
-            <h5 class="product__name">@item.productName</h5>
+            <h5 class="product__name">@item.ProductName</h5>
             <div class="product__price">
                 <div class="new__price">@String.Format(format, "{0:c0}", price)</div>
-                <div class="old__price text-decoration-line-through">@String.Format(format, "{0:c0}", item.price)</div>
+                <div class="old__price text-decoration-line-through">@String.Format(format, "{0:c0}", item.Price)</div>
             </div>
             <div class="item__star">
                 <i class="fa fa-star active"></i>
@@ -30,7 +30,7 @@
                 <i class="fa fa-star"></i>
             </div>
         </a>
-        <div class="add-cart__btn add-to-cart" id="@item.productID">
+        <div class="add-cart__btn add-to-cart" id="@item.ID">
             <span>Thêm vào giỏ</span>
         </div>
     </div>
@@ -42,7 +42,7 @@
             var model = {};
             model.id = $(this).attr('id');
             model.quantity = 1;
-        
+
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("AddToCart", "Cart")',

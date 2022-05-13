@@ -4,13 +4,11 @@ $(document).ready(function () {
     let shoppingCart = $('.header__cart');
     let account = $('.header__account');
 
-
     $('.header__menu-item').click(function () {
         searchForm.removeClass('active');
         account.removeClass('active');
         shoppingCart.removeClass('active');
     });
-
     $('#search-btn').click(function () {
         if (!searchForm.hasClass('active'))
             searchForm.addClass('active');
@@ -21,7 +19,6 @@ $(document).ready(function () {
         account.removeClass('active');
         navbar.removeClass('active');
     })
-
     $('#cart-btn').click(function () {
         if (!shoppingCart.hasClass('active'))
             shoppingCart.addClass('active');
@@ -32,7 +29,6 @@ $(document).ready(function () {
         account.removeClass('active');
         navbar.removeClass('active');
     });
-
     $('#menu-btn').click(function () {
         if (!navbar.hasClass('active'))
             navbar.addClass('active');
@@ -43,7 +39,6 @@ $(document).ready(function () {
         shoppingCart.removeClass('active');
         account.removeClass('active');
     });
-
     $('#account-btn').click(function () {
         if (!account.hasClass('active'))
             account.addClass('active');
@@ -54,6 +49,7 @@ $(document).ready(function () {
         shoppingCart.removeClass('active');
     });
 
+
     $('.body').click(function () {
         searchForm.removeClass('active');
         navbar.removeClass('active');
@@ -61,6 +57,9 @@ $(document).ready(function () {
         account.removeClass('active');
     })
 
+    /*
+     * Account modal
+     */
     $('#login_btn').click(function () {
         if ($('.modal-body__register').hasClass('active')) {
             $('.modal-header__register').removeClass('active');
@@ -82,7 +81,9 @@ $(document).ready(function () {
         }
     });
 
-    /*Show/hide password*/
+    /*
+     * Show/hide password
+     */
     $('.pwd-input').each(function (index, value) {
         let temp = $(this).find('.pw');
         $(this).find('i').click(function () {
@@ -101,28 +102,28 @@ $(document).ready(function () {
 
 
     // Product slider
-        $('#autoWidth').lightSlider({
-            autoWidth: true,
-            loop: true,
-            onSliderLoad: function () {
-                $('#autoWidth').removeClass('cs-hidden');
-            }
-        });
+    $('#autoWidth').lightSlider({
+        autoWidth: true,
+        loop: true,
+        onSliderLoad: function () {
+            $('#autoWidth').removeClass('cs-hidden');
+        }
+    });
 
-        $('#imageGallery').lightSlider({
-            gallery: true,
-            item: 1,
-            loop: true,
-            thumbItem: 9,
-            slideMargin: 0,
-            enableDrag: false,
-            currentPagerPosition: 'left',
-            onSliderLoad: function (el) {
-                el.lightGallery({
-                    selector: '#imageGallery .lslide'
-                });
-            }
-        });
+    $('#imageGallery').lightSlider({
+        gallery: true,
+        item: 1,
+        loop: true,
+        thumbItem: 9,
+        slideMargin: 0,
+        enableDrag: false,
+        currentPagerPosition: 'left',
+        onSliderLoad: function (el) {
+            el.lightGallery({
+                selector: '#imageGallery .lslide'
+            });
+        }
+    });
 
 
 

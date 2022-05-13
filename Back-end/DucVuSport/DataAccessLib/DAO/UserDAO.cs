@@ -16,23 +16,21 @@ namespace DataAccessLib.DAO
             data = new dataContext();
         }
 
-        public tbUser GetUser(string email, string pwd)
+        public Account GetUser(string email, string pwd)
         {
-            return data.tbUsers.Where(x=>x.email == email && x.passwordHash == pwd).FirstOrDefault();
+            return data.Accounts.Where(x=>x.Email == email && x.PasswordHash == pwd).FirstOrDefault();
         }
-        public void Register(string fullname, string email, string phonenumber, string pwd)
+
+        public int Insert(Account user)
         {
+            data.Accounts.Add(user);
+            data.SaveChanges();
+            return data.Accounts.Count(x => x.Email == user.Email);
         }
 
         public bool CheckEmail(string email)
         {
-            return data.tbUsers.Count(x=>x.email == email) > 0;
-        }
-        public int Insert(tbUser user)
-        {
-            data.tbUsers.Add(user);
-            data.SaveChanges();
-            return data.tbUsers.Count(x=>x.email == user.email);
+            return data.Accounts.Count(x=>x.Email == email) > 0;
         }
     }
 }

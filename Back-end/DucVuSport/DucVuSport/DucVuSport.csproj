@@ -189,6 +189,7 @@
     <Content Include="Content\images\banners\no-cart.png" />
     <Content Include="Content\images\banners\no-image.jpg" />
     <Content Include="Content\images\banners\payment.png" />
+    <Content Include="Content\images\banners\slider-bg.jpg" />
     <Content Include="Content\images\banners\user-image.jpeg" />
     <Content Include="Content\images\DayKhangLuc.jpg" />
     <Content Include="Content\images\ostrovit_100__vit_min.jpg" />
@@ -206,15 +207,14 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\images\banners\banner-bg.webp" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Admin_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Content\images\.DS_Store" />
     <Content Include="Areas\Admin\Views\Shared\__Sidebar-menu.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\__Product-list.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\__Top-product.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\__Order.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -225,6 +225,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\app.js" />
     <Content Include="Scripts\js\event.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />

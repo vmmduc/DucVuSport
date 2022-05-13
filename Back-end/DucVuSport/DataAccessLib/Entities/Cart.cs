@@ -12,20 +12,20 @@ namespace DataAccessLib.Entities
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int userID { get; set; }
+        public int UserID { get; set; }
 
-        public int productID { get; set; }
+        public int ProductID { get; set; }
 
-        public int? quantity { get; set; }
+        public int? Quantity { get; set; }
 
-        public bool? status { get; set; }
+        public bool? Status { get; set; }
 
-        public virtual tbUser tbUser { get; set; }
+        public virtual Account Account { get; set; }
 
         public virtual Product Product { get; set; }
     }

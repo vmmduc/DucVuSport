@@ -20,13 +20,8 @@ namespace DucVuSport.Controllers
         {
             ProductDAO products = new ProductDAO();
             Product product = products.getProductByID(id);
-            if (Session["user"] == null)
-            /*
-             * Nếu session rỗng (Chưa đăng nhập)
-             * Thì lưu giỏ hàng vào session
-             */
             {
-                if (Session["Cart"] == null)
+                if (Session["cart"] == null)
                 {
                     List<CartModel> cartList = new List<CartModel>();
                     cartList.Add(new CartModel
@@ -34,8 +29,8 @@ namespace DucVuSport.Controllers
                         product = product,
                         quantity = quantity
                     });
-                    Session["Cart"] = cartList;
-                    Session["Count"] = cartList.Count;
+                    Session["cart"] = cartList;
+                    Session["count"] = cartList.Count;
                 }
                 else
                 {
@@ -56,35 +51,38 @@ namespace DucVuSport.Controllers
                             quantity = quantity
                         });
                     }
-                    Session["Cart"] = cartList;
-                    Session["Count"] = cartList.Count;
+                    Session["cart"] = cartList;
+                    Session["count"] = cartList.Count;
                 }
             }
-            else
-            {
-                var user = Session["user"] as tbUser;
-
-            }
-
+            
             return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
         }
 
+       
+        public ActionResult Remove(int id)
+        {
+            List<CartModel> cartList = Session["cart"] as List<CartModel>;
+            cartList.RemoveAll(x => x.product.ID == id);
+            Session["cart"] = cartList;
+            Session["count"] = cartList.Count;
+            return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
+        }
+
+        public ActionResult Update(int id, int quantity)
+        {
+            List<CartModel> cartList = Session["cart"] as List<CartModel>;
+           cartList.Find(x => x.product.ID == id).quantity = quantity;
+            Session["cart"] = cartList;
+            return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
+        }
         private int isExist(int id)
         {
             List<CartModel> cart = Session["cart"] as List<CartModel>;
             for (int i = 0; i < cart.Count; i++)
-                if (cart[i].product.productID == id)
+                if (cart[i].product.ID == id)
                     return i;
             return -1;
-        }
-
-        public ActionResult Remove(int id)
-        {
-            List<CartModel> cartList = Session["cart"] as List<CartModel>;
-            cartList.RemoveAll(x => x.product.productID == id);
-            Session["Cart"] = cartList;
-            Session["Count"] = cartList.Count;
-            return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
         }
     }
 }

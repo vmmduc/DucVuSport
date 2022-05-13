@@ -1,6 +1,6 @@
-﻿@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "account__form" }))
+﻿@model DucVuSport.Models.LoginModel
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "account__form" }))
 {
-    @model DucVuSport.Models.LoginModel
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, null, new { @class = "form__message" })
     <div class="form__input">
@@ -13,7 +13,7 @@
     </div>
     <div class="form__check">
         <div class="form__checkbox">
-            @Html.CheckBoxFor(m=>m.remember, htmlAttributes: new { @id = "remember-me" })
+            @Html.CheckBoxFor(m => m.remember, htmlAttributes: new { @id = "remember-me" })
             <label for="remember-me">Nhớ mật khẩu</label>
         </div>
         <div class="form__forgot-password">

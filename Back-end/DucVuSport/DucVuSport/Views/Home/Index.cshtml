@@ -1,9 +1,28 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    var top10 = ViewBag.top10 as List<DataAccessLib.Entities.Product>;
 }
-
-<div class="body__sale">
- 
+<div class="body__home">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Content/images/banners/slider-bg.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/images/banners/slider-bg.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/images/banners/slider-bg.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 </div>
 
 <div class="feature-product">
@@ -15,17 +34,29 @@
         <ul id="autoWidth" class="cs-hidden">
 
             <!-- for each here-->
-            @for (var i = 0; i < 10; i++)
+            @foreach (var item in top10)
             {
                 <li class="">
                     <div class="product__item">
                         <a class="product__content align-items-center" href="#">
-                            <div class="product__discount">-30%</div>
-                            <img class="product__img" src="~/Content/images/banners/no-image.jpg">
-                            <h5 class="product__name">Tên của sản phẩm tên của sản phẩm</h5>
+                            @{
+                                var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                                var price = item.Price - item.Price * item.Discount;
+                                var discount = item.Discount * 100;
+                            }
+                            <div class="product__discount">-@discount%</div>
+                            @if (@item.Image == null)
+                            {
+                                <img class="product__img" src="~/Content/images/banners/no-image.jpg">
+                            }
+                            else
+                            {
+                                <img class="product__img" src="~/Content/images/@item.Image">
+                            }
+                            <h5 class="product__name">@item.ProductName</h5>
                             <div class="product__price">
-                                <div class="new__price">30000000</div>
-                                <div class="old__price text-decoration-line-through">30000000</div>
+                                <div class="new__price">@String.Format(format, "{0:c0}", price)</div>
+                                <div class="old__price text-decoration-line-through">@String.Format(format, "{0:c0}", item.Price)</div>
                             </div>
                             <div class="item__star">
                                 <i class="fa fa-star active"></i>
@@ -35,7 +66,7 @@
                                 <i class="fa fa-star"></i>
                             </div>
                         </a>
-                        <div class="add-cart__btn add-to-cart" id="">
+                        <div class="add-cart__btn add-to-cart" id="@item.ID">
                             <span>Thêm vào giỏ</span>
                         </div>
                     </div>
@@ -46,6 +77,87 @@
     </div>
 </div>
 
-<div class="body__get-info">
-
+<div class="body__about-us">
+    <!-- why us section -->
+    <section class="why_us_section layout_padding">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <div class="title__heading">
+                    <h1>Tại sao chọn chúng tôi</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mx-auto">
+                    <div class="box">
+                        <div class="img-box">
+                            <i class="fa fa-truck"></i>
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                SHIP COD TOÀN QUỐC
+                            </h5>
+                            <span>
+                                Giao nhận & thanh toán tiền tại nhà
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mx-auto">
+                    <div class="box">
+                        <div class="img-box">
+                            <i class="fa fa-retweet"></i>
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                ĐỔI TRẢ DỄ DÀNG
+                            </h5>
+                            <span>
+                                Cho phép đổi trả hàng trong 30 ngày
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mx-auto">
+                    <div class="box">
+                        <div class="img-box">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                ĐỘI NGŨ TƯ VẤN 24/7
+                            </h5>
+                            <span>
+                                Tư vấn 1 cách khoa học, nhanh chóng
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end why us section -->
 </div>
+
+<!-- Get newletter -->
+<div class="body__get-infor">
+    <div class="subscribe_section layout_padding">
+        <div class="container">
+            <div class="col-md-8 mx-auto">
+                <div class="subscribe_form">
+                    <div class="heading_container heading_center">
+                        <h2>ĐĂNG KÍ NHẬN THÔNG TIN</h2>
+                    </div>
+                    <form action="">
+                        <input type="email" placeholder="Enter your email">
+                        <div class="btn-box">
+                            <button class="btn1">
+                                subscribe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End get newletter -->

@@ -24,7 +24,8 @@ namespace DucVuSport
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/myscript").Include(
-                    "~/Scripts/js/event.js"));
+                    "~/Scripts/js/event.js",
+                    "~/Scripts/js/app.js"));
 
             bundles.Add(new StyleBundle("~/Content/mycss").Include(
                       "~/Content/bootstrap.min.css",

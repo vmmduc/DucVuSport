@@ -11,6 +11,7 @@ namespace DucVuSport.Controllers
 {
     public class ProductController : Controller
     {
+        [Route("Product")]
         public ActionResult Index()
         {
             ProductDAO product = new ProductDAO();
@@ -30,14 +31,13 @@ namespace DucVuSport.Controllers
             List<Product> li = products.getProductByCat(id);
             return PartialView("__Product", li);
         }
+
         public ActionResult Detail(int id)
         {
             ProductDAO products = new ProductDAO();
-            ViewBag.detail = products.getProductDetail(id);
+            ViewBag.detail = products.getProductByID(id);
             ViewBag.image = products.getImage(id);
             return View();
         }
-
-      
     }
 }

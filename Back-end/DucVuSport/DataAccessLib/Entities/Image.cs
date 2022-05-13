@@ -10,15 +10,15 @@ namespace DataAccessLib.Entities
     public partial class Image
     {
         [Key]
-        public int imgID { get; set; }
+        public int ImgID { get; set; }
 
-        public int? productID { get; set; }
+        public int? ProductID { get; set; }
 
-        public string url { get; set; }
+        public string URL { get; set; }
 
-        public DateTime? create_at { get; set; }
+        public DateTime? Create_date { get; set; }
 
-        public bool? status { get; set; }
+        public bool? Status { get; set; }
 
         public virtual Product Product { get; set; }
     }

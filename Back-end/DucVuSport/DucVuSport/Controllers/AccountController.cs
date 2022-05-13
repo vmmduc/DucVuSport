@@ -12,7 +12,7 @@ namespace DucVuSport.Controllers
 {
     public class AccountController : Controller
     {
-        private const string USER_SESSION = "user";
+        public const string USER_SESSION = "user";
         // GET: Accont
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -52,11 +52,11 @@ namespace DucVuSport.Controllers
                     ModelState.AddModelError("", "Email đã tồn tại");
                 else
                 {
-                    tbUser user = new tbUser();
-                    user.fullName = model.fullname;
-                    user.email = model.email;
-                    user.phoneNumber = model.phonenumber;
-                    user.passwordHash = model.pwd;
+                    Account user = new Account();
+                    user.FullName = model.fullname;
+                    user.Email = model.email;
+                    user.PhoneNumber = model.phonenumber;
+                    user.PasswordHash = model.pwd;
 
                     var result = userDAO.Insert(user);
                     if (result > 0)
@@ -73,8 +73,8 @@ namespace DucVuSport.Controllers
             DateTime now = DateTime.Now; // Lấy thời gian hiện tại
 
             dataContext data = new dataContext();
-            var _user = data.tbUsers.Find(((tbUser)Session["user"]).id);
-            _user.lastActivity = now;
+            var _user = data.Accounts.Find(((Account)Session["user"]).ID);
+            _user.LastActivity = now;
             data.SaveChanges();
 
             Session.Remove(USER_SESSION);

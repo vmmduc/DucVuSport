@@ -17,17 +17,17 @@ namespace DataAccessLib.DAO
         public void AddToCart(int userID, int productID, int quantity)
         {
             // Chưa xong
-            var hasProduct = data.Carts.FirstOrDefault(x =>x.userID == userID && x.productID == productID);
+            var hasProduct = data.Carts.FirstOrDefault(x =>x.UserID == userID && x.ProductID == productID);
             if (hasProduct != null)
             {
-                hasProduct.quantity += quantity;
+                hasProduct.Quantity += quantity;
             }
             else
             {
                 Cart cart = new Cart();
-                cart.userID = userID;
-                cart.productID = productID;
-                cart.quantity = quantity;
+                cart.UserID = userID;
+                cart.ProductID = productID;
+                cart.Quantity = quantity;
 
                 data.Carts.Add(cart);
             }
@@ -36,7 +36,7 @@ namespace DataAccessLib.DAO
         }
         public Cart GetCartByUser(int id)
         {
-            return data.Carts.FirstOrDefault(x=>x.userID == id);
+            return data.Carts.FirstOrDefault(x=>x.UserID == id);
         }
     }
 }

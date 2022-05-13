@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
+    [RouteArea("admin")]
     public class HomeAdminController : Controller
     {
         public ActionResult Index()

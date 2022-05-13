@@ -7,7 +7,7 @@
 <div class="body__product-detail">
     <div class="header__product-detail">
         <div class="left col-md-4 col-4">
-            @if (product.img == null)
+            @if (product.Image == null)
             {
                 <div class="big__img">
                     <img src="~/Content/images/banners/no-image.jpg" alt="">
@@ -16,21 +16,21 @@
             else
             {
                 <div class="big__img">
-                    <img src="~/Content/images/@product.img" alt="">
+                    <img src="~/Content/images/@product.Image" alt="">
                 </div>
             }
             <div class="images">
                 @foreach (var image in images)
                 {
                     <div class="small__img">
-                        <img src="~/Content/images/@image.url" alt="">
+                        <img src="~/Content/images/@image.URL" alt="">
                     </div>
                 }
             </div>
         </div>
 
         <div class="right col-md-9 col-9">
-            <div class="__product__name">@product.productName</div>
+            <div class="__product__name">@product.ProductName</div>
             <div class="item__star">
                 <i class="fa fa-star active"></i>
                 <i class="fa fa-star active"></i>
@@ -38,8 +38,8 @@
                 <i class="fa fa-star active"></i>
                 <i class="fa fa-star"></i>
             </div>
-            <div class="price">@String.Format(format, "{0:c0}", @product.price)</div>
-            <div class="col-10">@product.shotDescribe</div>
+            <div class="price">@String.Format(format, "{0:c0}", @product.Price)</div>
+            <div class="col-10">@product.ShotDescribe</div>
             <div class="quantity">
                 <div>Số lượng:</div>
                 <div class="buttons_added">
@@ -48,7 +48,7 @@
                     <input class="plus is-form" type="button" value="+">
                 </div>
             </div>
-            <div id="@product.productID">
+            <div id="@product.ID">
                 <div class="detail-btn add-to-cart">
                     <span>Thêm vào giỏ</span>
                 </div>
@@ -70,7 +70,7 @@
         <div class="tab-content">
             <div class="tab-pane description__tab active" id="decript">
                 <div class="">
-                    @product.describe
+                    @product.Describe
                 </div>
             </div>
             <div class="tab-pane" id="rate">

@@ -12,35 +12,35 @@ namespace DataAccessLib.Entities
         {
         }
 
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<tbUser> tbUsers { get; set; }
         public virtual DbSet<tbRole> tbRoles { get; set; }
         public virtual DbSet<tbUserRole> tbUserRoles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Account>()
+                .HasMany(e => e.Carts)
+                .WithRequired(e => e.Account)
+                .HasForeignKey(e => e.UserID)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Customer>()
-                .Property(e => e.phoneNumber)
+                .Property(e => e.PhoneNumber)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
-                .Property(e => e.img)
+                .Property(e => e.Image)
                 .IsFixedLength();
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.Carts)
                 .WithRequired(e => e.Product)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<tbUser>()
-                .HasMany(e => e.Carts)
-                .WithRequired(e => e.tbUser)
-                .HasForeignKey(e => e.userID)
                 .WillCascadeOnDelete(false);
         }
     }

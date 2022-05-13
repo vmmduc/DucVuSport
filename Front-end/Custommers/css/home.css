@@ -1,53 +1,235 @@
 @import url("../css/style.css");
 
 .body__home--img-style {
-    margin: 0;
-    width: 100%;
-    height: auto
+  margin: 0;
+  width: 100%;
+  height: auto
 }
 
 .body__home--left {
-    position: absolute;
-    left: 0;
-    margin-top: -45rem;
-    padding-left: 6rem;
-    box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  margin-top: -45rem;
+  padding-left: 6rem;
+  box-sizing: border-box;
 }
 
 .body__home--left h2 {
-    font-size: 6rem;
-    color: var(--main-color);
+  font-size: 6rem;
+  color: var(--main-color);
 }
 
 .body__home--left p {
-    font-size: var(--size);
-    color: var(--white);
-    padding: 2rem 0 2rem 0;
+  font-size: var(--size);
+  color: var(--white);
+  padding: 2rem 0 2rem 0;
 }
 
 .body__home--right {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-items: space-around;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-items: space-around;
 }
 
 [class*="btn--"] {
-    margin-right: 3rem;
-    font-size: 4rem;
-    cursor: pointer;
+  margin-right: 3rem;
+  font-size: 4rem;
+  cursor: pointer;
 }
 
 .feature-product {
-    width: 80%;
-    margin: 2rem auto;
-    text-align: center;
+  width: 80%;
+  margin: 2rem auto;
+  text-align: center;
 }
 
-.feature-product__heading {
-    margin-top: 5rem;
-    color: var(--main-color);
-    display: flex;
-    justify-content: center;
+
+.title__heading {
+  color: var(--main-color);
+  display: flex;
+  justify-content: center;
+}
+.why_us_section .box {
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+}
+
+.why_us_section .box .img-box {
+  width: 90px;
+  height: 90px;
+  border: 5px solid var(--white);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 100%;
+  margin-bottom: -37.5px;
+  position: relative;
+  background-color: var(--main-color);
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.why_us_section .box .img-box {
+  font-size: 3rem;
+}
+
+.why_us_section .box .detail-box {
+  background-color: var(--main-color);
+  color: var(--white);
+  width: 30rem;
+  padding: 55px 20px 20px 20px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  border-radius: 15px;
+}
+
+.why_us_section .box .detail-box h5 {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.layout_padding {
+  padding: 90px 0;
+}
+
+.layout_padding2 {
+  padding: 45px 0;
+}
+
+.layout_padding2-top {
+  padding-top: 45px;
+}
+
+.layout_padding2-bottom {
+  padding-bottom: 45px;
+}
+
+.layout_padding-top {
+  padding-top: 90px;
+}
+
+.layout_padding-bottom {
+  padding-bottom: 90px;
+}
+
+
+
+
+
+
+
+
+
+
+.heading_container {
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.heading_container h2 {
+  position: relative;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.heading_container.heading_center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+.heading_container.heading_center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+.subscribe_section {
+  text-align: center;
+  background-color: var(--main-color);
+  opacity: 0.8;
+}
+
+.subscribe_section .subscribe_form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subscribe_section .subscribe_form form input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #eeeff1;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 25px;
+  background-color: transparent;
+  margin-top: 35px;
+  color: #fffefe;
+}
+
+.subscribe_section .subscribe_form form input::placeholder {
+  color: rgba(255, 254, 254, 0.8);
+}
+
+.subscribe_section .subscribe_form form .btn-box {
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 25px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.subscribe_section .subscribe_form form .btn-box button {
+  display: inline-block;
+  padding: 10px 65px;
+  background-color: #ffffff;
+  color: #060a36;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  border: 1px solid #ffffff;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  text-transform: uppercase;
+}
+
+.subscribe_section .subscribe_form form .btn-box button:hover {
+  background-color: transparent;
+  color: #ffffff;
 }

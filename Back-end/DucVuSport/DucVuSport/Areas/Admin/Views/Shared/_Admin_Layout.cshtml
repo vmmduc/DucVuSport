@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,9 +16,8 @@
     <link rel="stylesheet" href="~/Areas/Admin/Content/css/grid.css">
     <link rel="stylesheet" href="~/Areas/Admin/Content/css/app.css">
 </head>
-
 <body>
-    <!-- SIDEBAR -->
+
     <div class="sidebar">
         <div class="sidebar-logo">
             <img src="~/Areas/Admin/Content/images/logo-lg.png" alt="Comapny logo">
@@ -38,22 +36,20 @@
                 <i class='bx bx-log-out bx-flip-horizontal'></i>
             </button>
         </div>
-        <!-- SIDEBAR MENU -->
         <ul class="sidebar-menu">
             @Html.Partial("__Sidebar-menu")
-        </ul>
-        <!-- END SIDEBAR MENU -->
-    </div>
-    <!-- END SIDEBAR -->
-    <!-- MAIN CONTENT -->
+        </ul> <!-- SIDEBAR MENU -->
+
+    </div>  <!-- SIDEBAR -->
+
     <div class="main">
         @RenderBody();
-    </div>
-    <!-- END MAIN CONTENT -->
+    </div>  <!-- MAIN CONTENT -->
+
     <div class="overlay"></div>
-    <!-- SCRIPT -->
+
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- APP JS -->
     <script src="~/Areas/Admin/Content/js/app.js"></script>
 </body>
 </html>

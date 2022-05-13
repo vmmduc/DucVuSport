@@ -13,10 +13,10 @@ namespace ssport.Controllers
     {
         public ActionResult Index()
         {
+            ProductDAO product = new ProductDAO();
+            ViewBag.top10 = product.getTop10();
             return View();
         }
-
-       
     }
 
     

@@ -1,25 +1,23 @@
 ﻿@{
     var cart = Session["Cart"] as List<DucVuSport.Models.CartModel>;
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-    var user = Session["user"] as DataAccessLib.Entities.tbUser;
+    var user = Session["user"] as DataAccessLib.Entities.Account;
     var total = 0;
 }
 <div class="_top">
     @if (user != null)
     {
-        <span>Xin chào @user.email</span>
+        <script>
+            $('._top').css({ "display": "block" });
+        </script>
+        <span>Xin chào @(user.FullName!=null?user.FullName:user.Email)</span>
     }
-    @*else
-    {
-        <div>Chào mừng bạn đến với DucVuSport. <a href="#" style="color: blueviolet;">Đăng nhập</a> hoặc <a href="#" style="color: blueviolet;">Đăng ký</a></div>
-    }*@
-
 </div>
 <div class="_header">
     <a href="#home" class="header__logo"> <i class="fas fa-shopping-basket"></i> SStore </a>
     <nav class="header__menu">
-        <a href="/Home/Index" class="header__menu-item">Trang chủ</a>
-        <a href="/Product/Index" class="header__menu-item">Sản phẩm</a>
+        <a href="/" class="header__menu-item">Trang chủ</a>
+        <a href="/Product" class="header__menu-item">Sản phẩm</a>
         <a href="#" class="header__menu-item">Tin tức</a>
         <a href="#" class="header__menu-item">Giới thiệu</a>
     </nav>
@@ -47,7 +45,7 @@
             <div class="header__no-cart">
                 <img src="~/Content/images/banners/no-cart.png" alt="">
                 <span>Bạn chưa có sản phẩm nào</span>
-                <a href="/Product/Index">Mua sắm ngay</a>
+                <a href="/Product">Mua sắm ngay</a>
             </div>
             <script>
                 $('.header__cart--notice').css({ 'display': 'none' });
@@ -63,20 +61,20 @@
                     {
                         <!-- Item -->
                         <li class="header__cart-list-item">
-                            @if (item.product.img == null)
+                            @if (item.product.Image == null)
                             {
                                 <img src="~/Content/images/banners/no-image.jpg" alt="" class="header__cart-list-item-img">
                             }
                             else
                             {
-                                <img src="~/Content/images/@item.product.img" alt="" class="header__cart-list-item-img">
+                                <img src="~/Content/images/@item.product.Image" alt="" class="header__cart-list-item-img">
                             }
                             <div class="header__cart-list-item-info">
                                 <div class="header__cart-list-item-head">
-                                    <h5 class="header__cart-list-item-name">@item.product.productName</h5>
+                                    <h5 class="header__cart-list-item-name">@item.product.ProductName</h5>
                                 </div>
                                 @{
-                                    var price = item.product.price - item.product.price * item.product.discount;
+                                    var price = item.product.Price - item.product.Price * item.product.Discount;
                                     total += Convert.ToInt32(price * item.quantity);
                                 }
                                 <div class="header__cart-list-item-body">
@@ -85,7 +83,7 @@
                                         <span class="header__cart-list-item-mul">x</span>
                                         <span class="header__cart-list-item-quantity">@item.quantity</span>
                                     </div>
-                                    <span class="header__cart-list-item-trash __delete" id="@item.product.productID">Xoá</span>
+                                    <span class="header__cart-list-item-trash __delete" id="@item.product.ID">Xoá</span>
                                 </div>
                             </div>
                         </li>
@@ -120,38 +118,23 @@
         }
     </div>
     <!--Header cart end-->
-
     <div class="col-5 col-md-3 header__account">
         @if (Session["user"] != null)
         {
-            <a class="header__account-item">
-
-                Tài khoản
-
-            </a>
-
-
-            <a class="header__account-item" href="/Account/LogOut">
-
-                Đăng xuất
-
-            </a>
+            <a class="header__account-item">Tài khoản</a>
+            <a class="header__account-item">Đổi mật khẩu</a>
+            <a class="header__account-item" href="/Account/LogOut">Đăng xuất</a>
         }
         else
         {
             <a class="header__account-item" id="login_btn"
                data-bs-toggle="modal" data-bs-target="#account-modal">
-
                 Đăng nhập
-
             </a>
-
 
             <a class="header__account-item" id="register_btn"
                data-bs-toggle="modal" data-bs-target="#account-modal">
-
                 Đăng ký
-
             </a>
         }
     </div>

@@ -31,19 +31,19 @@
                 {
                     <div class="cart__item">
                         <div class="__product col-md-5 col-5">
-                            <div class="__product_img col-md-2"><img src="~/Content/images/@item.product.img" alt=""></div>
-                            <div class="__product_name col-md-10">@item.product.productName</div>
+                            <div class="__product_img col-md-2"><img src="~/Content/images/@item.product.Image" alt=""></div>
+                            <div class="__product_name col-md-10">@item.product.ProductName</div>
                         </div>
 
                         <div class="__price col-md-3 col-3">
                             @{
-                                var price = item.product.price - item.product.price * item.product.discount;
+                                var price = item.product.Price - item.product.Price * item.product.Discount;
                                 var total_money = price * item.quantity;
                                 total += Convert.ToInt32(total_money);
-                                discount += Convert.ToInt32(item.product.price * item.product.discount * item.quantity);
+                                discount += Convert.ToInt32(item.product.Price * item.product.Discount * item.quantity);
                             }
 
-                            <div class="__old-price text-decoration-line-through">@String.Format(format, "{0:c0}", item.product.price)</div>
+                            <div class="__old-price text-decoration-line-through">@String.Format(format, "{0:c0}", item.product.Price)</div>
                             <div class="__new-price">@String.Format(format, "{0:c0}", price)</div>
                         </div>
                         <div class="__amount col-md-2 col-2">
@@ -57,9 +57,9 @@
                         <div class="__total col-md-2 col-2">
                             <span>@String.Format(format, "{0:c0}", total_money)</span>
                         </div>
-                        <div class="__action">
+                        <div class="__action" id="@item.product.ID">
                             <div class="__update">Sửa</div>
-                            <div class="__delete" id="@item.product.productID">Xoá</div>
+                            <div class="__delete">Xoá</div>
                         </div>
                     </div>
                 }
@@ -67,7 +67,7 @@
             <script>
                 $('.__delete').click(function () {
                     var model = {};
-                    model.id = $(this).attr('id');
+                    model.id = $(this).parent().attr('id');
                     $.ajax({
                         type: "POST",
                         url: '@Url.Action("Remove", "Cart")',
@@ -77,6 +77,22 @@
                         success: function () {
                             location.reload();
                             alert("Xóa thành công");
+                        }
+                    });
+                })
+
+                $('.__update').click(function () {
+                    var model = {};
+                    model.id = $(this).parent().attr('id');
+                    model.quantity = $('.input-qty').val();
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Update", "Cart")',
+                        data: JSON.stringify(model),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            location.reload();
                         }
                     });
                 })

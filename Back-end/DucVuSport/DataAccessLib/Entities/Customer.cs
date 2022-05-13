@@ -9,18 +9,18 @@ namespace DataAccessLib.Entities
     public partial class Customer
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
         [StringLength(100)]
-        public string fullname { get; set; }
+        public string FullName { get; set; }
 
-        public bool? gender { get; set; }
+        public bool? Gender { get; set; }
 
         [StringLength(50)]
-        public string phoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public string address { get; set; }
+        public string Address { get; set; }
 
-        public int? userID { get; set; }
+        public int? UserID { get; set; }
     }
 }

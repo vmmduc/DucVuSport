@@ -14,32 +14,41 @@ namespace DataAccessLib.DAO
         {
             data = new dataContext();
         }
+        /*
+         * Table product
+         */
         public List<Product> getAllProduct()
         {
             return data.Products.ToList();
         }
+
+        public Product getProductByID(int id)
+        {
+            return data.Products.Where(x => x.ID == id).FirstOrDefault();
+        }
+        public List<Product> getProductByCat(int cartID)
+        {
+            return data.Products.Where(x => x.CategoryID == cartID).ToList();
+        }
+
+        public List<Product> getTop10()
+        {
+            return data.Products.OrderByDescending(x => x.Sold).Take(10).ToList();
+        }
+        /*
+         * Table Category
+         */
         public List<Category> getAllCategory()
         {
             return data.Categories.ToList();
         }
-        
-        public Product getProductByID(int id)
-        {
-            return data.Products.Where(x=>x.productID == id).FirstOrDefault();
-        }
 
-        public List<Product> getProductByCat(int cartID)
-        {
-            return data.Products.Where(x=>x.categoryID == cartID).ToList(); 
-        }
-
-        public Product getProductDetail(int productID)
-        {
-            return data.Products.Where(x=>x.productID == productID).FirstOrDefault();
-        }
+        /*
+         * Table Image
+         */
         public List<Image> getImage(int productID)
         {
-            return data.Images.Where(x=>x.productID == productID).ToList();
+            return data.Images.Where(x => x.ProductID == productID).ToList();
         }
     }
 }
