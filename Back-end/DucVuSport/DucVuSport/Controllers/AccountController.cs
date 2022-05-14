@@ -73,7 +73,7 @@ namespace DucVuSport.Controllers
             DateTime now = DateTime.Now; // Lấy thời gian hiện tại
 
             dataContext data = new dataContext();
-            var _user = data.Accounts.Find(((Account)Session["user"]).ID);
+            var _user = data.Accounts.Find(((Account)Session["user"]).AccountID);
             _user.LastActivity = now;
             data.SaveChanges();
 

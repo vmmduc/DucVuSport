@@ -2,7 +2,7 @@
 @foreach (var item in Model)
 {
     <div class="product__item">
-        <a class="product__content align-items-center" href="/Product/Detail/@item.ID">
+        <a class="product__content align-items-center" href="/Product/Detail/@item.ProductID">
             @{
                 var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
                 var price = item.Price - item.Price * item.Discount;
@@ -30,7 +30,7 @@
                 <i class="fa fa-star"></i>
             </div>
         </a>
-        <div class="add-cart__btn add-to-cart" id="@item.ID">
+        <div class="add-cart__btn add-to-cart" id="@item.ProductID">
             <span>Thêm vào giỏ</span>
         </div>
     </div>

@@ -6,27 +6,22 @@ namespace DataAccessLib.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Cart")]
-    public partial class Cart
+    [Table("OrderDetail")]
+    public partial class OrderDetail
     {
-        [Key]
-        [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CartID { get; set; }
+        public int OrderDetailID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int UserID { get; set; }
+        public int OrderID { get; set; }
 
         public int ProductID { get; set; }
 
         public int? Quantity { get; set; }
 
-        public bool? Status { get; set; }
-
-        public virtual Account Account { get; set; }
+        public int? Status { get; set; }
 
         public virtual Product Product { get; set; }
+
+        public virtual tbOrder tbOrder { get; set; }
     }
 }

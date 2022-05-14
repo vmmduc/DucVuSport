@@ -15,7 +15,7 @@ namespace DataAccessLib.Entities
             Carts = new HashSet<Cart>();
         }
 
-        public int ID { get; set; }
+        public int AccountID { get; set; }
 
         [StringLength(100)]
         public string FullName { get; set; }

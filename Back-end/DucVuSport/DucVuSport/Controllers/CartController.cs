@@ -63,7 +63,7 @@ namespace DucVuSport.Controllers
         public ActionResult Remove(int id)
         {
             List<CartModel> cartList = Session["cart"] as List<CartModel>;
-            cartList.RemoveAll(x => x.product.ID == id);
+            cartList.RemoveAll(x => x.product.ProductID == id);
             Session["cart"] = cartList;
             Session["count"] = cartList.Count;
             return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
@@ -72,7 +72,7 @@ namespace DucVuSport.Controllers
         public ActionResult Update(int id, int quantity)
         {
             List<CartModel> cartList = Session["cart"] as List<CartModel>;
-           cartList.Find(x => x.product.ID == id).quantity = quantity;
+           cartList.Find(x => x.product.ProductID == id).quantity = quantity;
             Session["cart"] = cartList;
             return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
         }
@@ -80,7 +80,7 @@ namespace DucVuSport.Controllers
         {
             List<CartModel> cart = Session["cart"] as List<CartModel>;
             for (int i = 0; i < cart.Count; i++)
-                if (cart[i].product.ID == id)
+                if (cart[i].product.ProductID == id)
                     return i;
             return -1;
         }

@@ -24,7 +24,7 @@ namespace DataAccessLib.DAO
 
         public Product getProductByID(int id)
         {
-            return data.Products.Where(x => x.ID == id).FirstOrDefault();
+            return data.Products.Where(x => x.ProductID == id).FirstOrDefault();
         }
         public List<Product> getProductByCat(int cartID)
         {

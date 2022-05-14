@@ -6,31 +6,30 @@ namespace DataAccessLib.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Customer
+    [Table("tbOrder")]
+    public partial class tbOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public tbOrder()
         {
-            tbOrders = new HashSet<tbOrder>();
+            OrderDetails = new HashSet<OrderDetail>();
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CustommerID { get; set; }
+        public int OrderID { get; set; }
 
-        [StringLength(100)]
-        public string FullName { get; set; }
+        public int? CustommerID { get; set; }
 
-        public bool? Gender { get; set; }
+        public long? Total { get; set; }
 
-        [StringLength(50)]
-        public string PhoneNumber { get; set; }
+        public DateTime? Create_date { get; set; }
 
-        public string Address { get; set; }
+        public bool? Status { get; set; }
 
-        public int? UserID { get; set; }
+        public virtual Customer Customer { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbOrder> tbOrders { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

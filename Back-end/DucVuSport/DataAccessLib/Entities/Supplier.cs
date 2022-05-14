@@ -15,7 +15,7 @@ namespace DataAccessLib.Entities
             Products = new HashSet<Product>();
         }
 
-        public int ID { get; set; }
+        public int SupplierID { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; }

@@ -62,10 +62,10 @@
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\dataContext.cs" />
     <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\OrderDetail.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Supplier.cs" />
-    <Compile Include="Entities\tbRole.cs" />
-    <Compile Include="Entities\tbUserRole.cs" />
+    <Compile Include="Entities\tbOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

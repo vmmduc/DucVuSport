@@ -16,10 +16,10 @@ namespace DataAccessLib.Entities
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID { get; set; }
+        public int CategoryID { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string CategoryName { get; set; }
 
         public DateTime? Create_date { get; set; }
 

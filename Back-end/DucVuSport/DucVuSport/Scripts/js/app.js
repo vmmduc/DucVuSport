@@ -15,7 +15,7 @@
                     location.reload();
                     alert("Thêm thành công!")
                 }
-            });
-        });
+            })
+        })
     })
 </script>
