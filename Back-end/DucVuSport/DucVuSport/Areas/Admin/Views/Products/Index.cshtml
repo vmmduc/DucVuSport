@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DataAccessLib.Entities.Product>
+
+@{
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+<div>
+    <p class="add-new">
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
+<table class="table">
+    <thead class="tb-header">
+        <tr>
+            <th>Ảnh</th>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>Giảm giá</th>
+            <th>Số lượng</th>
+            <th>Trạng thái</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+    <tbody class="tb-body">
+        @foreach (var item in Model)
+        {
+            var price = item.Price - item.Price * item.Discount;
+            var discount = item.Discount * 100;
+
+
+            <tr>
+                @*Image*@
+                <td>
+                    <div class="order-owner">
+                        @if (item.Image != null)
+                        {
+                            <img src="~/Content/images/@item.Image" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/banners/no-image.jpg" />
+                        }
+                    </div>
+                </td>
+
+                @*Product name*@
+                <td class="r-name">
+                    @item.ProductName
+                </td>
+
+                @*Price*@
+                <td>
+                    @price
+                </td>
+
+                @*Discount*@
+                <td>
+                    @discount%
+                </td>
+
+
+                <td>
+                    @item.Quantity
+                </td>
+
+                @*Status*@
+                <td>
+                    <div class="status paid">
+                        <div class="dot"></div>
+                        <span>Active</span>
+                    </div>
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

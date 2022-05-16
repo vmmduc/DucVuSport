@@ -13,9 +13,5 @@ namespace DucVuSport.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult Product()
-        {
-            return PartialView("__Product-list");
-        }
     }
 }

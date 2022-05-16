@@ -14,6 +14,8 @@
     --main-header-height: 80px;
     --shadow: 0 1px 4px -1px rgb(0 0 0 / 15%);
     --darkmode-toggle-size: 20px;
+    --bg-color: #fcf8f8;
+    --light-grey: rgb(240, 240, 240);
 }
 
 .dark {
@@ -348,24 +350,6 @@ a {
         margin-right: 10px;
     }
 
-.product-name,
-.product-sales {
-    font-weight: 600;
-    text-transform: capitalize;
-}
-
-.product-name {
-    margin-bottom: 5px;
-}
-
-.product-sales {
-    margin-top: 5px;
-}
-
-.text-second {
-    color: var(--text-second-color);
-}
-
 .item-sale-info {
     text-align: right;
 }
@@ -379,8 +363,20 @@ table {
     min-width: 1000px;
 }
 
+
+.tb-header tr {
+    text-align: center;
+}
+
+.tb-body tr {
+    box-sizing: border-box;
+    text-align: center;
+}
+    .tb-body tr .r-name {
+        padding-left: 1rem;
+        text-align: left;
+    }
 .order-owner {
-    display: flex;
     align-items: center;
     text-transform: capitalize;
     font-weight: 500;
@@ -389,7 +385,6 @@ table {
     .order-owner img {
         width: 45px;
         height: 45px;
-        border-radius: 50%;
         margin-right: 15px;
     }
 
@@ -403,12 +398,6 @@ table td {
     border-bottom: 1px solid var(--border-color);
 }
 
-.order-status {
-    padding: 5px 15px;
-    border-radius: 5px;
-    font-weight: 500;
-}
-
 .order-ready {
     color: #2a59d1;
     background-color: rgba(62, 121, 247, 0.1);
@@ -419,44 +408,38 @@ table td {
     background-color: rgba(4, 209, 130, 0.1);
 }
 
-.payment-status {
+.status{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
-
-    .payment-status .dot {
+    .dot {
         width: 10px;
         height: 10px;
         border-radius: 50%;
         margin-right: 10px;
     }
 
-.payment-paid .dot {
+.paid .dot {
     background-color: #04d182;
 }
 
-.payment-pending .dot {
-    background-color: #ffc542;
-}
+.action-btn{
 
+}
+/*.payment-pending .dot {
+    background-color: #ffc542;
+}*/
 .overflow-scroll {
     overflow-y: auto;
 }
 
-.overlay {
-    position: absolute;
-    left: 0;
+.add-new {
+    background-color: antiquewhite;
+    position: fixed;
     top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: none;
+    right: 0;
 }
-
-    .overlay.active {
-        display: block;
-    }
-
 @media only screen and (max-width: 1280px) {
     .sidebar {
         transition: transform 0.3s ease-in-out;
