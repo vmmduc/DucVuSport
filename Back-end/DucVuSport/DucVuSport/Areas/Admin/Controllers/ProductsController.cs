@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DataAccessLib.Entities;
+using System.IO;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
@@ -29,11 +30,15 @@ namespace DucVuSport.Areas.Admin.Controllers
             return View();
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product)
         {
+            DateTime now = DateTime.Now;
+            product.Create_date = now;
+            product.Sold = 0; ;
+            product.View_count = 0;
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
@@ -63,7 +68,7 @@ namespace DucVuSport.Areas.Admin.Controllers
             return View(product);
         }
 
-    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product)
@@ -104,5 +109,16 @@ namespace DucVuSport.Areas.Admin.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+
+        /*[HttpPost]
+        public JsonResult UploadFile(HttpPostedFileBase fileUpload)
+        {
+            string ImagePath = string.Empty;
+            string fileName;
+            string Extention;
+            string imageName;
+
+        }*/
     }
 }

@@ -35,10 +35,6 @@ namespace DataAccessLib.Entities
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
-                .Property(e => e.Image)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Product>()
                 .HasMany(e => e.Carts)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);

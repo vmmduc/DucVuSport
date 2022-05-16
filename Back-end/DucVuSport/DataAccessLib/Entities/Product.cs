@@ -27,7 +27,6 @@ namespace DataAccessLib.Entities
 
         public string Describe { get; set; }
 
-        [StringLength(100)]
         public string Image { get; set; }
 
         public int? CategoryID { get; set; }
