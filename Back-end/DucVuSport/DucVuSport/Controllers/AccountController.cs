@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using DataAccessLib.DAO;
 using DataAccessLib.Entities;
 using DucVuSport.Models;
 
@@ -13,42 +12,42 @@ namespace DucVuSport.Controllers
     public class AccountController : Controller
     {
         public const string USER_SESSION = "user";
+        dataContext data = new dataContext();
         // GET: Accont
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                var result = data.Accounts.Where(x => x.Email == model.email && x.PasswordHash == model.passwd).FirstOrDefault();
+                if (result != null)
                 {
-                    UserDAO user = new UserDAO();
-                    var result = user.GetUser(model.email, model.passwd);
-                    if (result != null)
+                    Session[USER_SESSION] = result;
+                    if (model.remember)
                     {
-                        Session[USER_SESSION] = result;
-                        if (model.remember)
-                        {
-                            /*
-                             * Lưu cookie
-                             */
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Email hoặc mật khẩu không đúng");
+                        /*
+                         * Lưu cookie
+                         */
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Bạn chưa nhập email hoặc mật khẩu");
+                    ModelState.AddModelError("", "Email hoặc mật khẩu không đúng");
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Bạn chưa nhập email hoặc mật khẩu");
+            }
             return RedirectToAction("Index", "Home");
         }
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
-                UserDAO userDAO = new UserDAO();
-                if (userDAO.CheckEmail(model.email))
+                var hasEmail = data.Accounts.Count(x => x.Email == model.email) > 0;
+                if (hasEmail)
                     ModelState.AddModelError("", "Email đã tồn tại");
                 else
                 {
@@ -58,12 +57,11 @@ namespace DucVuSport.Controllers
                     user.PhoneNumber = model.phonenumber;
                     user.PasswordHash = model.pwd;
 
-                    var result = userDAO.Insert(user);
-                    if (result > 0)
-                    {
-                        var _user = userDAO.GetUser(model.email, model.pwd);
-                        Session[USER_SESSION] = _user;
-                    }
+                    data.Accounts.Add(user);
+                    data.SaveChanges();
+
+                    var _user = data.Accounts.Where(x => x.Email == model.email && x.PasswordHash == model.pwd).FirstOrDefault();
+                    Session[USER_SESSION] = _user;
                 }
             }
             return RedirectToAction("Index", "Home");

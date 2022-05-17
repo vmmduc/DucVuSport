@@ -1,6 +1,5 @@
 ﻿@{
     var product = ViewBag.detail as DataAccessLib.Entities.Product;
-    var images = ViewBag.Image as List<DataAccessLib.Entities.Image>;
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 <link href="~/Content/css/product-detal.css" rel="stylesheet" />
@@ -19,14 +18,6 @@
                     <img src="~/Content/images/@product.Image" alt="">
                 </div>
             }
-            <div class="images">
-                @foreach (var image in images)
-                {
-                    <div class="small__img">
-                        <img src="~/Content/images/@image.URL" alt="">
-                    </div>
-                }
-            </div>
         </div>
 
         <div class="right col-md-9 col-9">

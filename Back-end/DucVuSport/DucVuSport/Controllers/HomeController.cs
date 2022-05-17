@@ -1,5 +1,4 @@
-﻿using DataAccessLib.DAO;
-using DataAccessLib.Entities;
+﻿using DataAccessLib.Entities;
 using DucVuSport.Models;
 using System;
 using System.Collections.Generic;
@@ -11,10 +10,10 @@ namespace ssport.Controllers
 {
     public class HomeController : Controller
     {
+        dataContext data = new dataContext();
         public ActionResult Index()
         {
-            ProductDAO product = new ProductDAO();
-            ViewBag.top10 = product.getTop10();
+            ViewBag.top10 = data.Products.OrderByDescending(x => x.Sold).Take(10).ToList();
             return View();
         }
     }

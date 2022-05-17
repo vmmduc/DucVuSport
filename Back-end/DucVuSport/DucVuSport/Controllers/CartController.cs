@@ -1,5 +1,4 @@
-﻿using DataAccessLib.DAO;
-using DataAccessLib.Entities;
+﻿using DataAccessLib.Entities;
 using DucVuSport.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ namespace DucVuSport.Controllers
 {
     public class CartController : Controller
     {
+        dataContext data = new dataContext();
         public ActionResult Index()
         {
             return View();
@@ -18,8 +18,7 @@ namespace DucVuSport.Controllers
 
         public ActionResult AddToCart(int id, int quantity)
         {
-            ProductDAO products = new ProductDAO();
-            Product product = products.getProductByID(id);
+            Product product = data.Products.Where(x => x.ProductID == id).FirstOrDefault();
             {
                 if (Session["cart"] == null)
                 {

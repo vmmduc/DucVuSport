@@ -41,7 +41,7 @@
 }
 
 .product__list {
-    margin-left: 25rem;
+    margin-left: 30rem;
     border-radius: 2rem;
 }
 .product__list hr{
@@ -147,7 +147,7 @@
         margin-left: 0;
     }
     .product__list-content {
-        grid-template-columns: auto auto auto auto;
+        grid-template-columns: auto auto auto;
     }
 }
 

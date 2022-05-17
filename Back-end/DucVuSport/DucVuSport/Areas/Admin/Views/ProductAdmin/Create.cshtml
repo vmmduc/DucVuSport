@@ -38,7 +38,6 @@
             <script>
                 function UploadImage(file) {
                     var url = '@Url.Action("UploadFile", "Products")';
-
                     var formData = new FormData();
                     formData.append("UploadedFile", file);
                     $.ajax({

@@ -1,5 +1,4 @@
-﻿using DataAccessLib.DAO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,32 +10,28 @@ namespace DucVuSport.Controllers
 {
     public class ProductController : Controller
     {
+        dataContext data = new dataContext();
         [Route("Product")]
         public ActionResult Index()
         {
-            ProductDAO product = new ProductDAO();
-            ViewBag.Category_list = product.getAllCategory();
+            ViewBag.Category_list = data.Categories.ToList();
             return View();
         }
         public ActionResult getProduct()
         {
-            ProductDAO products = new ProductDAO(); 
-            List<Product> li = products.getAllProduct();
+            List<Product> li = data.Products.ToList();
             return PartialView("__Product", li);
         }
 
         public ActionResult getProductByCart(int id)
         {
-            ProductDAO products = new ProductDAO();
-            List<Product> li = products.getProductByCat(id);
+            List<Product> li = data.Products.Where(x => x.CategoryID == id).ToList();
             return PartialView("__Product", li);
         }
 
         public ActionResult Detail(int id)
         {
-            ProductDAO products = new ProductDAO();
-            ViewBag.detail = products.getProductByID(id);
-            ViewBag.image = products.getImage(id);
+            ViewBag.detail = data.Products.Where(x => x.ProductID == id).FirstOrDefault();
             return View();
         }
     }

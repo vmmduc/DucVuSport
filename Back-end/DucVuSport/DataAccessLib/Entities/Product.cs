@@ -5,7 +5,6 @@ namespace DataAccessLib.Entities
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Web.Mvc;
 
     [Table("Product")]
     public partial class Product
@@ -14,7 +13,6 @@ namespace DataAccessLib.Entities
         public Product()
         {
             Carts = new HashSet<Cart>();
-            Images = new HashSet<Image>();
             OrderDetails = new HashSet<OrderDetail>();
         }
 
@@ -26,7 +24,6 @@ namespace DataAccessLib.Entities
 
         public string ShotDescribe { get; set; }
 
-        [AllowHtml]
         public string Describe { get; set; }
 
         public string Image { get; set; }
@@ -54,9 +51,6 @@ namespace DataAccessLib.Entities
         public virtual ICollection<Cart> Carts { get; set; }
 
         public virtual Category Category { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
