@@ -5,6 +5,7 @@ namespace DataAccessLib.Entities
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("Product")]
     public partial class Product
@@ -25,6 +26,7 @@ namespace DataAccessLib.Entities
 
         public string ShotDescribe { get; set; }
 
+        [AllowHtml]
         public string Describe { get; set; }
 
         public string Image { get; set; }

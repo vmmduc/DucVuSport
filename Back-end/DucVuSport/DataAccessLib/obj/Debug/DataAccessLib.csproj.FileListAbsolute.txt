@@ -22,3 +22,16 @@ D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csp
 D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.csproj.CopyComplete
 D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.dll
 D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\obj\Debug\DataAccessLib.pdb
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.Helpers.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.Mvc.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.Razor.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.WebPages.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.WebPages.Razor.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.Helpers.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.Mvc.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.Razor.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.WebPages.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DataAccessLib\bin\Debug\System.Web.WebPages.Razor.xml

@@ -12,7 +12,7 @@ using System.IO;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductAdminController : Controller
     {
         private dataContext db = new dataContext();
 
@@ -110,15 +110,24 @@ namespace DucVuSport.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-
-        /*[HttpPost]
-        public JsonResult UploadFile(HttpPostedFileBase fileUpload)
+        [HttpPost]
+        public JsonResult UploadFile(HttpPostedFileBase UploadedFile)
         {
-            string ImagePath = string.Empty;
-            string fileName;
-            string Extention;
-            string imageName;
+            var urlpath = "/Content/images/";
+            var _ReturnImagePath = string.Empty;
+            if (UploadedFile.ContentLength > 0)
+            {
+                var _FileName = Path.GetFileNameWithoutExtension(UploadedFile.FileName);
+                var _Extension = Path.GetExtension(UploadedFile.FileName);
 
-        }*/
+                string _ImageName = _FileName + DateTime.Now.ToString("YYYYMMDDHHMMSS");
+
+                var _ImageSavePath = Server.MapPath(urlpath) + _ImageName + _Extension;
+                _ReturnImagePath = urlpath + _ImageName + _Extension;
+                var path = _ImageSavePath;
+                UploadedFile.SaveAs(path);
+            }
+            return Json(Convert.ToString(_ReturnImagePath), JsonRequestBehavior.AllowGet);
+        }
     }
 }

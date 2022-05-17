@@ -9,9 +9,36 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Create Product</h4>
+        <h4>Sửa sản phẩm</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductID)
+
+        <div class="group">
+            <div class="form-group-2">
+                <div class="form-floating">
+                    @Html.EditorFor(model => model.Create_date, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
+                    @Html.ValidationMessageFor(model => model.Create_date, "", new { @class = "text-danger" })
+                    <label for="floatingTextarea">Ngày tạo</label>
+                </div>
+            </div>
+
+            <div class="form-group-2">
+                <div class="form-floating">
+                    @Html.EditorFor(model => model.Sold, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
+                    @Html.ValidationMessageFor(model => model.Sold, "", new { @class = "text-danger" })
+                    <label for="floatingTextarea">Đã bán</label>
+                </div>
+            </div>
+
+            <div class="form-group-2">
+                <div class="form-floating">
+                    @Html.EditorFor(model => model.View_count, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
+                    @Html.ValidationMessageFor(model => model.View_count, "", new { @class = "text-danger" })
+                    <label for="floatingTextarea">Lượt xem</label>
+                </div>
+            </div>
+        </div>
 
         @* Product name*@
         <div class="form-group">
@@ -21,7 +48,6 @@
                 <label for="floatingTextarea">Tên sản phẩm</label>
             </div>
         </div>
-
 
         @*Shot describe*@
         <div class="form-group">
@@ -34,14 +60,35 @@
 
         @*Desctibe*@
         <div class="form-group">
-
-            @Html.EditorFor(model => model.Describe, new { htmlAttributes = new { @class = "form-control", @id = "summernote" } })
-            @Html.ValidationMessageFor(model => model.Describe, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(model => model.Describe, new { @class = "form-control", @id = "summernote" })
             <script>
+                function UploadImage(file) {
+                    var url = '@Url.Action("UploadFile", "Products")';
+
+                    var formData = new FormData();
+                    formData.append("UploadedFile", file);
+                    $.ajax({
+                        data: formData,
+                        type: "POST",
+                        url: url,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (FileUrl) {
+                            var imgNode = document.createElement('img');
+                            imgNode.src = FileUrl;
+                            $('#Content').summernote('insertNode', imgNode);
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+
                 $('#summernote').summernote({
                     placeholder: 'Mô tả sản phẩm',
-                    tabsize: 2,
-                    height: 120,
+                    height: 500,
+                    fontSizes: ['12', '14', '16', '18', '24', '36', '48'],
                     toolbar: [
                         ['style', ['style']],
                         ['font', ['bold', 'underline', 'clear']],
@@ -49,7 +96,7 @@
                         ['para', ['ul', 'ol', 'paragraph']],
                         ['table', ['table']],
                         ['insert', ['link', 'picture', 'video']],
-                        ['view', ['fullscreen', 'codeview', 'help']]
+                        ['view', ['codeview', 'help']]
                     ]
                 });
             </script>
@@ -116,15 +163,14 @@
             </div>
         </div>
 
-
         @*Submit btn*@
         <div class="button-group">
-            <div>
+            <div class="col-md-offset-2 come-back">
                 @Html.ActionLink("Trở về", "Index", new { @class = "btn btn-primary" })
             </div>
 
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Tạo" class="btn btn-primary" />
+                <input type="submit" value="Sửa" class="btn btn-primary" />
             </div>
         </div>
     </div>

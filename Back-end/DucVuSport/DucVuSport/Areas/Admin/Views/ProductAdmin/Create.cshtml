@@ -1,0 +1,152 @@
+﻿@model DataAccessLib.Entities.Product
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Create Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @* Product name*@
+        <div class="form-group">
+            <div class="form-floating">
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                <label for="floatingTextarea">Tên sản phẩm</label>
+            </div>
+        </div>
+
+
+        @*Shot describe*@
+        <div class="form-group">
+            <div class="form-floating">
+                @Html.EditorFor(model => model.ShotDescribe, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
+                @Html.ValidationMessageFor(model => model.ShotDescribe, "", new { @class = "text-danger" })
+                <label for="floatingTextarea">Mô tả ngắn</label>
+            </div>
+        </div>
+
+        @*Desctibe*@
+        <div class="form-group">
+            @Html.TextAreaFor(model => model.Describe, new { @class = "form-control", @id = "summernote" })
+            <script>
+                function UploadImage(file) {
+                    var url = '@Url.Action("UploadFile", "Products")';
+
+                    var formData = new FormData();
+                    formData.append("UploadedFile", file);
+                    $.ajax({
+                        data: formData,
+                        type: "POST",
+                        url: url,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (FileUrl) {
+                            var imgNode = document.createElement('img');
+                            imgNode.src = FileUrl;
+                            $('#Content').summernote('insertNode', imgNode);
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+
+                $('#summernote').summernote({
+                    placeholder: 'Mô tả sản phẩm',
+                    height: 500,
+                    fontSizes: ['12', '14', '16', '18', '24', '36', '48'],
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'underline', 'clear']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['table', ['table']],
+                        ['insert', ['link', 'picture', 'video']],
+                        ['view', ['codeview', 'help']]
+                    ]
+                });
+            </script>
+        </div>
+
+        @*Image*@
+        <div class="group">
+            @Html.EditorFor(model => model.Image, new { htmlAttributes = new { Type = "file", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="group">
+            @*Category*@
+            <div class="form-group-1">
+                <div>
+                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control form-select" })
+                    @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*Supplier*@
+            <div class="form-group-1">
+                <div>
+                    @Html.DropDownList("SupplierID", null, htmlAttributes: new { @class = "form-control form-select" })
+                    @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="group">
+            @*Price*@
+            <div class="form-group-2">
+                <div class="form-floating">
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    <label for="floatingTextarea">Giá</label>
+                </div>
+            </div>
+
+            @*Discount*@
+            <div class="form-group-2">
+                <div class="form-floating">
+                    @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
+                    @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                    <label for="floatingTextarea">Giảm giá</label>
+                </div>
+            </div>
+
+            @*Quantity*@
+            <div class="form-group-2">
+                <div class="form-floating">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    <label for="floatingTextarea">Số lượng</label>
+                </div>
+            </div>
+        </div>
+
+        @*Status*@
+        <div class="status">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Status)
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @*Submit btn*@
+        <div class="button-group">
+            <div>
+                @Html.ActionLink("Trở về", "Index", new { @class = "btn btn-primary" })
+            </div>
+
+            <div class="col-md-10">
+                <input type="submit" value="Tạo" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
