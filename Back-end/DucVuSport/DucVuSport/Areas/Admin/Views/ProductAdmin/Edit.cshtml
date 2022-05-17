@@ -62,7 +62,7 @@
         <div class="form-group">
             @Html.TextAreaFor(model => model.Describe, new { @class = "form-control", @id = "summernote" })
             <script>
-                function UploadImage(file) {
+                @*function UploadImage(file) {
                     var url = '@Url.Action("UploadFile", "Products")';
 
                     var formData = new FormData();
@@ -83,7 +83,7 @@
                             alert(data.responseText);
                         }
                     });
-                }
+                }*@
 
                 $('#summernote').summernote({
                     placeholder: 'Mô tả sản phẩm',

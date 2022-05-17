@@ -111,7 +111,7 @@ namespace DucVuSport.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public JsonResult UploadFile(HttpPostedFileBase UploadedFile)
         {
             var urlpath = "/Content/images/";
@@ -129,6 +129,6 @@ namespace DucVuSport.Areas.Admin.Controllers
                 UploadedFile.SaveAs(path);
             }
             return Json(Convert.ToString(_ReturnImagePath), JsonRequestBehavior.AllowGet);
-        }
+        }*/
     }
 }

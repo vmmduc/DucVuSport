@@ -28,7 +28,7 @@ namespace DataAccessLib.Entities
         [AllowHtml]
         public string Describe { get; set; }
 
-        public HttpPostedFileBaseModelBinder Image { get; set; }
+        public String Image { get; set; }
 
         public int? CategoryID { get; set; }
 
