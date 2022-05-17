@@ -71,6 +71,7 @@ namespace DucVuSport.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // https://www.compilemode.com/2016/04/uploading-files-in-Asp-Net-mvc-using-HttpPostedFileBase.html
         public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product)
         {
             if (ModelState.IsValid)

@@ -154,3 +154,7 @@ $(".small__img").each(function (index, value) {
         $('.big__img img').attr('src', img);
     })
 });
+
+
+var content = $('.desc-content').text();
+$('.desc-content').html(content);

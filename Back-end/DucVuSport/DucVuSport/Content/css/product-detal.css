@@ -103,6 +103,11 @@
     padding: 2rem;
 }
 
+.desc-content {
+    width: 95%;
+    margin: 0 auto;
+}
+
 .nav-item {
     width: 20%;
     margin-bottom: 2rem;

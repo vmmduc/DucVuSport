@@ -30,7 +30,7 @@ let customer_options = {
     series: [{
         name: "Store Customers",
         data: [40, 70, 20, 90, 36, 80, 30, 91, 60]
-    },{
+    }, {
         name: "Online Customers",
         data: [20, 30, 10, 20, 16, 40, 20, 51, 10]
     }],
@@ -55,37 +55,3 @@ let customer_options = {
 
 let customer_chart = new ApexCharts(document.querySelector("#customer-chart"), customer_options)
 customer_chart.render()
-
-setDarkChart = (dark) => {
-    let theme = {
-        theme: {
-            mode: dark ? 'dark' : 'light'
-        }
-    }
-
-    customer_chart.updateOptions(theme)
-    category_chart.updateOptions(theme)
-} 
-
-// DARK MODE TOGGLE
-let darkmode_toggle = document.querySelector('#darkmode-toggle')
-
-darkmode_toggle.onclick = (e) => {
-    e.preventDefault()
-    document.querySelector('body').classList.toggle('dark')
-    darkmode_toggle.querySelector('.darkmode-switch').classList.toggle('active')
-    setDarkChart(document.querySelector('body').classList.contains('dark'))
-}
-
-let overlay = document.querySelector('.overlay')
-let sidebar = document.querySelector('.sidebar')
-
-document.querySelector('#mobile-toggle').onclick = () => {
-    sidebar.classList.toggle('active')
-    overlay.classList.toggle('active')
-}
-
-document.querySelector('#sidebar-close').onclick = () => {
-    sidebar.classList.toggle('active')
-    overlay.classList.toggle('active')
-}

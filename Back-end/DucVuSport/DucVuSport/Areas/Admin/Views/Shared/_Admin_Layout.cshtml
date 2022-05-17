@@ -44,16 +44,35 @@
                 <i class='bx bx-log-out bx-flip-horizontal'></i>
             </button>
         </div>
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu active">
             @Html.Partial("__Sidebar-menu")
         </ul> <!-- SIDEBAR MENU -->
     </div>  <!-- SIDEBAR -->
 
     <div class="main">
+        <div class="main-header">
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class='bx bx-menu-alt-right'></i>
+            </div>
+        </div>
         @RenderBody()
     </div>  <!-- MAIN CONTENT -->
+    <div class="overlay"></div>
 
+    <script>
+        let overlay = $('.overlay');
+        let sidebar = $('.sidebar')
 
+        $('#mobile-toggle').click(function () {
+            overlay.addClass('active')
+            sidebar.addClass('active')
+        })
+
+        $('#sidebar-close').click(function () {
+            overlay.removeClass('active')
+            sidebar.removeClass('active')
+        })
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="~/Areas/Admin/Content/js/app.js"></script>
 </body>
