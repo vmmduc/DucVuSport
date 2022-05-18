@@ -71,7 +71,6 @@ namespace DucVuSport.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // https://www.compilemode.com/2016/04/uploading-files-in-Asp-Net-mvc-using-HttpPostedFileBase.html
         public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product)
         {
             if (ModelState.IsValid)
@@ -112,21 +111,19 @@ namespace DucVuSport.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult UploadFile(HttpPostedFileBase UploadedFile)
+        public JsonResult SaveFile(HttpPostedFileBase file)
         {
-            var urlpath = "/Content/images/";
+            var urlPath = "/Content/images/";
             var _ReturnImagePath = string.Empty;
-            if (UploadedFile.ContentLength > 0)
+            if (file.ContentLength > 0)
             {
-                var _FileName = Path.GetFileNameWithoutExtension(UploadedFile.FileName);
-                var _Extension = Path.GetExtension(UploadedFile.FileName);
+                string fileName, fileExtension, imgSavePath;
+                fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                fileExtension = Path.GetExtension(file.FileName);
+                imgSavePath = Server.MapPath(urlPath) + fileName + fileExtension;
 
-                string _ImageName = _FileName + DateTime.Now.ToString("YYYYMMDDHHMMSS");
-
-                var _ImageSavePath = Server.MapPath(urlpath) + _ImageName + _Extension;
-                _ReturnImagePath = urlpath + _ImageName + _Extension;
-                var path = _ImageSavePath;
-                UploadedFile.SaveAs(path);
+                file.SaveAs(imgSavePath);
+                _ReturnImagePath = urlPath;
             }
             return Json(Convert.ToString(_ReturnImagePath), JsonRequestBehavior.AllowGet);
         }

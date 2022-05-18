@@ -34,8 +34,6 @@ namespace DucVuSport.Controllers
                 else
                 {
                     List<CartModel> cartList = Session["cart"] as List<CartModel>;
-
-                    // Kiểm tra sản phẩm đã nằm trong giỏ hàng hay chưa
                     int index = isExist(id);
                     if (index != -1) // Nếu đã có trong giỏ hàng thì tăng số lượng lên 1
                     {
@@ -54,11 +52,10 @@ namespace DucVuSport.Controllers
                     Session["count"] = cartList.Count;
                 }
             }
-            
+
             return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
         }
 
-       
         public ActionResult Remove(int id)
         {
             List<CartModel> cartList = Session["cart"] as List<CartModel>;
@@ -71,7 +68,7 @@ namespace DucVuSport.Controllers
         public ActionResult Update(int id, int quantity)
         {
             List<CartModel> cartList = Session["cart"] as List<CartModel>;
-           cartList.Find(x => x.product.ProductID == id).quantity = quantity;
+            cartList.Find(x => x.product.ProductID == id).quantity = quantity;
             Session["cart"] = cartList;
             return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
         }

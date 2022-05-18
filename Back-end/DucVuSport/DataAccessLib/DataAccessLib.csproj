@@ -75,10 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Account.cs" />
-    <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\dataContext.cs" />
+    <Compile Include="Entities\Feedback.cs" />
     <Compile Include="Entities\OrderDetail.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Supplier.cs" />

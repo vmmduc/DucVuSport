@@ -77,8 +77,35 @@
 
         @*Image*@
         <div class="group">
-            @Html.EditorFor(model => model.Image, new { htmlAttributes = new { Type = "file", @class = "form-control" } })
+            @Html.EditorFor(model => model.Image, new { htmlAttributes = new { Type = "file", @class = "form-control", id = "" } })
             @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+
+            <script>
+
+
+            $('#pickUpImage').change(function(file = $(this).files[0]) {
+                    var formData = new FormData();
+                    formData.append("file", file);
+                    var url = '@Url.Action("SaveFile", "ProductAdmin")';
+                    $.ajax({
+                        data: formData,
+                        type: "POST",
+                        url: url,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (FileUrl) {
+                            alert("Upload thành công")
+                           @* var imgNode = document.createElement('img');
+                            imgNode.src = FileUrl;
+                            $('#Content').summernote('insertNode', imgNode);*@
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+            });
+            </script>
         </div>
 
         <div class="group">

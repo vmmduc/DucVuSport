@@ -20,9 +20,9 @@
                 </div>
 
                 @*Register*@
-            <div class="modal-body__register tab-pane" id="register">
-                @Html.Partial("__Form-register")
-            </div>
+                <div class="modal-body__register tab-pane" id="register">
+                    @Html.Partial("__Form-register")
+                </div>
 
                 @*Login by Google and Facebook*@
                 <div class="form__line">
@@ -33,6 +33,24 @@
                 <div class="form__other">
                     <a href="#" class="facebook"><img class="img--style" src="~/Content/images/banners/facebook.png"></a>
                     <a href="#" class="google"><img class="img--style" src="~/Content/images/banners/google.png"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Change password modal -->
+<div class="modal fade" id="change-pass">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header nav-tabs">
+                <button type="button" class="modal-header__btn close" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                @*Register*@
+                <div class="modal-body__register tab-pane" id="register">
+                    @Html.Partial("__Form-change-password")
                 </div>
             </div>
         </div>

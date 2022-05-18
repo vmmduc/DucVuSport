@@ -148,10 +148,27 @@
                             </div>
                             <p class="sonhanxet text-muted">(0 nhận xét)</p>
                             <div class="btn">
-                                <button>Viết đánh giá</button>
+                                <button data-bs-toggle="modal" data-bs-target="#vote">Viết đánh giá</button>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change password modal -->
+<div class="modal fade" id="vote">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header nav-tabs">
+                <button type="button" class="modal-header__btn close" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                @*Register*@
+                <div class="modal-body__register tab-pane" id="register">
+                    @Html.Partial("__Form-vote")
                 </div>
             </div>
         </div>

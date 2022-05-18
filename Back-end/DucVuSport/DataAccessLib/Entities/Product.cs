@@ -5,7 +5,6 @@ namespace DataAccessLib.Entities
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Web.Mvc;
 
     [Table("Product")]
     public partial class Product
@@ -13,7 +12,7 @@ namespace DataAccessLib.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            Carts = new HashSet<Cart>();
+            Feedbacks = new HashSet<Feedback>();
             OrderDetails = new HashSet<OrderDetail>();
         }
 
@@ -25,10 +24,9 @@ namespace DataAccessLib.Entities
 
         public string ShotDescribe { get; set; }
 
-        [AllowHtml]
         public string Describe { get; set; }
 
-        public HttpPostedFileBaseModelBinder Image { get; set; }
+        public string Image { get; set; }
 
         public int? CategoryID { get; set; }
 
@@ -49,10 +47,10 @@ namespace DataAccessLib.Entities
 
         public bool? Status { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Carts { get; set; }
-
         public virtual Category Category { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

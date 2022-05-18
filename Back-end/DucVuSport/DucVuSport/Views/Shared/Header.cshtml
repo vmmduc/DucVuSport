@@ -92,7 +92,7 @@
                 </ul>
 
                 <script>
-                $('.header__cart-list-item-trash').click(function () {
+                    $('.header__cart-list-item-trash').click(function () {
                     var model = {};
                     model.id = $(this).attr('id');
                     $.ajax({
@@ -102,12 +102,11 @@
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function () {
-                            location.reload();
-                            alert("Xóa thành công");
+                        location.reload();
+                        alert("Xóa thành công");
                         }
                     });
-                })
-                $('.header__cart--notice').css({ 'display': 'block' });
+                    })
                 </script>
 
                 <div class="header__cart-total">
@@ -122,7 +121,7 @@
         @if (Session["user"] != null)
         {
             <a class="header__account-item">Tài khoản</a>
-            <a class="header__account-item">Đổi mật khẩu</a>
+            <a class="header__account-item" data-bs-toggle="modal" data-bs-target="#change-pass">Đổi mật khẩu</a>
             <a class="header__account-item" href="/Account/LogOut">Đăng xuất</a>
         }
         else

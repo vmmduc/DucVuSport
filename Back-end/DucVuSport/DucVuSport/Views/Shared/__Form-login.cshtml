@@ -1,14 +1,16 @@
 ﻿@model DucVuSport.Models.LoginModel
+
 @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "account__form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, null, new { @class = "form__message" })
+    <div class="form__message"></div>
     <div class="form__input">
-        @Html.TextBoxFor(m => m.email, new { @placeholder = "Email" })
+        @Html.TextBoxFor(m => m.email, new { @placeholder = "Email", @id = "email" })
         <div class="form__icon"><i class="fas fa-user-circle"></i></div>
     </div>
     <div class="form__input pwd-input">
-        @Html.PasswordFor(m => m.passwd, new { @placeholder = "Mật khẩu", @class = "pw" })
+        @Html.PasswordFor(m => m.passwd, new { @placeholder = "Mật khẩu", @class = "pw", @id = "pass" })
         <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
     </div>
     <div class="form__check">

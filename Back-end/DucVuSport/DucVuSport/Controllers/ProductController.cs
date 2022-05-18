@@ -19,18 +19,22 @@ namespace DucVuSport.Controllers
         }
         public ActionResult getProduct()
         {
-            List<Product> li = data.Products.ToList();
+            List<Product> li = data.Products.Where(x=>x.Status == true).ToList();
             return PartialView("__Product", li);
         }
 
         public ActionResult getProductByCart(int id)
         {
-            List<Product> li = data.Products.Where(x => x.CategoryID == id).ToList();
+            List<Product> li = data.Products.Where(x => x.CategoryID == id && x.Status == true).ToList();
             return PartialView("__Product", li);
         }
 
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int? id)
         {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
             ViewBag.detail = data.Products.Where(x => x.ProductID == id).FirstOrDefault();
             return View();
         }
