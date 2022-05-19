@@ -16,6 +16,7 @@ namespace DucVuSport.Areas.Admin.Controllers
         public async Task<ActionResult> Index()
         {
             var products = db.Products.Include(p => p.Category).Include(p => p.Supplier);
+            ViewBag.Label = "Danh sách sản phẩm";
             return View(await products.ToListAsync());
         }
 
@@ -24,6 +25,7 @@ namespace DucVuSport.Areas.Admin.Controllers
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "Name");
+            ViewBag.Label = "Tạo mới sản phẩm";
             return View();
         }
 
@@ -38,11 +40,14 @@ namespace DucVuSport.Areas.Admin.Controllers
             product.View_count = 0;
             if (ModelState.IsValid)
             {
-                string extentsion = Path.GetExtension(imageFile.FileName);
-                string fileName = Path.GetFileNameWithoutExtension(imageFile.FileName) + extentsion;
-                product.Image = fileName;
-                fileName = Path.Combine(Server.MapPath("~/Content/images"), fileName);
-                imageFile.SaveAs(fileName);
+                if (imageFile != null && imageFile.ContentLength > 0)
+                {
+                    string extentsion = Path.GetExtension(imageFile.FileName);
+                    string fileName = Path.GetFileNameWithoutExtension(imageFile.FileName) + extentsion;
+                    product.Image = fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+                    imageFile.SaveAs(fileName);
+                }
 
                 db.Products.Add(product);
                 await db.SaveChangesAsync();
@@ -68,6 +73,7 @@ namespace DucVuSport.Areas.Admin.Controllers
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "Name", product.SupplierID);
+            ViewBag.Label = "Sửa thông tin sản phẩm";
             return View(product);
         }
 
@@ -78,18 +84,21 @@ namespace DucVuSport.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string extention = Path.GetExtension(image.FileName);
-                string fileName = Path.GetFileNameWithoutExtension(image.FileName) + extention;
-                string path = Server.MapPath("~/Content/images");
-                if (!System.IO.File.Exists(path + fileName))
+                if (image != null && image.ContentLength > 0)
                 {
-                    product.Image = fileName;
-                    fileName = Path.Combine(path + fileName);
-                    image.SaveAs(fileName);
-                }
-                else
-                {
-                    product.Image = fileName;
+                    string extention = Path.GetExtension(image.FileName);
+                    string fileName = Path.GetFileNameWithoutExtension(image.FileName) + extention;
+                    string path = Server.MapPath("~/Content/images");
+                    if (!System.IO.File.Exists(path + fileName))
+                    {
+                        product.Image = fileName;
+                        fileName = Path.Combine(path + fileName);
+                        image.SaveAs(fileName);
+                    }
+                    else
+                    {
+                        product.Image = fileName;
+                    }
                 }
                 db.Entry(product).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -112,6 +121,7 @@ namespace DucVuSport.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Label = "Xóa sản phẩm";
             return View(product);
         }
 

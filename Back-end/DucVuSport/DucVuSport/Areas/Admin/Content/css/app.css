@@ -136,24 +136,24 @@ body {
         font-weight: 600;
         color: var(--main-color);
         text-transform: capitalize;
-        text-decoration:none;
+        text-decoration: none;
         transition: color 0.2s ease-in-out;
     }
 
-    .sidebar-menu > li > a:hover {
-        background-color: var(--menu-item-active-bg);
-        color: var(--main-color);
-        border-right: 4px solid var(--main-color);
-    }
+        .sidebar-menu > li > a:hover {
+            background-color: var(--menu-item-active-bg);
+            color: var(--main-color);
+            border-right: 4px solid var(--main-color);
+        }
 
-    .sidebar-menu > li > a:hover {
-        color: var(--main-color);
-    }
+        .sidebar-menu > li > a:hover {
+            color: var(--main-color);
+        }
 
-    .sidebar-menu > li > a > i {
-        font-size: 1.5rem;
-        margin-right: 10px;
-    }
+        .sidebar-menu > li > a > i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
 
 .sidebar-menu-dropdown {
     position: relative;
@@ -407,13 +407,38 @@ table td {
 }
 
 .add-new {
-    background-color: antiquewhite;
+    padding: 1rem;
+    background-color: var(--main-color);
+    text-align: center;
+    color: white;
     position: fixed;
-    top: 0;
-    right: 0;
+    right: 2rem;
+    bottom: 2rem;
+    border-radius: 1rem;
+    opacity: 0.6;
 }
 
+    .add-new:hover {
+        color: white;
+        opacity: 1;
+    }
+
+    .add-new a {
+        text-decoration: none;
+    }
+
+        .add-new a:hover {
+            color: white;
+        }
 /*New*/
+.label {
+    font-size: 1.5rem;
+    color: var(--main-color);
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
+
 .form-group {
     width: 80%;
     margin: 0 auto;
@@ -439,7 +464,6 @@ table td {
 .status {
     width: 80%;
     margin: 0 auto;
-    margin-top: 2rem;
     display: flex;
     justify-content: left;
 }
@@ -450,7 +474,6 @@ table td {
     margin: 0 auto;
     margin-top: 2rem;
 }
-
 
 @media only screen and (max-width: 1280px) {
     .sidebar {
