@@ -8,10 +8,8 @@ namespace DucVuSport.Models
 {
     public class RegisterModel
     {
-        public string fullname { get; set; }
-        public string email { get; set; }
-        public string phonenumber { get; set; }
-        public string pwd { get; set; }
-        public string repwd { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string repassword { get; set; }
     }
 }

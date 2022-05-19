@@ -22,14 +22,14 @@ namespace DucVuSport.Controllers
         {
             if (ModelState.IsValid)
             {
-                var passwordHash = Encrypt.GetMD5(model.passwd);
-                var result = data.Accounts.Where(x => x.Email == model.email && x.PasswordHash == passwordHash).FirstOrDefault();
+                var passwordHash = Encrypt.GetMD5(model.password);
+                var result = data.Accounts.Where(x => x.Username == model.username && x.PasswordHash == passwordHash).FirstOrDefault();
                 if (result != null)
                 {
                     Session[USER_SESSION] = result;
                     if (model.remember)
                     {
-                        Response.Cookies["username"].Value = result.Email;
+                        Response.Cookies["username"].Value = result.Username;
                         Response.Cookies["username"].Expires = DateTime.Now.AddDays(30);
                         Response.Cookies["password"].Value = result.PasswordHash;
                         Response.Cookies["password"].Expires = DateTime.Now.AddDays(30);
@@ -53,22 +53,20 @@ namespace DucVuSport.Controllers
         {
             if (ModelState.IsValid)
             {
-                var hasEmail = data.Accounts.Count(x => x.Email == model.email) > 0;
+                var hasEmail = data.Accounts.Count(x => x.Username == model.username) > 0;
                 if (hasEmail)
-                    ModelState.AddModelError("", "Email đã tồn tại");
+                    ModelState.AddModelError("", "Username đã tồn tại");
                 else
                 {
                     Account user = new Account();
-                    user.FullName = model.fullname;
-                    user.Email = model.email;
-                    user.PhoneNumber = model.phonenumber;
-                    var passwordHash = Encrypt.GetMD5(model.pwd);
+                    user.Username = model.username;
+                    var passwordHash = Encrypt.GetMD5(model.password);
                     user.PasswordHash = passwordHash;
 
                     data.Accounts.Add(user);
                     data.SaveChanges();
 
-                    var _user = data.Accounts.Where(x => x.Email == model.email && x.PasswordHash == passwordHash).FirstOrDefault();
+                    var _user = data.Accounts.Where(x => x.Username == model.username && x.PasswordHash == passwordHash).FirstOrDefault();
                     Session[USER_SESSION] = _user;
                 }
             }

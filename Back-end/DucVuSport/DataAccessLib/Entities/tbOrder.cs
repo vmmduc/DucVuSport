@@ -19,7 +19,7 @@ namespace DataAccessLib.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int OrderID { get; set; }
 
-        public int? CustommerID { get; set; }
+        public int CustommerID { get; set; }
 
         public long? Total { get; set; }
 

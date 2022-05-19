@@ -3,28 +3,19 @@
     @model DucVuSport.Models.RegisterModel
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, null, new { @class = "form__message" })
+    <div class="form__message">Đăng ký</div>
     <div class="form__input">
-        @Html.TextBoxFor(m => m.fullname, new { @placeholder = "Họ và tên" })
-        <div class="form__icon"><i class="fas fa-user-circle"></i></div>
-    </div>
-
-    <div class="form__input">
-        @Html.TextBoxFor(m => m.email, new { @placeholder = "email" })
+        @Html.TextBoxFor(m => m.username, new { @placeholder = "Tên người dùng" })
         <div class="form__icon"><i class="fas fa-envelope"></i></div>
     </div>
 
-    <div class="form__input">
-        @Html.TextBoxFor(m => m.phonenumber, new { @placeholder = "Số điện thoại" })
-        <div class="form__icon"><i class="fas fa-phone"></i></div>
-    </div>
-
     <div class="form__input pwd-input">
-        @Html.PasswordFor(m => m.pwd, new { @class = "pw", @placeholder = "Mật khẩu" })
+        @Html.PasswordFor(m => m.password, new { @class = "pw", @placeholder = "Mật khẩu" })
         <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
     </div>
 
     <div class="form__input pwd-input">
-        @Html.PasswordFor(m => m.repwd, new { @class = "pw", @placeholder = "Xác nhận mật khẩu" })
+        @Html.PasswordFor(m => m.repassword, new { @class = "pw", @placeholder = "Xác nhận mật khẩu" })
         <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
     </div>
 

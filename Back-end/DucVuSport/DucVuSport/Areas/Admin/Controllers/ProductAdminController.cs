@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
 using System.Web;
@@ -33,7 +30,7 @@ namespace DucVuSport.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product)
+        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product, HttpPostedFileBase imageFile)
         {
             DateTime now = DateTime.Now;
             product.Create_date = now;
@@ -41,6 +38,12 @@ namespace DucVuSport.Areas.Admin.Controllers
             product.View_count = 0;
             if (ModelState.IsValid)
             {
+                string extentsion = Path.GetExtension(imageFile.FileName);
+                string fileName = Path.GetFileNameWithoutExtension(imageFile.FileName) + extentsion;
+                product.Image = fileName;
+                fileName = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+                imageFile.SaveAs(fileName);
+
                 db.Products.Add(product);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -71,10 +74,23 @@ namespace DucVuSport.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product)
+        public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                string extention = Path.GetExtension(image.FileName);
+                string fileName = Path.GetFileNameWithoutExtension(image.FileName) + extention;
+                string path = Server.MapPath("~/Content/images");
+                if (!System.IO.File.Exists(path + fileName))
+                {
+                    product.Image = fileName;
+                    fileName = Path.Combine(path + fileName);
+                    image.SaveAs(fileName);
+                }
+                else
+                {
+                    product.Image = fileName;
+                }
                 db.Entry(product).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -108,24 +124,6 @@ namespace DucVuSport.Areas.Admin.Controllers
             db.Products.Remove(product);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public JsonResult SaveFile(HttpPostedFileBase file)
-        {
-            var urlPath = "/Content/images/";
-            var _ReturnImagePath = string.Empty;
-            if (file.ContentLength > 0)
-            {
-                string fileName, fileExtension, imgSavePath;
-                fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                fileExtension = Path.GetExtension(file.FileName);
-                imgSavePath = Server.MapPath(urlPath) + fileName + fileExtension;
-
-                file.SaveAs(imgSavePath);
-                _ReturnImagePath = urlPath;
-            }
-            return Json(Convert.ToString(_ReturnImagePath), JsonRequestBehavior.AllowGet);
         }
     }
 }

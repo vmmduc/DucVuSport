@@ -18,7 +18,7 @@ namespace DataAccessLib.Entities
 
         public int? Quantity { get; set; }
 
-        public int? Status { get; set; }
+        public bool? Status { get; set; }
 
         public virtual Product Product { get; set; }
 

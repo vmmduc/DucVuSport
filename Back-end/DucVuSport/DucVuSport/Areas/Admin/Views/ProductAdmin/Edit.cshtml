@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "ProductAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
@@ -78,8 +78,7 @@
 
         @*Image*@
         <div class="group">
-            @Html.EditorFor(model => model.Image, new { htmlAttributes = new { Type = "file", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            <input type="file" name="image" class="form-control" />
         </div>
 
         <div class="group">

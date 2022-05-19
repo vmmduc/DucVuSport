@@ -462,8 +462,9 @@ ul li {
 }
 
 .form__message {
-    color: red;
-    font-size: 1.5rem;
+    color: var(--main-color);
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .form__input {
