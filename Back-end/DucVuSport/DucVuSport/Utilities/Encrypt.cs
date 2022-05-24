@@ -11,15 +11,18 @@ namespace DucVuSport.Utilities
     {
         public static string GetMD5(string str)
         {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] fromData = Encoding.UTF8.GetBytes(str);
-            byte[] targetData = md5.ComputeHash(fromData);
             string byte2String = null;
-
-            for (int i = 0; i < targetData.Length; i++)
+            if (str != null)
             {
-                byte2String += targetData[i].ToString("x2");
+                MD5 md5 = new MD5CryptoServiceProvider();
+                byte[] fromData = Encoding.UTF8.GetBytes(str);
+                byte[] targetData = md5.ComputeHash(fromData);
 
+                for (int i = 0; i < targetData.Length; i++)
+                {
+                    byte2String += targetData[i].ToString("x2");
+
+                }
             }
             return byte2String;
         }

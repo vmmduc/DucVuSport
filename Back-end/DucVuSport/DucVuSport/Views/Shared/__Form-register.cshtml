@@ -1,4 +1,4 @@
-﻿@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "account__form" }))
+﻿@using (Ajax.BeginForm("Register", "Home", new AjaxOptions { HttpMethod = "POST", OnSuccess = "registerDone" }, new { @class = "account__form" }))
 {
     @model DucVuSport.Models.RegisterModel
     @Html.AntiForgeryToken()
@@ -30,3 +30,15 @@
         <button>Đăng kí</button>
     </div>
 }
+
+<script type="text/javascript">
+    function registerDone(response) {
+        if (response == true) {
+            displayMessage("Đăng ký thành công !!!", 'success');
+            $('.modal-header__btn').trigger('click');
+            $('.header__account').removeClass('active');
+        } else {
+            displayMessage("Đăng kí thất bại !!!", 'error');
+        }
+    }
+</script>

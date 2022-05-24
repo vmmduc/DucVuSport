@@ -4,25 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trang chủ</title>
+
     @Styles.Render("~/bundles/mycss")
     @Scripts.Render("~/bundles/jquery")
+
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.js"></script>
+
+    @*Toast*@
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <script src="~/Scripts/toastr.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
 </head>
 
 <body>
     <header class="header">
         @Html.Partial("Header")
     </header> <!-- header -->
+
+
     @Html.Partial("__Account-modal") <!-- Modal -->
     <div class="body">
         <div class="body-container" id="body">
             @RenderBody()
         </div>
     </div> <!-- Home conten-->
+
+
     @Html.Partial("Footer")    <!-- Footer -->
 
     @Scripts.Render("~/bundles/myscript")

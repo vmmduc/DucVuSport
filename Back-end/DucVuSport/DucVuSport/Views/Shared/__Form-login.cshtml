@@ -1,6 +1,6 @@
 ﻿@model DucVuSport.Models.LoginModel
 
-@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "account__form" }))
+@using (Ajax.BeginForm("Login", "Home", new AjaxOptions { HttpMethod = "POST", OnSuccess = "fnSuccess" }, new { @class = "account__form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, null, new { @class = "form__message" })
@@ -10,7 +10,7 @@
         <div class="form__icon"><i class="fas fa-user-circle"></i></div>
     </div>
     <div class="form__input pwd-input">
-        @Html.PasswordFor(m => m.password, new { @placeholder = "Mật khẩu", @class = "pw", @id = "pass" })
+        @Html.PasswordFor(m => m.password, new { @placeholder = "Mật khẩu", @class = "pw" })
         <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
     </div>
     <div class="form__check">
@@ -26,3 +26,16 @@
         <button type="submit">Đăng nhập</button>
     </div>
 }
+
+
+<script type="text/javascript">
+    function fnSuccess(response) {
+        if (response == true) {
+            displayMessage("Đăng nhập thành công !!!", 'success');
+            $('.modal-header__btn').trigger('click');
+            $('.header__account').removeClass('active');
+        } else {
+            displayMessage("Đăng nhập thất bại !!!", 'error');
+        }
+    }
+</script>

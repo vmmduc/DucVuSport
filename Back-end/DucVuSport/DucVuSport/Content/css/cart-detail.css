@@ -1,6 +1,7 @@
 @import url("style.css");
 
 .cart__detail {
+    min-height: 40rem;
     width: 100%;
 }
 
@@ -179,6 +180,7 @@
     background-color: var(--main-color);
     border-radius: 5px;
     color: var(--white);
+    cursor: pointer;
 }
 
     .__update:hover,

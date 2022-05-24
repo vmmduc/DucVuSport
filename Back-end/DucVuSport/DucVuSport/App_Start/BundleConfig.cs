@@ -10,30 +10,28 @@ namespace DucVuSport
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                        "~/Scripts/jquery-{version}.js",
-                       "~/Scripts/jquery-{version}.min.js"));
+                       "~/Scripts/jquery-{version}.min.js",
+                       "~/Scripts/jquery.validate.min.js",
+                       "~/Scripts/jquery.validate.unobtrusive.min.js",
+                       "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/bundles/toast").Include(
+                        "~/Script/toastr.js"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+            bundles.Add(new StyleBundle("~/bundles/style-toast").Include(
+                        "~/Content/toastr.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/myscript").Include(
-                    "~/Scripts/js/event.js",
-                    "~/Scripts/js/app.js"));
+                        "~/Scripts/js/event.js",
+                        "~/Scripts/js/app.js"));
 
             bundles.Add(new StyleBundle("~/bundles/mycss").Include(
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/css/style.css",
-                      "~/Content/css/home.css",
-                      "~/Content/css/product-list.css",
-                      "~/Content/css/product-detail.css",
-                      "~/Content/css/cart-detail.css"));
+                          "~/Content/bootstrap.min.css",
+                          "~/Content/css/style.css",
+                          "~/Content/css/home.css",
+                          "~/Content/css/product-list.css",
+                          "~/Content/css/product-detail.css",
+                          "~/Content/css/cart-detail.css"));
         }
     }
 }
