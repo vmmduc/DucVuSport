@@ -1,8 +1,10 @@
 ﻿using DataAccessLib.Entities;
 using DucVuSport.Models;
 using DucVuSport.Utilities;
+using Facebook;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +15,18 @@ namespace ssport.Controllers
     {
         dataContext data = new dataContext();
         public const string USER_SESSION = "user";
+
+        private Uri RederectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallBack");
+                return uriBuilder.Uri;
+            }
+        }
         public ActionResult Index()
         {
             ViewBag.top10 = data.Products.OrderByDescending(x => x.Sold).Take(10).ToList();
@@ -47,6 +61,43 @@ namespace ssport.Controllers
             }
             else
                 return null;
+        }
+
+        public ActionResult LoginFacebook()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                redirect_uri = RederectUri.AbsoluteUri,
+                response_type = "code",
+                scope = "email",
+            });
+            return Redirect(loginUrl.AbsoluteUri);
+        }
+
+        public ActionResult FacebookCallBack(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                rederect_url = RederectUri.AbsoluteUri,
+                code = code
+            });
+
+            var accessToken = result.access_token;
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                dynamic me = fb.Get("me?fields=first_name, middle_name,last_name,id,email");
+                string email = me.email;
+                string firstName = me.first_name;
+                string middleName = me.middle_name;
+                string lastName = me.last_name;
+            }
+            return Redirect("/");
         }
 
         [HttpPost]

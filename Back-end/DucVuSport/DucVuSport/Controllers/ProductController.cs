@@ -35,7 +35,13 @@ namespace DucVuSport.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            ViewBag.detail = data.Products.Where(x => x.ProductID == id).FirstOrDefault();
+            else
+            {
+                Product product = data.Products.Where(x => x.ProductID == id).FirstOrDefault();
+                product.View_count += 1;
+                data.SaveChanges();
+                ViewBag.detail = product;
+            }
             return View();
         }
     }

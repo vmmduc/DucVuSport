@@ -4,127 +4,99 @@
     ViewBag.Title = "Delete";
     Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
 }
+<style>
+    .img {
+        width: 5rem;
+        height: 5rem;
+    }
 
-<h2>Delete</h2>
+        .img img {
+            width: inherit;
+        }
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Product</h4>
+    .content {
+        padding: 3rem;
+    }
+
+    table tr td{
+        height: 3rem;
+    }
+
+    ._label {
+        font-weight: bold;
+    }
+
+    .form-actions{
+       padding-top:2rem;
+    }
+    .form-actions a{
+        margin-right: 1rem;
+        text-decoration: none;
+        padding: 1rem;
+        cursor: pointer;
+    }
+</style>
+<div class="content">
+    <h3>Bạn có muốn xóa sản phẩm này?</h3>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </dt>
+    <div style="text-align: center; width: 100%">
+        <div class="img">
+            @if (@Model.Image != null)
+            {
+                <img src="~/Content/images/@Model.Image" />
+            }
+            else
+            {
+                <img src="~/Content/images/banners/no-image.jpg" />
+            }
+        </div>
+    </div>
+    <table>
+        <tr>
+            <td class="col-md-2 _label">Tên sản phẩm</td>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.ProductName)
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-2 _label">Mô tả ngắn</td>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.ShotDescribe)
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-2 _label">Giá</td>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Price)
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-2 _label">Ngày tạo</td>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Create_date)
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-2 _label">Đã bán</td>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.Sold)
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-2 _label">Số lượt xem</td>
+            <td class="col-md-10">
+                @Html.DisplayFor(model => model.View_count)
+            </td>
+        </tr>
+    </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.CategoryName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Supplier.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Supplier.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShotDescribe)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShotDescribe)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Describe)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Describe)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Create_date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Create_date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sold)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sold)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.View_count)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.View_count)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Hủy", "Index")
+            <input type="submit" value="Xóa" class="btn btn-danger" />
         </div>
     }
 </div>

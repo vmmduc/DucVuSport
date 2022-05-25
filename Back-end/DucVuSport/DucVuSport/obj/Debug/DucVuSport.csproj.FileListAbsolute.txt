@@ -160,3 +160,5 @@ D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\System.Memory.xml
 D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\System.Numerics.Vectors.xml
 D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\System.Runtime.CompilerServices.Unsafe.xml
 D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\System.Threading.Tasks.Extensions.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\Facebook.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\Facebook.xml
