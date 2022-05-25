@@ -21,15 +21,28 @@ namespace DataAccessLib.Entities
 
         public int CustommerID { get; set; }
 
-        public long? Total { get; set; }
+        public DateTime? OrderDate { get; set; }
 
-        public DateTime? Create_date { get; set; }
+        public DateTime? ShipDate { get; set; }
 
-        public bool? Status { get; set; }
+        public int? Status { get; set; }
+
+        public bool? Deleted { get; set; }
+
+        public bool? Paid { get; set; }
+
+        public DateTime? PaymentDate { get; set; }
+
+        public int? PaymentID { get; set; }
+
+        [StringLength(255)]
+        public string Note { get; set; }
 
         public virtual Customer Customer { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public virtual Payment Payment { get; set; }
     }
 }

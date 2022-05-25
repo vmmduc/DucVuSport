@@ -16,7 +16,7 @@ namespace DataAccessLib.Entities
         public string Name { get; set; }
 
         [StringLength(12)]
-        public string PhoneNumber { get; set; }
+        public string Phone_Number { get; set; }
 
         [StringLength(50)]
         public string Email { get; set; }

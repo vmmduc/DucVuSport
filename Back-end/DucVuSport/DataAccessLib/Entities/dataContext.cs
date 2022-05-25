@@ -15,10 +15,13 @@ namespace DataAccessLib.Entities
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Bill> Bills { get; set; }
         public virtual DbSet<BillDetail> BillDetails { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
+        public virtual DbSet<BlogCategory> BlogCategories { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
@@ -31,14 +34,15 @@ namespace DataAccessLib.Entities
                 .WithOptional(e => e.Account)
                 .HasForeignKey(e => e.UserID);
 
-            modelBuilder.Entity<Account>()
-                .HasOptional(e => e.Role)
-                .WithRequired(e => e.Account);
-
             modelBuilder.Entity<Bill>()
                 .HasMany(e => e.BillDetails)
                 .WithRequired(e => e.Bill)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BlogCategory>()
+                .HasMany(e => e.Blogs)
+                .WithOptional(e => e.BlogCategory)
+                .HasForeignKey(e => e.BlogCatID);
 
             modelBuilder.Entity<Customer>()
                 .Property(e => e.PhoneNumber)

@@ -246,11 +246,11 @@
     <Content Include="Areas\Admin\Views\Shared\__Sidebar-menu.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\__Order.cshtml" />
     <Content Include="Areas\Admin\Views\ProductAdmin\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductAdmin\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ProductAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ProductAdmin\Index.cshtml" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Areas\Admin\Views\ProductAdmin\Delete.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

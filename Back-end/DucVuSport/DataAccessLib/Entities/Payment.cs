@@ -6,24 +6,25 @@ namespace DataAccessLib.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Role")]
-    public partial class Role
+    [Table("Payment")]
+    public partial class Payment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Role()
+        public Payment()
         {
-            Accounts = new HashSet<Account>();
+            tbOrders = new HashSet<tbOrder>();
         }
 
-        public int RoleID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int PaymentID { get; set; }
 
-        [StringLength(50)]
-        public string RoleName { get; set; }
+        [StringLength(255)]
+        public string PaymentMethod { get; set; }
 
-        [StringLength(100)]
-        public string Detail { get; set; }
+        [StringLength(255)]
+        public string Decribe { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<tbOrder> tbOrders { get; set; }
     }
 }

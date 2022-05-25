@@ -9,8 +9,9 @@ namespace DataAccessLib.Entities
     [Table("OrderDetail")]
     public partial class OrderDetail
     {
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int OrderDetailID { get; set; }
+        public int OrderDetail_ID { get; set; }
 
         public int OrderID { get; set; }
 
@@ -18,7 +19,9 @@ namespace DataAccessLib.Entities
 
         public int? Quantity { get; set; }
 
-        public bool? Status { get; set; }
+        public int? Discount { get; set; }
+
+        public long? Total { get; set; }
 
         public virtual Product Product { get; set; }
 

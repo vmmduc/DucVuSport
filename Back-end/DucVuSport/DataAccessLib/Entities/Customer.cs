@@ -25,14 +25,18 @@ namespace DataAccessLib.Entities
         public bool? Gender { get; set; }
 
         [StringLength(50)]
-        public string Email { get; set; }
-
-        [StringLength(50)]
         public string PhoneNumber { get; set; }
 
-        public string Address { get; set; }
-
         public int? UserID { get; set; }
+
+        public int? Province { get; set; }
+
+        public int? District { get; set; }
+
+        public int? Ward { get; set; }
+
+        [StringLength(255)]
+        public string AddressDetail { get; set; }
 
         public virtual Account Account { get; set; }
 

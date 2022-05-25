@@ -22,19 +22,19 @@ namespace ssport.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Login(string username, string password, bool remember)
+        public JsonResult Login(LoginModel login)
         {
             if (ModelState.IsValid)
             {
-                var passwordHash = Encrypt.GetMD5(password);
-                var result = data.Accounts.Where(x => x.Username == username && x.PasswordHash == passwordHash).FirstOrDefault();
+                var passwordHash = Encrypt.GetMD5(login.password);
+                var result = data.Accounts.Where(x => x.Email == login.email && x.PasswordHash == passwordHash).FirstOrDefault();
                 if (result != null)
                 {
                     Session[USER_SESSION] = result;
-                    if (remember)
+                    if (login.remember)
                     {
-                        Response.Cookies["username"].Value = result.Username;
-                        Response.Cookies["username"].Expires = DateTime.Now.AddDays(30);
+                        Response.Cookies["email"].Value = result.Email;
+                        Response.Cookies["email"].Expires = DateTime.Now.AddDays(30);
                         Response.Cookies["password"].Value = result.PasswordHash;
                         Response.Cookies["password"].Expires = DateTime.Now.AddDays(30);
                     }
@@ -46,7 +46,7 @@ namespace ssport.Controllers
                 }
             }
             else
-                return Json(false, JsonRequestBehavior.AllowGet);
+                return null;
         }
 
         [HttpPost]
@@ -55,20 +55,20 @@ namespace ssport.Controllers
         {
             if (ModelState.IsValid)
             {
-                var hasEmail = data.Accounts.Count(x => x.Username == model.username) > 0;
+                var hasEmail = data.Accounts.Count(x => x.Email == model.email) > 0;
                 if (hasEmail)
                     return Json(false, JsonRequestBehavior.AllowGet);
                 else
                 {
                     Account user = new Account();
-                    user.Username = model.username;
+                    user.Email = model.email;
                     var passwordHash = Encrypt.GetMD5(model.password);
                     user.PasswordHash = passwordHash;
 
                     data.Accounts.Add(user);
                     data.SaveChanges();
 
-                    var _user = data.Accounts.Where(x => x.Username == model.username && x.PasswordHash == passwordHash).FirstOrDefault();
+                    var _user = data.Accounts.Where(x => x.Email == model.email && x.PasswordHash == passwordHash).FirstOrDefault();
                     Session[USER_SESSION] = _user;
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);

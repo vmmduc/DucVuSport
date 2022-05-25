@@ -86,19 +86,11 @@ namespace DucVuSport.Areas.Admin.Controllers
             {
                 if (image != null && image.ContentLength > 0)
                 {
-                    string extention = Path.GetExtension(image.FileName);
-                    string fileName = Path.GetFileNameWithoutExtension(image.FileName) + extention;
-                    string path = Server.MapPath("~/Content/images");
-                    if (!System.IO.File.Exists(path + fileName))
-                    {
-                        product.Image = fileName;
-                        fileName = Path.Combine(path + fileName);
-                        image.SaveAs(fileName);
-                    }
-                    else
-                    {
-                        product.Image = fileName;
-                    }
+                    string extentsion = Path.GetExtension(image.FileName);
+                    string fileName = Path.GetFileNameWithoutExtension(image.FileName) + extentsion;
+                    product.Image = fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+                    image.SaveAs(fileName);
                 }
                 db.Entry(product).State = EntityState.Modified;
                 await db.SaveChangesAsync();

@@ -5,7 +5,7 @@
     @Html.ValidationSummary(true, null, new { @class = "form__message" })
     <div class="form__message">Đăng ký</div>
     <div class="form__input">
-        @Html.TextBoxFor(m => m.username, new { @placeholder = "Tên người dùng" })
+        @Html.TextBoxFor(m => m.email, new { @placeholder = "Tên người dùng" })
         <div class="form__icon"><i class="fas fa-envelope"></i></div>
     </div>
 
@@ -34,11 +34,10 @@
 <script type="text/javascript">
     function registerDone(response) {
         if (response == true) {
-            displayMessage("Đăng ký thành công !!!", 'success');
-            $('.modal-header__btn').trigger('click');
-            $('.header__account').removeClass('active');
+            alert("Đăng ký thành công!");
+            window.location.reload();
         } else {
-            displayMessage("Đăng kí thất bại !!!", 'error');
+            alert("Đăng ký thất bại!");
         }
     }
 </script>

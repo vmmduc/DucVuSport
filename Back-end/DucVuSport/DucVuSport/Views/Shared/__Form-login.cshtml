@@ -6,7 +6,7 @@
     @Html.ValidationSummary(true, null, new { @class = "form__message" })
     <div class="form__message">Đăng nhập</div>
     <div class="form__input">
-        @Html.TextBoxFor(m => m.username, new { @placeholder = "Tên người dùng", @id = "username" })
+        @Html.TextBoxFor(m => m.email, new { @placeholder = "Tên người dùng", @id = "username" })
         <div class="form__icon"><i class="fas fa-user-circle"></i></div>
     </div>
     <div class="form__input pwd-input">
@@ -31,11 +31,10 @@
 <script type="text/javascript">
     function fnSuccess(response) {
         if (response == true) {
-            displayMessage("Đăng nhập thành công !!!", 'success');
-            $('.modal-header__btn').trigger('click');
-            $('.header__account').removeClass('active');
+            alert("Đăng nhập thành công!");
+            location.reload();
         } else {
-            displayMessage("Đăng nhập thất bại !!!", 'error');
+            alert("Đăng nhập thất bại!");
         }
     }
 </script>
