@@ -1,6 +1,4 @@
-﻿@{
-    var top10 = ViewBag.top10 as List<DataAccessLib.Entities.Product>;
-}
+﻿@model List<DucVuSport.Models.Entities.Product>
 <div class="body__home">
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -34,7 +32,7 @@
         <ul id="autoWidth" class="cs-hidden">
 
             <!-- for each here-->
-            @foreach (var item in top10)
+            @foreach (var item in Model)
             {
                 <li class="">
                     <div class="product__item">

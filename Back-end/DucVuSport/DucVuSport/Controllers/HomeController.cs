@@ -1,5 +1,5 @@
-﻿using DataAccessLib.Entities;
-using DucVuSport.Models;
+﻿using DucVuSport.Models;
+using DucVuSport.Models.Entities;
 using DucVuSport.Utilities;
 using Facebook;
 using System;
@@ -16,23 +16,16 @@ namespace ssport.Controllers
         dataContext data = new dataContext();
         public const string USER_SESSION = "user";
 
-        private Uri RederectUri
-        {
-            get
-            {
-                var uriBuilder = new UriBuilder(Request.Url);
-                uriBuilder.Query = null;
-                uriBuilder.Fragment = null;
-                uriBuilder.Path = Url.Action("FacebookCallBack");
-                return uriBuilder.Uri;
-            }
-        }
+
         public ActionResult Index()
         {
-            ViewBag.top10 = data.Products.OrderByDescending(x => x.Sold).Take(10).ToList();
-            return View();
+            return View(data.Products.OrderByDescending(x => x.Sold).Take(10).ToList());
         }
 
+        public ActionResult ShowModal()
+        {
+            return PartialView("__Account-modal");
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -63,42 +56,6 @@ namespace ssport.Controllers
                 return null;
         }
 
-        public ActionResult LoginFacebook()
-        {
-            var fb = new FacebookClient();
-            var loginUrl = fb.GetLoginUrl(new
-            {
-                client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
-                redirect_uri = RederectUri.AbsoluteUri,
-                response_type = "code",
-                scope = "email",
-            });
-            return Redirect(loginUrl.AbsoluteUri);
-        }
-
-        public ActionResult FacebookCallBack(string code)
-        {
-            var fb = new FacebookClient();
-            dynamic result = fb.Post("oauth/access_token", new
-            {
-                client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
-                rederect_url = RederectUri.AbsoluteUri,
-                code = code
-            });
-
-            var accessToken = result.access_token;
-            if (!string.IsNullOrEmpty(accessToken))
-            {
-                dynamic me = fb.Get("me?fields=first_name, middle_name,last_name,id,email");
-                string email = me.email;
-                string firstName = me.first_name;
-                string middleName = me.middle_name;
-                string lastName = me.last_name;
-            }
-            return Redirect("/");
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -159,13 +116,65 @@ namespace ssport.Controllers
 
         public ActionResult LogOut()
         {
-            DateTime now = DateTime.Now; // Lấy thời gian hiện tại
+            DateTime now = DateTime.Now;
             var _user = data.Accounts.Find(((Account)Session["user"]).AccountID);
             _user.LastActivity = now;
             data.SaveChanges();
 
             Session.Remove(USER_SESSION);
             return RedirectToAction("Index");
+        }
+
+
+
+
+        private Uri RederectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallBack");
+                return uriBuilder.Uri;
+            }
+        }
+
+        public ActionResult LoginFacebook()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                redirect_uri = RederectUri.AbsoluteUri,
+                response_type = "code",
+                scope = "email",
+            });
+            return Redirect(loginUrl.AbsoluteUri);
+        }
+
+        public ActionResult FacebookCallBack(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                rederect_url = RederectUri.AbsoluteUri,
+                code = code
+            });
+
+            var accessToken = result.access_token;
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                dynamic me = fb.Get("me?fields=first_name, middle_name,last_name,id,email");
+                string email = me.email;
+                string firstName = me.first_name;
+                string middleName = me.middle_name;
+                string lastName = me.last_name;
+            }
+            return Redirect("/");
         }
     }
 }

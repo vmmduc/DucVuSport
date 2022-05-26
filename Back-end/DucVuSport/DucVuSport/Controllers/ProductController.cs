@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DucVuSport.Models;
-using DataAccessLib.Entities;
+using DucVuSport.Models.Entities;
 
 namespace DucVuSport.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿@{
     var cart = Session["Cart"] as List<DucVuSport.Models.CartModel>;
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-    var user = Session["user"] as DataAccessLib.Entities.Account;
+    var user = Session["user"] as DucVuSport.Models.Entities.Account;
     var total = 0;
 }
 <div class="_top">
@@ -120,7 +120,7 @@
     <div class="col-5 col-md-3 header__account">
         @if (Session["user"] != null)
         {
-            <a class="header__account-item">Tài khoản</a>
+            <a class="header__account-item" href="/Customer/Edit">Tài khoản</a>
             <a class="header__account-item" data-bs-toggle="modal" data-bs-target="#change-pass">Đổi mật khẩu</a>
             <a class="header__account-item" href="/Home/LogOut">Đăng xuất</a>
         }

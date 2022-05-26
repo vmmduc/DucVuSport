@@ -1,5 +1,5 @@
-﻿using DataAccessLib.Entities;
-using DucVuSport.Models;
+﻿using DucVuSport.Models;
+using DucVuSport.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

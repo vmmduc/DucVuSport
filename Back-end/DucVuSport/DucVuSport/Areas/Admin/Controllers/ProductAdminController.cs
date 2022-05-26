@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DataAccessLib.Entities;
 using System.IO;
+using DucVuSport.Models.Entities;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {

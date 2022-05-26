@@ -1,8 +1,7 @@
-﻿@using (Ajax.BeginForm("Register", "Home", new AjaxOptions { HttpMethod = "POST", OnSuccess = "registerDone" }, new { @class = "account__form" }))
+﻿@model DucVuSport.Models.RegisterModel
+@using (Ajax.BeginForm("Register", "Home", new AjaxOptions { HttpMethod = "POST", OnSuccess = "registerDone" }, new { @class = "account__form" }))
 {
-    @model DucVuSport.Models.RegisterModel
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, null, new { @class = "form__message" })
     <div class="form__message">Đăng ký</div>
     <div class="form__input">
         @Html.TextBoxFor(m => m.email, new { @placeholder = "Tên người dùng" })
