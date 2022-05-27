@@ -11,23 +11,29 @@ namespace DucVuSport.Controllers
     public class ProductController : Controller
     {
         dataContext data = new dataContext();
+
+
         [Route("Product")]
         public ActionResult Index()
         {
             ViewBag.Category_list = data.Categories.ToList();
             return View();
         }
+
+
         public ActionResult getProduct()
         {
             List<Product> li = data.Products.Where(x=>x.Status == true).ToList();
             return PartialView("__Product", li);
         }
 
+
         public ActionResult getProductByCart(int id)
         {
             List<Product> li = data.Products.Where(x => x.CategoryID == id && x.Status == true).ToList();
             return PartialView("__Product", li);
         }
+
 
         public ActionResult Detail(int? id)
         {

@@ -604,10 +604,9 @@ ul li {
     position: absolute;
     left: 1rem;
 }
-
 .product__img {
     width: 95%;
-    height: auto;
+    height: 175px;
     padding: 0.5rem 0;
     margin: 0.5rem auto;
     object-fit: contain;

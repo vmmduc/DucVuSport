@@ -17,13 +17,15 @@ namespace DucVuSport.Models.Entities
 
         public int CustomerID { get; set; }
 
-        [StringLength(100)]
+        [StringLength(255)]
         public string FullName { get; set; }
 
-        public bool? Gender { get; set; }
 
         [StringLength(50)]
         public string PhoneNumber { get; set; }
+
+        [StringLength(255)]
+        public string Email { get; set; }
 
         public int? AccountID { get; set; }
 

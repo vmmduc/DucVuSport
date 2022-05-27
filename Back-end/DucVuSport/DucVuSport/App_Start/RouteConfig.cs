@@ -18,18 +18,6 @@ namespace DucVuSport
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-                name: "product",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Product", action = "Index", id = UrlParameter.Optional }
-                );
-
-            routes.MapRoute(
-                name: "cart",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Cart", action = "Index", id = UrlParameter.Optional }
-                );
         }
     }
 }

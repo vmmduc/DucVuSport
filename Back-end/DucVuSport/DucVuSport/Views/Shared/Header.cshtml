@@ -111,7 +111,7 @@
 
                 <div class="header__cart-total">
                     <div class="total"> Tổng cộng: <span>@String.Format(format, "{0:c0}", total)</span> </div>
-                    <a href="/Cart/Index" class="header__cart-check-btn">Kiểm tra giỏ hàng</a>
+                    <a href="Cart" class="header__cart-check-btn">Kiểm tra giỏ hàng</a>
                 </div>
             </div>
         }
@@ -120,9 +120,9 @@
     <div class="col-5 col-md-3 header__account">
         @if (Session["user"] != null)
         {
-            <a class="header__account-item" href="/Customer/Edit">Tài khoản</a>
+            <a class="header__account-item" href="/Home/Edit">Tài khoản</a>
             <a class="header__account-item" data-bs-toggle="modal" data-bs-target="#change-pass">Đổi mật khẩu</a>
-            <a class="header__account-item" href="/Home/LogOut">Đăng xuất</a>
+            <a class="header__account-item" href="User/Logout">Đăng xuất</a>
         }
         else
         {

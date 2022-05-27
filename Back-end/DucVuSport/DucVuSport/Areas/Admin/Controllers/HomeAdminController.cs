@@ -11,6 +11,10 @@ namespace DucVuSport.Areas.Admin.Controllers
     public class HomeAdminController : Controller
     {
         dataContext data = new dataContext();
+        public ActionResult Login()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             ViewBag.viewTotal = data.Products.Sum(x => x.View_count);

@@ -11,6 +11,8 @@ namespace DucVuSport.Controllers
     public class CartController : Controller
     {
         dataContext data = new dataContext();
+
+        [Route("cart")]
         public ActionResult Index()
         {
             return View();

@@ -1,180 +1,88 @@
 ﻿using DucVuSport.Models;
 using DucVuSport.Models.Entities;
 using DucVuSport.Utilities;
-using Facebook;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ssport.Controllers
 {
     public class HomeController : Controller
     {
-        dataContext data = new dataContext();
-        public const string USER_SESSION = "user";
-
+        private dataContext _data = new dataContext();
 
         public ActionResult Index()
         {
-            return View(data.Products.OrderByDescending(x => x.Sold).Take(10).ToList());
+            return View(_data.Products.OrderByDescending(x => x.Sold).Take(10).ToList());
         }
 
-        public ActionResult ShowModal()
+        
+
+        // Create Customer
+        public ActionResult Create()
         {
-            return PartialView("__Account-modal");
+            ViewBag.AccountID = new SelectList(_data.Accounts, "AccountID", "Email");
+            return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Login(LoginModel login)
+        public ActionResult Create(Customer customer)
         {
+            var user = Session["user"] as DucVuSport.Models.Entities.Account;
             if (ModelState.IsValid)
             {
-                var passwordHash = Encrypt.GetMD5(login.password);
-                var result = data.Accounts.Where(x => x.Email == login.email && x.PasswordHash == passwordHash).FirstOrDefault();
-                if (result != null)
-                {
-                    Session[USER_SESSION] = result;
-                    if (login.remember)
-                    {
-                        Response.Cookies["email"].Value = result.Email;
-                        Response.Cookies["email"].Expires = DateTime.Now.AddDays(30);
-                        Response.Cookies["password"].Value = result.PasswordHash;
-                        Response.Cookies["password"].Expires = DateTime.Now.AddDays(30);
-                    }
-                    return Json(true, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(false, JsonRequestBehavior.AllowGet);
-                }
+                customer.AccountID = user.AccountID;
+                _data.Customers.Add(customer);
+                _data.SaveChanges();
+                return RedirectToAction("Index");
             }
-            else
-                return null;
+
+            ViewBag.AccountID = new SelectList(_data.Accounts, "AccountID", "Email", customer.AccountID);
+            return View(customer);
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Register(RegisterModel model)
+        // Edit infor
+        [Route("Edit")]
+        public ActionResult Edit()
         {
-            if (ModelState.IsValid)
+            var user = Session["user"] as DucVuSport.Models.Entities.Account;
+            if (user == null)
             {
-                var hasEmail = data.Accounts.Count(x => x.Email == model.email) > 0;
-                if (hasEmail)
-                    return Json(false, JsonRequestBehavior.AllowGet);
-                else
-                {
-                    Account user = new Account();
-                    user.Email = model.email;
-                    var passwordHash = Encrypt.GetMD5(model.password);
-                    user.PasswordHash = passwordHash;
-
-                    data.Accounts.Add(user);
-                    data.SaveChanges();
-
-                    var _user = data.Accounts.Where(x => x.Email == model.email && x.PasswordHash == passwordHash).FirstOrDefault();
-                    Session[USER_SESSION] = _user;
-                }
-                return Json(true, JsonRequestBehavior.AllowGet);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = _data.Customers.FirstOrDefault(x=>x.AccountID == user.AccountID);
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
             }
             else
             {
-                return Json(false, JsonRequestBehavior.AllowGet);
+                return View(customer);
             }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult ChangePassword(ChangePasswordModel model)
+        public ActionResult Edit(Customer customer)
         {
+            var user = Session["user"] as DucVuSport.Models.Entities.Account;
+            if(user == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             if (ModelState.IsValid)
             {
-                if (Session[USER_SESSION] != null)
-                {
-                    var oldPass = Encrypt.GetMD5(model.oldPassword);
-                    var user = data.Accounts.Find(((Account)Session["user"]).AccountID);
-                    if (user.PasswordHash == oldPass)
-                    {
-                        var newPass = Encrypt.GetMD5(model.newPassword);
-                        user.PasswordHash = newPass;
-                        data.SaveChanges();
-                        Session[USER_SESSION] = user;
-                        return Json(true, JsonRequestBehavior.AllowGet);
-                    }
-                }
-                return Json(false, JsonRequestBehavior.AllowGet);
+                customer = _data.Customers.FirstOrDefault(x => x.AccountID == user.AccountID);
+                _data.Entry(customer).State = EntityState.Modified;
+                _data.SaveChanges();
+                return RedirectToAction("Index");
             }
-            else
-            {
-                return Json(false, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        public ActionResult LogOut()
-        {
-            DateTime now = DateTime.Now;
-            var _user = data.Accounts.Find(((Account)Session["user"]).AccountID);
-            _user.LastActivity = now;
-            data.SaveChanges();
-
-            Session.Remove(USER_SESSION);
-            return RedirectToAction("Index");
-        }
-
-
-
-
-        private Uri RederectUri
-        {
-            get
-            {
-                var uriBuilder = new UriBuilder(Request.Url);
-                uriBuilder.Query = null;
-                uriBuilder.Fragment = null;
-                uriBuilder.Path = Url.Action("FacebookCallBack");
-                return uriBuilder.Uri;
-            }
-        }
-
-        public ActionResult LoginFacebook()
-        {
-            var fb = new FacebookClient();
-            var loginUrl = fb.GetLoginUrl(new
-            {
-                client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
-                redirect_uri = RederectUri.AbsoluteUri,
-                response_type = "code",
-                scope = "email",
-            });
-            return Redirect(loginUrl.AbsoluteUri);
-        }
-
-        public ActionResult FacebookCallBack(string code)
-        {
-            var fb = new FacebookClient();
-            dynamic result = fb.Post("oauth/access_token", new
-            {
-                client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
-                rederect_url = RederectUri.AbsoluteUri,
-                code = code
-            });
-
-            var accessToken = result.access_token;
-            if (!string.IsNullOrEmpty(accessToken))
-            {
-                dynamic me = fb.Get("me?fields=first_name, middle_name,last_name,id,email");
-                string email = me.email;
-                string firstName = me.first_name;
-                string middleName = me.middle_name;
-                string lastName = me.last_name;
-            }
-            return Redirect("/");
+            return View(customer);
         }
     }
 }
