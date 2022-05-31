@@ -24,14 +24,14 @@
         @*Shot describe*@
         <div class="form-group">
             <div class="form-floating">
-                @Html.EditorFor(model => model.ShotDescribe, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
+                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
                 <label for="floatingTextarea">Mô tả ngắn</label>
             </div>
         </div>
 
         @*Desctibe*@
         <div class="form-group">
-            @Html.TextAreaFor(model => model.Describe, new { @class = "form-control", @id = "summernote" })
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @id = "summernote" })
         </div>
 
         @*Image*@
@@ -44,13 +44,6 @@
             <div class="form-group-1">
                 <div>
                     @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control form-select" })
-                </div>
-            </div>
-
-            @*Supplier*@
-            <div class="form-group-1">
-                <div>
-                    @Html.DropDownList("SupplierID", null, htmlAttributes: new { @class = "form-control form-select" })
                 </div>
             </div>
         </div>
@@ -83,15 +76,6 @@
                 </div>
             </div>
         </div>
-
-        @*Status*@
-        <div class="status">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Status)
-                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
 
         @*Submit btn*@
         <div class="button-group">

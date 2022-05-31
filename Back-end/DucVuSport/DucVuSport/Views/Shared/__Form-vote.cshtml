@@ -1,35 +1,56 @@
-﻿<style>
-</style>
+﻿@model DucVuSport.Models.Entities.FeedBack
+<div class="modal fade" id="vote">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header nav-tabs">
+                <button type="button" class="modal-header__btn close" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
 
-<div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Họ và tên</label>
-    <input type="text" class="form-control">
+                <div class="modal-body__register tab-pane" id="register">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Họ và tên</label>
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Số điện thoại</label>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Nội dung</label>
+                        @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
+                    </div>
+                    <div class="mb-3 modal-review__rating-order-wrap">
+                        <span data-rating-value="1"></span>s
+                        <span data-rating-value="2"></span>
+                        <span data-rating-value="3"></span>
+                        <span data-rating-value="4"></span>
+                        <span data-rating-value="5"></span>
+                    </div>
+                    @using (Ajax.BeginForm("Feedback", "Product", new AjaxOptions { HttpMethod = "POST", OnSuccess = "fnSuccess" }, new { @class = "account__form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="btn">
+                            <button>Đánh giá</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Số điện thoại</label>
-    <input type="text" class="form-control">
-</div>
-
-<div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Email</label>
-    <input type="text" class="form-control">
-</div>
-
-<div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label">Nội dung</label>
-    <textarea class="form-control" rows="3"></textarea>
-</div>
-<div class="mb-3">
-    <ul class="ratings">
-        <li class="star"></li>
-        <li class="star"></li>
-        <li class="star"></li>
-        <li class="star"></li>
-        <li class="star"></li>
-    </ul>
-</div>
-
-<div class="btn">
-    <button>Đánh giá</button>
-</div>
+<script>
+    $('.modal-review__rating-order-wrap > span').click(function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        $(this).parent().attr('data-rating-value', $(this).data('rating-value'));
+        $(this).parent().attr('data-rating-value');
+    });
+</script>

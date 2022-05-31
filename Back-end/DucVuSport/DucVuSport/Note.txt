@@ -1,3 +1,2 @@
 ﻿[AllowHtml]
 [DataType(DataType.Upload)]
-new { enctype = "multipart/form-data" }

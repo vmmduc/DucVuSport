@@ -10,14 +10,14 @@ namespace DucVuSport.Areas.Admin.Controllers
     [RouteArea("admin")]
     public class HomeAdminController : Controller
     {
-        dataContext data = new dataContext();
+        private readonly dataContext data = new dataContext();
         public ActionResult Login()
         {
             return View();
         }
         public ActionResult Index()
         {
-            ViewBag.viewTotal = data.Products.Sum(x => x.View_count);
+            ViewBag.viewTotal = data.Products.Sum(x=>x.ViewCount);
             ViewBag.top10 = data.Products.OrderByDescending(x => x.Sold).Take(10).ToList();
             return View();
         }

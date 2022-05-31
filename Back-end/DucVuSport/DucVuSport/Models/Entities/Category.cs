@@ -15,15 +15,12 @@ namespace DucVuSport.Models.Entities
             Products = new HashSet<Product>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CategoryID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(255)]
         public string CategoryName { get; set; }
 
-        public DateTime? Create_date { get; set; }
-
-        public bool? Status { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

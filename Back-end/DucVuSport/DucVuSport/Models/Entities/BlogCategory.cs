@@ -16,10 +16,10 @@ namespace DucVuSport.Models.Entities
         }
 
         [Key]
-        public int CatID { get; set; }
+        public int BlogCatID { get; set; }
 
         [StringLength(255)]
-        public string CateName { get; set; }
+        public string CatName { get; set; }
 
         [StringLength(255)]
         public string Title { get; set; }
@@ -36,13 +36,13 @@ namespace DucVuSport.Models.Entities
         [StringLength(255)]
         public string Thumb { get; set; }
 
-        public bool Published { get; set; }
+        public bool? Publisherd { get; set; }
 
         public int? Ordering { get; set; }
 
         public int? Parent { get; set; }
 
-        public int? Levels { get; set; }
+        public int? Level { get; set; }
 
         [StringLength(255)]
         public string Cover { get; set; }

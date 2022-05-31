@@ -18,9 +18,10 @@ namespace DucVuSport.Models.Entities
 
         public int AccountID { get; set; }
 
-        [StringLength(255)]
+        [StringLength(50)]
         public string Email { get; set; }
 
+        [StringLength(255)]
         public string PasswordHash { get; set; }
 
         public DateTime? LastActivity { get; set; }

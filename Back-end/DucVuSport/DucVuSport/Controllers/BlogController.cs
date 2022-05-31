@@ -8,7 +8,13 @@ namespace DucVuSport.Controllers
 {
     public class BlogController : Controller
     {
+        [Route("Blog")]
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Detail()
         {
             return View();
         }

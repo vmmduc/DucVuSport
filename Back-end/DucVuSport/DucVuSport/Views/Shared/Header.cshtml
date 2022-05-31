@@ -18,7 +18,7 @@
     <nav class="header__menu">
         <a href="/" class="header__menu-item">Trang chủ</a>
         <a href="/Product" class="header__menu-item">Sản phẩm</a>
-        <a href="#" class="header__menu-item">Tin tức</a>
+        <a href="/Blog" class="header__menu-item">Tin tức</a>
         <a href="#" class="header__menu-item">Giới thiệu</a>
     </nav>
 
@@ -43,7 +43,7 @@
         {
             @*No item*@
             <div class="header__no-cart">
-                <img src="~/Content/images/banners/no-cart.png" alt="">
+                <img src="~/Images/Banners/no-cart.png" alt="">
                 <span>Bạn chưa có sản phẩm nào</span>
                 <a href="/Product">Mua sắm ngay</a>
             </div>
@@ -63,11 +63,11 @@
                         <li class="header__cart-list-item">
                             @if (item.product.Image == null)
                             {
-                                <img src="~/Content/images/banners/no-image.jpg" alt="" class="header__cart-list-item-img">
+                                <img src="~/Images/Banners/no-image.jpg" alt="" class="header__cart-list-item-img">
                             }
                             else
                             {
-                                <img src="~/Content/images/@item.product.Image" alt="" class="header__cart-list-item-img">
+                                <img src="~/Images/Product/@item.product.Image" alt="" class="header__cart-list-item-img">
                             }
                             <div class="header__cart-list-item-info">
                                 <div class="header__cart-list-item-head">

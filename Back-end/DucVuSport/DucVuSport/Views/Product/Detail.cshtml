@@ -9,13 +9,13 @@
             @if (product.Image == null)
             {
                 <div class="big__img">
-                    <img src="~/Content/images/banners/no-image.jpg" alt="">
+                    <img src="~/Images/Banners/no-image.jpg" alt="">
                 </div>
             }
             else
             {
                 <div class="big__img">
-                    <img src="~/Content/images/@product.Image" alt="">
+                    <img src="~/Images/Product/@product.Image" alt="">
                 </div>
             }
         </div>
@@ -30,7 +30,7 @@
                 <i class="fa fa-star"></i>
             </div>
             <div class="price">@String.Format(format, "{0:c0}", @product.Price)</div>
-            <div class="col-10">@product.ShotDescribe</div>
+            <div class="col-10">@product.ShortDescription</div>
             <div class="quantity">
                 <div>Số lượng:</div>
                 <div class="buttons_added">
@@ -58,7 +58,7 @@
         <div class="tab-content">
             <div class="tab-pane description__tab active" id="decript">
                 <div class="desc-content">
-                    @product.Describe
+                    @product.Description
                 </div>
             </div>
             <div class="tab-pane" id="rate">
@@ -155,22 +155,8 @@
     </div>
 </div>
 
-<!-- Change password modal -->
-<div class="modal fade" id="vote">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header nav-tabs">
-                <button type="button" class="modal-header__btn close" data-bs-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                @*Register*@
-                <div class="modal-body__register tab-pane" id="register">
-                    @Html.Partial("__Form-vote")
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Action("Feedback", "Product")
+
 
 <script>
     $('.add-to-cart').click(function () {

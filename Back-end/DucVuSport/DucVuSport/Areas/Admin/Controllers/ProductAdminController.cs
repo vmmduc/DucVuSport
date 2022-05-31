@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
-using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.IO;
 using DucVuSport.Models.Entities;
 
 namespace DucVuSport.Areas.Admin.Controllers
@@ -12,32 +14,43 @@ namespace DucVuSport.Areas.Admin.Controllers
     public class ProductAdminController : Controller
     {
         private dataContext db = new dataContext();
-
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier);
-            ViewBag.Label = "Danh sách sản phẩm";
-            return View(await products.ToListAsync());
+            var products = db.Products.Include(p => p.Category);
+            return View(products.ToList());
+        }
+
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
         }
 
 
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "Name");
-            ViewBag.Label = "Tạo mới sản phẩm";
             return View();
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product, HttpPostedFileBase imageFile)
+        public ActionResult Create(Product product, HttpPostedFileBase imageFile)
         {
             DateTime now = DateTime.Now;
-            product.Create_date = now;
+            product.CreateDate = now;
             product.Sold = 0; ;
-            product.View_count = 0;
+            product.ViewCount = 0;
             if (ModelState.IsValid)
             {
                 if (imageFile != null && imageFile.ContentLength > 0)
@@ -45,42 +58,39 @@ namespace DucVuSport.Areas.Admin.Controllers
                     string extentsion = Path.GetExtension(imageFile.FileName);
                     string fileName = Path.GetFileNameWithoutExtension(imageFile.FileName) + extentsion;
                     product.Image = fileName;
-                    fileName = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+                    fileName = Path.Combine(Server.MapPath("~/Images/Products"), fileName);
                     imageFile.SaveAs(fileName);
                 }
 
                 db.Products.Add(product);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "Name", product.SupplierID);
             return View(product);
         }
 
 
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await db.Products.FindAsync(id);
+            Product product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "Name", product.SupplierID);
-            ViewBag.Label = "Sửa thông tin sản phẩm";
             return View(product);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,ShotDescribe,Describe,Image,CategoryID,SupplierID,Price,Discount,Quantity,Create_date,Sold,View_count,Status")] Product product, HttpPostedFileBase image)
+        public ActionResult Edit(Product product, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -89,42 +99,40 @@ namespace DucVuSport.Areas.Admin.Controllers
                     string extentsion = Path.GetExtension(image.FileName);
                     string fileName = Path.GetFileNameWithoutExtension(image.FileName) + extentsion;
                     product.Image = fileName;
-                    fileName = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+                    fileName = Path.Combine(Server.MapPath("~/Images/Products"), fileName);
                     image.SaveAs(fileName);
                 }
                 db.Entry(product).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "Name", product.SupplierID);
             return View(product);
         }
 
 
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await db.Products.FindAsync(id);
+            Product product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Label = "Xóa sản phẩm";
             return View(product);
         }
 
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Product product = await db.Products.FindAsync(id);
+            Product product = db.Products.Find(id);
             db.Products.Remove(product);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

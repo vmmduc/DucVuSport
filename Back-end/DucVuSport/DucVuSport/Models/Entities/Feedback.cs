@@ -6,17 +6,16 @@ namespace DucVuSport.Models.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Feedback")]
-    public partial class Feedback
+    [Table("FeedBack")]
+    public partial class FeedBack
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int FeedbackID { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
         public string Name { get; set; }
 
-        [StringLength(12)]
-        public string Phone_Number { get; set; }
+        [StringLength(50)]
+        public string PhoneNumber { get; set; }
 
         [StringLength(50)]
         public string Email { get; set; }

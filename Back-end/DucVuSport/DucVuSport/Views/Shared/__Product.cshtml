@@ -11,11 +11,11 @@
             <div class="product__discount">-@discount%</div>
                 @if (@item.Image == null)
                 {
-                    <img class="product__img" src="~/Content/images/banners/no-image.jpg">
+                    <img class="product__img" src="~/Images/Banners/no-image.jpg">
                 }
                 else
                 {
-                    <img class="product__img" src="~/Content/images/@item.Image">
+                    <img class="product__img" src="~/Images/Products/@item.Image">
                 }
             <h5 class="product__name">@item.ProductName</h5>
             <div class="product__price">
@@ -36,3 +36,24 @@
     </div>
 }
 
+<script>
+    $('.add-to-cart').each(function () {
+    $(this).click(function () {
+        var model = {};
+        model.id = $(this).attr('id');
+        model.quantity = 1;
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddToCart", "Cart")',
+            data: JSON.stringify(model),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                location.reload();
+                alert("Thêm thành công!")
+            }
+        });
+    });
+})
+</script>

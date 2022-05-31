@@ -5,7 +5,6 @@ namespace DucVuSport
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -22,8 +21,7 @@ namespace DucVuSport
                         "~/Content/toastr.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/myscript").Include(
-                        "~/Scripts/js/event.js",
-                        "~/Scripts/js/app.js"));
+                        "~/Scripts/js/event.js"));
 
             bundles.Add(new StyleBundle("~/bundles/mycss").Include(
                           "~/Content/bootstrap.min.css",

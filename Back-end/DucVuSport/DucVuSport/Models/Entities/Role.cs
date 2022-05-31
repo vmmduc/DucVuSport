@@ -20,7 +20,7 @@ namespace DucVuSport.Models.Entities
         [StringLength(50)]
         public string RoleName { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
         public string Detail { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

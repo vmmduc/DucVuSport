@@ -6,20 +6,19 @@ namespace DucVuSport.Models.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [Table("Customer")]
     public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            Bills = new HashSet<Bill>();
-            tbOrders = new HashSet<tbOrder>();
+            Orders = new HashSet<Order>();
         }
 
         public int CustomerID { get; set; }
 
         [StringLength(255)]
         public string FullName { get; set; }
-
 
         [StringLength(50)]
         public string PhoneNumber { get; set; }
@@ -29,21 +28,21 @@ namespace DucVuSport.Models.Entities
 
         public int? AccountID { get; set; }
 
-        public int? Province { get; set; }
+        [StringLength(50)]
+        public string Province { get; set; }
 
-        public int? District { get; set; }
+        [StringLength(50)]
+        public string District { get; set; }
 
-        public int? Ward { get; set; }
+        [StringLength(50)]
+        public string Ward { get; set; }
 
-        [StringLength(255)]
+        [StringLength(50)]
         public string AddressDetail { get; set; }
 
         public virtual Account Account { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bill> Bills { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbOrder> tbOrders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

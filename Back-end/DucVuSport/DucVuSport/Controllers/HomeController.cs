@@ -1,26 +1,20 @@
-﻿using DucVuSport.Models;
-using DucVuSport.Models.Entities;
-using DucVuSport.Utilities;
-using System;
+﻿using DucVuSport.Models.Entities;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ssport.Controllers
 {
     public class HomeController : Controller
     {
-        private dataContext _data = new dataContext();
+        private readonly dataContext _data = new dataContext();
 
         public ActionResult Index()
         {
-            return View(_data.Products.OrderByDescending(x => x.Sold).Take(10).ToList());
+            ViewBag.TopProduct = _data.Products.OrderByDescending(x => x.Sold).Take(10).ToList();
+            return View();
         }
-
-        
 
         // Create Customer
         public ActionResult Create()
@@ -50,7 +44,7 @@ namespace ssport.Controllers
         [Route("Edit")]
         public ActionResult Edit()
         {
-            var user = Session["user"] as DucVuSport.Models.Entities.Account;
+            Account user = Session["user"] as DucVuSport.Models.Entities.Account;
             if (user == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

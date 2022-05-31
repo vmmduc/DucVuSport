@@ -1,15 +1,17 @@
-﻿@model List<DucVuSport.Models.Entities.Product>
+﻿@{ 
+    var TopProduct = ViewBag.TopProduct as List<DucVuSport.Models.Entities.Product>;
+}
 <div class="body__home">
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="~/Content/images/banners/slider-bg.jpg" class="d-block w-100" alt="...">
+                <img src="~/Images/Banners/slider-bg.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="~/Content/images/banners/slider-bg.jpg" class="d-block w-100" alt="...">
+                <img src="~/Images/Banners/slider-1.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="~/Content/images/banners/slider-bg.jpg" class="d-block w-100" alt="...">
+                <img src="~/Images/Banners/slider-2.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -32,7 +34,7 @@
         <ul id="autoWidth" class="cs-hidden">
 
             <!-- for each here-->
-            @foreach (var item in Model)
+            @foreach (var item in TopProduct)
             {
                 <li class="">
                     <div class="product__item">
@@ -45,11 +47,11 @@
                             <div class="product__discount">-@discount%</div>
                                 @if (@item.Image == null)
                                 {
-                                    <img class="product__img" src="~/Content/images/banners/no-image.jpg">
+                                    <img class="product__img" src="~/Images/Banners/no-image.jpg">
                                 }
                                 else
                                 {
-                                    <img class="product__img" src="~/Content/images/@item.Image">
+                                    <img class="product__img" src="~/Images/Products/@item.Image">
                                 }
                             <h5 class="product__name">@item.ProductName</h5>
                             <div class="product__price">
@@ -159,3 +161,26 @@
     </div>
 </div>
 <!-- End get newletter -->
+
+
+<script>
+    $('.add-to-cart').each(function () {
+    $(this).click(function () {
+        var model = {};
+        model.id = $(this).attr('id');
+        model.quantity = 1;
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddToCart", "Cart")',
+            data: JSON.stringify(model),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                location.reload();
+                alert("Thêm thành công!")
+            }
+        });
+    });
+})
+</script>
