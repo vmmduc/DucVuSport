@@ -4,14 +4,16 @@ using DucVuSport.Utilities;
 using Facebook;
 using System;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 namespace DucVuSport.Controllers
 {
     public class UserController : Controller
     {
-        private dataContext data = new dataContext();
+        private readonly dataContext _data = new dataContext();
         public const string USER_SESSION = "user";
 
         public ActionResult ShowModal()
@@ -26,7 +28,7 @@ namespace DucVuSport.Controllers
             if (ModelState.IsValid)
             {
                 var passwordHash = Encrypt.GetMD5(login.password);
-                var result = data.Accounts.Where(x => x.Email == login.email && x.PasswordHash == passwordHash).FirstOrDefault();
+                var result = _data.Accounts.Where(x => x.Email == login.email && x.PasswordHash == passwordHash).FirstOrDefault();
                 if (result != null)
                 {
                     Session[USER_SESSION] = result;
@@ -54,7 +56,7 @@ namespace DucVuSport.Controllers
         {
             if (ModelState.IsValid)
             {
-                var hasEmail = data.Accounts.Count(x => x.Email == model.email) > 0;
+                var hasEmail = _data.Accounts.Count(x => x.Email == model.email) > 0;
                 if (hasEmail)
                     return Json(false, JsonRequestBehavior.AllowGet);
                 else
@@ -64,10 +66,10 @@ namespace DucVuSport.Controllers
                     var passwordHash = Encrypt.GetMD5(model.password);
                     user.PasswordHash = passwordHash;
 
-                    data.Accounts.Add(user);
-                    data.SaveChanges();
+                    _data.Accounts.Add(user);
+                    _data.SaveChanges();
 
-                    var _user = data.Accounts.Where(x => x.Email == model.email && x.PasswordHash == passwordHash).FirstOrDefault();
+                    var _user = _data.Accounts.Where(x => x.Email == model.email && x.PasswordHash == passwordHash).FirstOrDefault();
                     Session[USER_SESSION] = _user;
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);
@@ -87,12 +89,12 @@ namespace DucVuSport.Controllers
                 if (Session[USER_SESSION] != null)
                 {
                     var oldPass = Encrypt.GetMD5(model.oldPassword);
-                    var user = data.Accounts.Find(((Account)Session["user"]).AccountID);
+                    var user = _data.Accounts.Find(((Account)Session["user"]).AccountID);
                     if (user.PasswordHash == oldPass)
                     {
                         var newPass = Encrypt.GetMD5(model.newPassword);
                         user.PasswordHash = newPass;
-                        data.SaveChanges();
+                        _data.SaveChanges();
                         Session[USER_SESSION] = user;
                         return Json(true, JsonRequestBehavior.AllowGet);
                     }
@@ -109,55 +111,70 @@ namespace DucVuSport.Controllers
         public ActionResult Logout()
         {
             DateTime now = DateTime.Now;
-            var _user = data.Accounts.Find(((Account)Session["user"]).AccountID);
+            var _user = _data.Accounts.Find(((Account)Session["user"]).AccountID);
             _user.LastActivity = now;
-            data.SaveChanges();
+            _data.SaveChanges();
             Session.Remove(USER_SESSION);
             return Redirect("/Home/Index");
         }
 
-
-
-        private Uri RederectUri
+        public ActionResult Create()
         {
-            get
+            ViewBag.AccountID = new SelectList(_data.Accounts, "AccountID", "Email");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Customer customer)
+        {
+            var user = Session["user"] as DucVuSport.Models.Entities.Account;
+            if (ModelState.IsValid)
             {
-                var uriBuilder = new UriBuilder(Request.Url);
-                uriBuilder.Query = null;
-                uriBuilder.Fragment = null;
-                uriBuilder.Path = Url.Action("FacebookCallBack");
-                return uriBuilder.Uri;
+                customer.AccountID = user.AccountID;
+                _data.Customers.Add(customer);
+                _data.SaveChanges();
+                return RedirectToAction("Index","Home");
+            }
+            return View(customer);
+        }
+
+
+        // Edit infor
+        [Route("Edit")]
+        public ActionResult Edit()
+        {
+            Account user = Session["user"] as DucVuSport.Models.Entities.Account;
+            if (user == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = _data.Customers.FirstOrDefault(x => x.AccountID == user.AccountID);
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+            else
+            {
+                return View(customer);
             }
         }
 
-        [Route("Facebook")]
-        public ActionResult LoginFacebook()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Customer customer)
         {
-            var fb = new FacebookClient();
-            var loginUrl = fb.GetLoginUrl(new
+            var user = Session["user"] as DucVuSport.Models.Entities.Account;
+            if (user == null)
             {
-                client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
-                redirect_uri = RederectUri.AbsoluteUri,
-                response_type = "code",
-                scope = "email",
-            });
-            return Redirect(loginUrl.AbsoluteUri);
-        }
-
-        public ActionResult FacebookCallBack(string code)
-        {
-            var fb = new FacebookClient();
-            dynamic result = fb.Post("oauth/access_token", new
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (ModelState.IsValid)
             {
-                client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
-                rederect_url = RederectUri.AbsoluteUri,
-                code = code
-            });
-
-            var accessToken = result.access_token;
-            return Redirect("/");
+                customer = _data.Customers.FirstOrDefault(x=>x.AccountID == user.AccountID);
+                _data.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(customer);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace DucVuSport.Controllers
 {
     public class CartController : Controller
     {
-        dataContext data = new dataContext();
+        private readonly dataContext _data = new dataContext();
 
         [Route("cart")]
         public ActionResult Index()
@@ -22,7 +22,7 @@ namespace DucVuSport.Controllers
         {
             try
             {
-                Product product = data.Products.Where(x => x.ProductID == id).FirstOrDefault();
+                Product product = _data.Products.Where(x => x.ProductID == id).FirstOrDefault();
                 {
                     if (Session["cart"] == null)
                     {
@@ -38,7 +38,7 @@ namespace DucVuSport.Controllers
                     else
                     {
                         List<CartModel> cartList = Session["cart"] as List<CartModel>;
-                        int index = isExist(id);
+                        int index = IsExist(id);
                         if (index != -1) // Nếu đã có trong giỏ hàng thì tăng số lượng lên 1
                         {
                             cartList[index].quantity += quantity;
@@ -81,13 +81,24 @@ namespace DucVuSport.Controllers
             Session["cart"] = cartList;
             return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
         }
-        private int isExist(int id)
+        private int IsExist(int id)
         {
             List<CartModel> cart = Session["cart"] as List<CartModel>;
             for (int i = 0; i < cart.Count; i++)
                 if (cart[i].product.ProductID == id)
                     return i;
             return -1;
+        }
+
+        public ActionResult Payment()
+        {
+            Customer customer = null;
+            var user = Session["user"] as DucVuSport.Models.Entities.Account;
+            if (user != null)
+            {
+                customer = _data.Customers.FirstOrDefault(x=>x.AccountID == user.AccountID);
+            }
+            return View(customer);
         }
     }
 }

@@ -899,3 +899,18 @@ ul li {
         padding: 0 3rem 0 4rem;
     }
 }
+
+._form-style {
+    padding-top: 2rem;
+    width: 70%;
+    margin: auto;
+}
+
+.form-control {
+    height: 4rem;
+    font-size: 1rem;
+}
+
+.col {
+    padding-bottom: 2rem;
+}
