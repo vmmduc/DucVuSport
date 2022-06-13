@@ -17,6 +17,7 @@ namespace DucVuSport.Models.Entities
 
         public int ProductID { get; set; }
 
+        [Required(ErrorMessage = "Nh?p tên s?n ph?m")]
         [StringLength(255)]
         public string ProductName { get; set; }
 
@@ -26,16 +27,19 @@ namespace DucVuSport.Models.Entities
         [AllowHtml]
         public string Description { get; set; }
 
+        [Required(ErrorMessage = "Ch?n ?nh")]
         [StringLength(255)]
         [DataType(DataType.Upload)]
         public string Image { get; set; }
 
         public int? CategoryID { get; set; }
 
+        [Required(ErrorMessage = "Nh?p giá s?n ph?m")]
         public long? Price { get; set; }
 
         public double? Discount { get; set; }
 
+        [Required(ErrorMessage = "Nh?p s? l??ng")]
         public int? Quantity { get; set; }
 
         public DateTime? CreateDate { get; set; }

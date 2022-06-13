@@ -460,17 +460,22 @@ ul li {
     box-sizing: border-box;
     font-size: var(--size);
 }
-
-.form__message {
-    color: var(--main-color);
-    font-size: 2rem;
-    font-weight: bold;
+.form-group{
+    padding-top: 2rem;
 }
+    .form-group .text-danger{
+        padding-left: 1rem;
+    }
+
+    .form__message {
+        color: var(--main-color);
+        font-size: 2rem;
+        font-weight: bold;
+    }
 
 .form__input {
     width: 100%;
-    margin-top: 2rem;
-    padding: 0rem 1rem 0rem 1rem;
+    padding: 0rem .5rem 0rem .5rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -480,7 +485,7 @@ ul li {
 
     .form__input input {
         text-transform: lowercase;
-        border-radius: 3rem;
+        border-radius: 1.5rem;
         width: 90%;
         padding: 1rem 1rem 1rem 1rem;
     }

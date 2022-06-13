@@ -38,7 +38,7 @@ namespace DucVuSport.Utilities
 
         public override string[] GetRolesForUser(string userID)
         {
-            dataContext data = new dataContext();
+            DataContext data = new DataContext();
             User account = data.Users.Single(x => x.UserID == Convert.ToInt32(userID));
             if (account != null)
             {

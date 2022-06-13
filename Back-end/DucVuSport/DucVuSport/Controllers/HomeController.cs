@@ -8,7 +8,7 @@ namespace ssport.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly dataContext _data = new dataContext();
+        private readonly DataContext _data = new DataContext();
 
         public ActionResult Index()
         {

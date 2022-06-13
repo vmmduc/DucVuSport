@@ -3,15 +3,25 @@
 @using (Ajax.BeginForm("Login", "User", new AjaxOptions { HttpMethod = "POST", OnSuccess = "fnSuccess" }, new { @class = "account__form" }))
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form__message">Đăng nhập</div>
-    <div class="form__input">
-        @Html.TextBoxFor(m => m.email, new { @placeholder = "Tên người dùng", @id = "username" })
-        <div class="form__icon"><i class="fas fa-user-circle"></i></div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        <div class="form__input">
+            @Html.TextBoxFor(m => m.email, new { @placeholder = "Tên người dùng", @id = "username" })
+            <div class="form__icon"><i class="fas fa-user-circle"></i></div>
+        </div>
     </div>
-    <div class="form__input pwd-input">
-        @Html.PasswordFor(m => m.password, new { @placeholder = "Mật khẩu", @class = "pw" })
-        <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+        <div class="form__input pwd-input">
+            @Html.PasswordFor(m => m.password, new { @placeholder = "Mật khẩu", @class = "pw" })
+            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
+        </div>
     </div>
+
     <div class="form__check">
         <div class="form__checkbox">
             @Html.CheckBoxFor(m => m.remember, htmlAttributes: new { @id = "remember-me" })

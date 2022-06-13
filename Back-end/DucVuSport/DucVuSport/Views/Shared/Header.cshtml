@@ -1,5 +1,5 @@
 ﻿@{
-    var cart = Session["Cart"] as List<DucVuSport.Models.CartModel>;
+    var cart = Session[DucVuSport.Common.Constans.CART_SESSION] as List<DucVuSport.Models.CartModel>;
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
     var user = Session["user"] as DucVuSport.Models.Entities.User;
     var total = 0;
@@ -33,65 +33,67 @@
         <div id="menu-btn"><i class="fas fa-bars"></i></div>
     </div>
 
-    <form action="" class="header__search">
+    <form class="header__search">
         <input type="search" id="search-box" placeholder="search here...">
         <label for="search-box" class="fas fa-search"></label>
     </form>
-    <!--Header cart start-->
-    <div class="header__cart">
-        @if (Convert.ToInt32(Session["Count"]) == 0)
-        {
-            @*No item*@
-            <div class="header__no-cart">
-                <img src="~/Images/Banners/no-cart.png" alt="">
-                <span>Bạn chưa có sản phẩm nào</span>
-                <a href="/Product">Mua sắm ngay</a>
-            </div>
-            <script>
-                $('.header__cart--notice').css({ 'display': 'none' });
-            </script>
-        }
-        else
-        {
-            @*Has item*@
-            <div class="header__has-cart">
-                <div class="header__has-cart--style">Sản phẩm bạn đã chọn</div>
-                <ul class="box header__cart-list">
-                    @foreach (var item in cart)
-                    {
-                        <!-- Item -->
-                        <li class="header__cart-list-item">
-                            @if (item.product.Image == null)
-                            {
-                                <img src="~/Images/Banners/no-image.jpg" alt="" class="header__cart-list-item-img">
-                            }
-                            else
-                            {
-                                <img src="~/Images/Products/@item.product.Image" alt="" class="header__cart-list-item-img">
-                            }
-                            <div class="header__cart-list-item-info">
-                                <div class="header__cart-list-item-head">
-                                    <h5 class="header__cart-list-item-name">@item.product.ProductName</h5>
-                                </div>
-                                @{
-                                    var price = item.product.Price - item.product.Price * item.product.Discount;
-                                    total += Convert.ToInt32(price * item.quantity);
-                                }
-                                <div class="header__cart-list-item-body">
-                                    <div class="header__cart-list-item-rice-wrap">
-                                        <span class="header__cart-list-item-price">@String.Format(format, "{0:c0}", price)</span>
-                                        <span class="header__cart-list-item-mul">x</span>
-                                        <span class="header__cart-list-item-quantity">@item.quantity</span>
-                                    </div>
-                                    <span class="header__cart-list-item-trash __delete" id="@item.product.ProductID">Xoá</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li><hr width="90%" style="margin: 0 auto;" /></li>
-                    }
-                </ul>
 
-                <script>
+</div>
+<!--Header cart start-->
+<div class="header__cart">
+    @if (cart == null)
+    {
+        @*No item*@
+        <div class="header__no-cart">
+            <img src="~/Images/Banners/no-cart.png" alt="">
+            <span>Bạn chưa có sản phẩm nào</span>
+            <a href="/Product">Mua sắm ngay</a>
+        </div>
+        <script>
+            $('.header__cart--notice').css({ 'display': 'none' });
+        </script>
+    }
+    else
+    {
+        @*Has item*@
+        <div class="header__has-cart">
+            <div class="header__has-cart--style">Sản phẩm bạn đã chọn</div>
+            <ul class="box header__cart-list">
+                @foreach (var item in cart)
+                {
+                    <!-- Item -->
+                    <li class="header__cart-list-item">
+                        @if (item.product.Image == null)
+                        {
+                            <img src="~/Images/Banners/no-image.jpg" alt="" class="header__cart-list-item-img">
+                        }
+                        else
+                        {
+                            <img src="~/Images/Products/@item.product.Image" alt="" class="header__cart-list-item-img">
+                        }
+                        <div class="header__cart-list-item-info">
+                            <div class="header__cart-list-item-head">
+                                <h5 class="header__cart-list-item-name">@item.product.ProductName</h5>
+                            </div>
+                            @{
+                                var price = item.product.Price - item.product.Price * item.product.Discount;
+                                total += Convert.ToInt32(price * item.quantity);
+                            }
+                            <div class="header__cart-list-item-body">
+                                <div class="header__cart-list-item-rice-wrap">
+                                    <span class="header__cart-list-item-price">@String.Format(format, "{0:c0}", price)</span>
+                                    <span class="header__cart-list-item-mul">x</span>
+                                    <span class="header__cart-list-item-quantity">@item.quantity</span>
+                                </div>
+                                <span class="header__cart-list-item-trash __delete" id="@item.product.ProductID">Xoá</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li><hr width="90%" style="margin: 0 auto;" /></li>
+                }
+            </ul>
+
+            <script>
                     $('.header__cart-list-item-trash').click(function () {
                     var model = {};
                     model.id = $(this).attr('id');
@@ -107,34 +109,33 @@
                         }
                     });
                     })
-                </script>
+            </script>
 
-                <div class="header__cart-total">
-                    <div class="total"> Tổng cộng: <span>@String.Format(format, "{0:c0}", total)</span> </div>
-                    <a href="/cart" class="header__cart-check-btn">Kiểm tra giỏ hàng</a>
-                </div>
+            <div class="header__cart-total">
+                <div class="total"> Tổng cộng: <span>@String.Format(format, "{0:c0}", total)</span> </div>
+                <a href="/cart" class="header__cart-check-btn">Kiểm tra giỏ hàng</a>
             </div>
-        }
-    </div>
-    <!--Header cart end-->
-    <div class="col-5 col-md-3 header__account">
-        @if (Session["user"] != null)
-        {
-            <a class="header__account-item" href="/User/Edit">Tài khoản</a>
-            <a class="header__account-item" data-bs-toggle="modal" data-bs-target="#change-pass">Đổi mật khẩu</a>
-            <a class="header__account-item" href="/User/Logout">Đăng xuất</a>
-        }
-        else
-        {
-            <a class="header__account-item" id="login_btn"
-               data-bs-toggle="modal" data-bs-target="#account-modal">
-                Đăng nhập
-            </a>
+        </div>
+    }
+</div>
+<!--Header cart end-->
+<div class="col-5 col-md-3 header__account">
+    @if (Session["user"] != null)
+    {
+        <a class="header__account-item" href="/User/Edit">Tài khoản</a>
+        <a class="header__account-item" data-bs-toggle="modal" data-bs-target="#change-pass">Đổi mật khẩu</a>
+        <a class="header__account-item" href="/User/Logout">Đăng xuất</a>
+    }
+    else
+    {
+        <a class="header__account-item" id="login_btn"
+           data-bs-toggle="modal" data-bs-target="#account-modal">
+            Đăng nhập
+        </a>
 
-            <a class="header__account-item" id="register_btn"
-               data-bs-toggle="modal" data-bs-target="#account-modal">
-                Đăng ký
-            </a>
-        }
-    </div>
+        <a class="header__account-item" id="register_btn"
+           data-bs-toggle="modal" data-bs-target="#account-modal">
+            Đăng ký
+        </a>
+    }
 </div>

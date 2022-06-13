@@ -329,7 +329,6 @@ body {
 
 table {
     width: 100%;
-    min-height: 1000px;
 }
 
 .tb-header tr {
@@ -361,7 +360,6 @@ table {
 table thead tr {
     text-align: left;
 }
-
 table th,
 table td {
     padding: 20px 0;
@@ -485,6 +483,9 @@ table td {
     margin-top: 2rem;
 }
 
+.order-table tr:hover {
+    background-color: var(--body-bg);
+}
 @media only screen and (max-width: 1280px) {
     .sidebar {
         transition: transform 0.3s ease-in-out;

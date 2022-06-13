@@ -10,7 +10,7 @@ namespace DucVuSport.Controllers
 {
     public class UserController : Controller
     {
-        private readonly dataContext _data = new dataContext();
+        private readonly DataContext _data = new DataContext();
 
         public ActionResult ShowModal()
         {
@@ -61,7 +61,7 @@ namespace DucVuSport.Controllers
                     user.Email = model.email;
                     var passwordHash = Encrypt.GetMD5(model.password);
                     user.PasswordHash = passwordHash;
-
+                    user.RoleID = 3;
                     _data.Users.Add(user);
                     _data.SaveChanges();
 
@@ -144,8 +144,8 @@ namespace DucVuSport.Controllers
             }
             if (ModelState.IsValid)
             {
-                var user = _data.Users.FirstOrDefault(x=>x.UserID == userSession.UserID);
-                if(user != null)
+                var user = _data.Users.FirstOrDefault(x => x.UserID == userSession.UserID);
+                if (user != null)
                 {
                     user.FullName = customer.FullName;
                     user.PhoneNumber = customer.PhoneNumber;
@@ -156,7 +156,7 @@ namespace DucVuSport.Controllers
                     user.AddressDetail = customer.AddressDetail;
                     _data.SaveChanges();
                 }
-                
+
                 return RedirectToAction("Index", "Home");
             }
             return View(customer);

@@ -10,7 +10,7 @@ namespace DucVuSport.Controllers
 {
     public class CartController : Controller
     {
-        private readonly dataContext _data = new dataContext();
+        private readonly DataContext _data = new DataContext();
 
         [Route("cart")]
         public ActionResult Index()

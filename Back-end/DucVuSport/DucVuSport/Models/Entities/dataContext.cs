@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace DucVuSport.Models.Entities
 {
-    public partial class dataContext : DbContext
+    public partial class DataContext : DbContext
     {
-        public dataContext()
+        public DataContext()
             : base("name=dataContext")
         {
         }
@@ -27,7 +27,7 @@ namespace DucVuSport.Models.Entities
         {
             modelBuilder.Entity<OrderStatus>()
                 .HasMany(e => e.Orders)
-                .WithOptional(e => e.OrderStatu)
+                .WithOptional(e => e.OrderStatus)
                 .HasForeignKey(e => e.Status);
 
             modelBuilder.Entity<Product>()

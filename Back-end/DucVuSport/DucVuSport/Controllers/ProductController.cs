@@ -10,7 +10,7 @@ namespace DucVuSport.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly dataContext _data = new dataContext();
+        private readonly DataContext _data = new DataContext();
 
 
         [Route("Product")]
@@ -51,9 +51,9 @@ namespace DucVuSport.Controllers
             return View();
         }
 
-        public ActionResult Feedback()
+        public ActionResult SearchProduct()
         {
-            return PartialView("__Form-vote");
+            return View();
         }
     }
 }

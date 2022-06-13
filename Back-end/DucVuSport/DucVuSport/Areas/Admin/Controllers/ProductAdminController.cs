@@ -13,7 +13,7 @@ namespace DucVuSport.Areas.Admin.Controllers
 {
     public class ProductAdminController : Controller
     {
-        private dataContext db = new dataContext();
+        private DataContext db = new DataContext();
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Category);
@@ -34,7 +34,6 @@ namespace DucVuSport.Areas.Admin.Controllers
             }
             return View(product);
         }
-
 
         public ActionResult Create()
         {

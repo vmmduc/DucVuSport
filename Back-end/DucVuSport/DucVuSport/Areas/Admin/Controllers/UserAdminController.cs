@@ -11,7 +11,7 @@ namespace DucVuSport.Areas.Admin.Controllers
 {
     public class UserAdminController : Controller
     {
-        private readonly dataContext _data = new dataContext();
+        private readonly DataContext _data = new DataContext();
         public const string SESSION_ADMIN = "session_admin";
         public ActionResult Login()
         {

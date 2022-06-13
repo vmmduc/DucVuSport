@@ -8,8 +8,17 @@ namespace DucVuSport.Models
 {
     public class RegisterModel
     {
+        [Required(ErrorMessage = "Nhập email")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Chưa đúng định dạng email")]
         public string email { get; set; }
+
+
+        [Required(ErrorMessage = "Nhập mật khẩu")]
         public string password { get; set; }
+
+
+        [Required(ErrorMessage = "Nhập lại mật khẩu")]
+        [Compare("password", ErrorMessage = "Mật khẩu nhập lại không đúng")]
         public string repassword { get; set; }
     }
 }

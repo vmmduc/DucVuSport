@@ -159,3 +159,7 @@ D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\System.Runtime.CompilerSer
 D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\System.Threading.Tasks.Extensions.xml
 D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\Facebook.dll
 D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\Facebook.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\PagedList.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\PagedList.Mvc.dll
+D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\PagedList.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\PagedList.Mvc.xml

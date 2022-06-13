@@ -1,7 +1,7 @@
-﻿@{ 
+﻿@model IEnumerable<DucVuSport.Models.Entities.Order>
+@{
     var topProduct = ViewBag.top10 as IEnumerable<DucVuSport.Models.Entities.Product>;
 }
-
 <div class="main-content">
     <div class="row">
         <div class="col-3 col-md-6 col-sm-12">
@@ -18,12 +18,10 @@
                         <i class='bx bx-shopping-bag'></i>
                     </div>
                 </div>
-                <!-- END COUNTER -->
             </div>
         </div>
         <div class="col-3 col-md-6 col-sm-12">
             <div class="box box-hover">
-                <!-- COUNTER -->
                 <div class="counter">
                     <div class="counter-title">
                         conversion rate
@@ -35,12 +33,10 @@
                         <i class='bx bx-chat'></i>
                     </div>
                 </div>
-                <!-- END COUNTER -->
             </div>
         </div>
         <div class="col-3 col-md-6 col-sm-12">
             <div class="box box-hover">
-                <!-- COUNTER -->
                 <div class="counter">
                     <div class="counter-title">
                         Tổng doanh thu
@@ -52,12 +48,10 @@
                         <i class='bx bx-line-chart'></i>
                     </div>
                 </div>
-                <!-- END COUNTER -->
             </div>
         </div>
         <div class="col-3 col-md-6 col-sm-12">
             <div class="box box-hover">
-                <!-- COUNTER -->
                 <div class="counter">
                     <div class="counter-title">
                         Tổng lượt xem
@@ -69,14 +63,12 @@
                         <i class='bx bx-user'></i>
                     </div>
                 </div>
-                <!-- END COUNTER -->
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-3 col-md-6 col-sm-12">
-            <!-- TOP PRODUCT -->
             <div class="box f-height">
                 <div class="box-header">
                     Sản phẩm bán chạy
@@ -95,10 +87,10 @@
                                     {
                                         <img src="~/Images/Products/@item.Image" alt="product image">
                                     }
-                                <div class="item-name">
-                                    <div class="text-second">Cloths</div>
-                                    <div class="product-name">@item.ProductName</div>
-                                </div>
+                                    <div class="item-name">
+                                        <div class="text-second">Cloths</div>
+                                        <div class="product-name">@item.ProductName</div>
+                                    </div>
                                 </div>
                                 <div class="item-sale-info">
                                     <div class="text-second">Sales</div>
@@ -111,27 +103,56 @@
             </div>
         </div>
         <div class="col-4 col-md-6 col-sm-12">
-            <!-- CATEGORY CHART -->
             <div class="box f-height">
                 <div class="box-body">
                     <div id="category-chart"></div>
                 </div>
             </div>
-            <!-- END CATEGORY CHART -->
-        </div>
-       
-        <div class="col-12">
-            <!-- ORDERS TABLE -->
-            <div class="box">
-                <div class="box-header">
-                    Recent orders
-                </div>
-                <div class="box-body">
-                    @Html.Partial("__Order")
-                </div>
-            </div>
-            <!-- END ORDERS TABLE -->
         </div>
 
+        <div class="col-12">
+            <div class="box">
+                <div class="box-header">
+                    Đơn đặt hàng
+                </div>
+                <div class="box-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ và tên</th>
+                                <th>Phương thức thanh toán</th>
+                                <th>Ngày đặt</th>
+                                <th>Trạng thái đơn hàng</th>
+                            </tr>
+                        </thead>
+                        <tbody class="order-table">
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User.FullName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Payment.PaymentMethod)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderStatus.Name)
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
