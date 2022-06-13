@@ -1,4 +1,4 @@
-﻿<table>
+﻿<table class="order">
     <thead>
         <tr>
             <th>ID</th>
@@ -9,94 +9,30 @@
             <th>Total</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>#2345</td>
-            <td>
-                <div class="order-owner">
-                    <img src="~/Areas/Admin/Content/images/user-image-2.png" alt="user image">
-                    <span>John doe</span>
-                </div>
-            </td>
-            <td>2021-05-09</td>
-            <td>
-                <span class="order-status order-shipped">
-                    Shipped
-                </span>
-            </td>
-            <td>
-                <div class="payment-status payment-paid">
-                    <div class="dot"></div>
-                    <span>Paid</span>
-                </div>
-            </td>
-            <td>$123.45</td>
-        </tr>
-        <tr>
-            <td>#2345</td>
-            <td>
-                <div class="order-owner">
-                    <img src="~/Areas/Admin/Content/images/user-image-3.png" alt="user image">
-                    <span>evelyn</span>
-                </div>
-            </td>
-            <td>2021-05-09</td>
-            <td>
-                <span class="order-status order-shipped">
-                    Shipped
-                </span>
-            </td>
-            <td>
-                <div class="payment-status payment-paid">
-                    <div class="dot"></div>
-                    <span>Paid</span>
-                </div>
-            </td>
-            <td>$123.45</td>
-        </tr>
-        <tr>
-            <td>#2345</td>
-            <td>
-                <div class="order-owner">
-                    <img src="~/Areas/Admin/Content/images/user-image-2.png" alt="user image">
-                    <span>John doe</span>
-                </div>
-            </td>
-            <td>2021-05-09</td>
-            <td>
-                <span class="order-status order-shipped">
-                    Shipped
-                </span>
-            </td>
-            <td>
-                <div class="payment-status payment-paid">
-                    <div class="dot"></div>
-                    <span>Paid</span>
-                </div>
-            </td>
-            <td>$123.45</td>
-        </tr>
-        <tr>
-            <td>#2345</td>
-            <td>
-                <div class="order-owner">
-                    <img src="~/Areas/Admin/Content/images/user-image-3.png" alt="user image">
-                    <span>evelyn</span>
-                </div>
-            </td>
-            <td>2021-05-09</td>
-            <td>
-                <span class="order-status order-shipped">
-                    Shipped
-                </span>
-            </td>
-            <td>
-                <div class="payment-status payment-paid">
-                    <div class="dot"></div>
-                    <span>Paid</span>
-                </div>
-            </td>
-            <td>$123.45</td>
-        </tr>
+    <tbody class="order-table">
+        @for (var i = 0; i < 20; i++)
+        {
+            <tr>
+                <td>#2345</td>
+                <td>
+                    <div class="order-owner">
+                        <span>John doe</span>
+                    </div>
+                </td>
+                <td>2021-05-09</td>
+                <td>
+                    <span class="order-status order-shipped">
+                        Shipped
+                    </span>
+                </td>
+                <td>
+                    <div class="payment-status payment-paid">
+                        <div class="dot"></div>
+                        <span>Paid</span>
+                    </div>
+                </td>
+                <td>$123.45</td>
+            </tr>
+        }
     </tbody>
 </table>

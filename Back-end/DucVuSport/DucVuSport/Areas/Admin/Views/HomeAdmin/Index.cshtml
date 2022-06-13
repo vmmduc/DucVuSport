@@ -89,11 +89,11 @@
                                 <div class="item-info">
                                     @if (item.Image == null)
                                     {
-                                        <img src="~/Content/images/banners/no-image.jpg" alt="product image">
+                                        <img src="~/Images/Banners/no-image.jpg" alt="product image">
                                     }
                                     else
                                     {
-                                        <img src="~/Content/images/@item.Image" alt="product image">
+                                        <img src="~/Images/Products/@item.Image" alt="product image">
                                     }
                                 <div class="item-name">
                                     <div class="text-second">Cloths</div>
@@ -126,7 +126,7 @@
                 <div class="box-header">
                     Recent orders
                 </div>
-                <div class="box-body overflow-scroll">
+                <div class="box-body">
                     @Html.Partial("__Order")
                 </div>
             </div>

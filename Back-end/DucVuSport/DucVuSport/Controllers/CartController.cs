@@ -15,7 +15,8 @@ namespace DucVuSport.Controllers
         [Route("cart")]
         public ActionResult Index()
         {
-            return View();
+            var user = Session[Common.Constans.LOGIN_SESSION];
+            return View(user);
         }
 
         public ActionResult AddToCart(int id, int quantity)
@@ -24,7 +25,7 @@ namespace DucVuSport.Controllers
             {
                 Product product = _data.Products.Where(x => x.ProductID == id).FirstOrDefault();
                 {
-                    if (Session["cart"] == null)
+                    if (Session[Common.Constans.CART_SESSION] == null)
                     {
                         List<CartModel> cartList = new List<CartModel>();
                         cartList.Add(new CartModel
@@ -32,12 +33,12 @@ namespace DucVuSport.Controllers
                             product = product,
                             quantity = quantity
                         });
-                        Session["cart"] = cartList;
+                        Session[Common.Constans.CART_SESSION] = cartList;
                         Session["count"] = cartList.Count;
                     }
                     else
                     {
-                        List<CartModel> cartList = Session["cart"] as List<CartModel>;
+                        List<CartModel> cartList = Session[Common.Constans.CART_SESSION] as List<CartModel>;
                         int index = IsExist(id);
                         if (index != -1) // Nếu đã có trong giỏ hàng thì tăng số lượng lên 1
                         {
@@ -52,7 +53,7 @@ namespace DucVuSport.Controllers
                                 quantity = quantity
                             });
                         }
-                        Session["cart"] = cartList;
+                        Session[Common.Constans.CART_SESSION] = cartList;
                         Session["count"] = cartList.Count;
                     }
                 }
@@ -67,7 +68,7 @@ namespace DucVuSport.Controllers
 
         public ActionResult Remove(int id)
         {
-            List<CartModel> cartList = Session["cart"] as List<CartModel>;
+            List<CartModel> cartList = Session[Common.Constans.CART_SESSION] as List<CartModel>;
             cartList.RemoveAll(x => x.product.ProductID == id);
             Session["cart"] = cartList;
             Session["count"] = cartList.Count;
@@ -83,22 +84,61 @@ namespace DucVuSport.Controllers
         }
         private int IsExist(int id)
         {
-            List<CartModel> cart = Session["cart"] as List<CartModel>;
+            List<CartModel> cart = Session[Common.Constans.CART_SESSION] as List<CartModel>;
             for (int i = 0; i < cart.Count; i++)
                 if (cart[i].product.ProductID == id)
                     return i;
             return -1;
         }
 
-        public ActionResult Payment()
+
+        [HttpPost]
+        public ActionResult Order(User model)
         {
-            Customer customer = null;
-            var user = Session["user"] as DucVuSport.Models.Entities.Account;
+            var user = Session[Common.Constans.LOGIN_SESSION] as User;
             if (user != null)
             {
-                customer = _data.Customers.FirstOrDefault(x=>x.AccountID == user.AccountID);
+                var customer = _data.Users.Find(user.UserID);
+                CreateOrder(customer);
             }
-            return View(customer);
+            else
+            {
+                _data.Users.Add(model);
+                _data.SaveChanges();
+                CreateOrder(model);
+            }
+            return View();
+        }
+        public void CreateOrder(User user)
+        {
+            var cart = Session[Common.Constans.CART_SESSION] as List<CartModel>;
+            // Table order
+            var order = new Order();
+            order.CustomerID = user.UserID;
+            order.OrderDate = DateTime.Now;
+            order.Paid = false;
+            order.PaymentID = 1;
+            order.PaymentDate = DateTime.Now;
+            order.Status = 1;
+            _data.Orders.Add(order);
+            _data.SaveChanges();
+            int orderId = order.OrderID;
+            foreach (var item in cart) // Duyệt trong cart session
+            {
+                var product = _data.Products.FirstOrDefault(x => x.ProductID == item.product.ProductID);
+                if (product != null)
+                {
+                    var orderDetail = new OrderDetail();
+                    orderDetail.OrderID = orderId;
+                    orderDetail.ProductID = product.ProductID;
+                    orderDetail.Discount = (float?)product.Discount;
+                    orderDetail.Quantity = item.quantity;
+                    orderDetail.Total = ((long?)(product.Price - product.Price * product.Discount) * orderDetail.Quantity);
+                    _data.OrderDetails.Add(orderDetail);
+                }
+            }
+            _data.SaveChanges();
+            Session.Remove(Common.Constans.CART_SESSION);
         }
     }
 }

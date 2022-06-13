@@ -1,10 +1,7 @@
 ﻿using DucVuSport.Models;
 using DucVuSport.Models.Entities;
 using DucVuSport.Utilities;
-using Facebook;
 using System;
-using System.Configuration;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -14,7 +11,6 @@ namespace DucVuSport.Controllers
     public class UserController : Controller
     {
         private readonly dataContext _data = new dataContext();
-        public const string USER_SESSION = "user";
 
         public ActionResult ShowModal()
         {
@@ -28,10 +24,10 @@ namespace DucVuSport.Controllers
             if (ModelState.IsValid)
             {
                 var passwordHash = Encrypt.GetMD5(login.password);
-                var result = _data.Accounts.Where(x => x.Email == login.email && x.PasswordHash == passwordHash).FirstOrDefault();
+                var result = _data.Users.FirstOrDefault(x => x.Email == login.email && x.PasswordHash == passwordHash);
                 if (result != null)
                 {
-                    Session[USER_SESSION] = result;
+                    Session[Common.Constans.LOGIN_SESSION] = result;
                     if (login.remember)
                     {
                         Response.Cookies["email"].Value = result.Email;
@@ -56,21 +52,21 @@ namespace DucVuSport.Controllers
         {
             if (ModelState.IsValid)
             {
-                var hasEmail = _data.Accounts.Count(x => x.Email == model.email) > 0;
+                var hasEmail = _data.Users.Count(x => x.Email == model.email) > 0;
                 if (hasEmail)
                     return Json(false, JsonRequestBehavior.AllowGet);
                 else
                 {
-                    Account user = new Account();
+                    User user = new User();
                     user.Email = model.email;
                     var passwordHash = Encrypt.GetMD5(model.password);
                     user.PasswordHash = passwordHash;
 
-                    _data.Accounts.Add(user);
+                    _data.Users.Add(user);
                     _data.SaveChanges();
 
-                    var _user = _data.Accounts.Where(x => x.Email == model.email && x.PasswordHash == passwordHash).FirstOrDefault();
-                    Session[USER_SESSION] = _user;
+                    var _user = _data.Users.Where(x => x.Email == model.email && x.PasswordHash == passwordHash).FirstOrDefault();
+                    Session[Common.Constans.LOGIN_SESSION] = _user;
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
@@ -86,16 +82,16 @@ namespace DucVuSport.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Session[USER_SESSION] != null)
+                if (Session[Common.Constans.LOGIN_SESSION] != null)
                 {
                     var oldPass = Encrypt.GetMD5(model.oldPassword);
-                    var user = _data.Accounts.Find(((Account)Session["user"]).AccountID);
+                    var user = _data.Users.Find(((User)Session[Common.Constans.LOGIN_SESSION]).UserID);
                     if (user.PasswordHash == oldPass)
                     {
                         var newPass = Encrypt.GetMD5(model.newPassword);
                         user.PasswordHash = newPass;
                         _data.SaveChanges();
-                        Session[USER_SESSION] = user;
+                        Session[Common.Constans.LOGIN_SESSION] = user;
                         return Json(true, JsonRequestBehavior.AllowGet);
                     }
                 }
@@ -111,44 +107,22 @@ namespace DucVuSport.Controllers
         public ActionResult Logout()
         {
             DateTime now = DateTime.Now;
-            var _user = _data.Accounts.Find(((Account)Session["user"]).AccountID);
+            var _user = _data.Users.Find(((User)Session["user"]).UserID);
             _user.LastActivity = now;
             _data.SaveChanges();
-            Session.Remove(USER_SESSION);
+            Session.Remove(Common.Constans.LOGIN_SESSION);
             return Redirect("/Home/Index");
         }
-
-        public ActionResult Create()
-        {
-            ViewBag.AccountID = new SelectList(_data.Accounts, "AccountID", "Email");
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Customer customer)
-        {
-            var user = Session["user"] as DucVuSport.Models.Entities.Account;
-            if (ModelState.IsValid)
-            {
-                customer.AccountID = user.AccountID;
-                _data.Customers.Add(customer);
-                _data.SaveChanges();
-                return RedirectToAction("Index","Home");
-            }
-            return View(customer);
-        }
-
 
         // Edit infor
         [Route("Edit")]
         public ActionResult Edit()
         {
-            Account user = Session["user"] as DucVuSport.Models.Entities.Account;
-            if (user == null)
+            if (!(Session["user"] is User user))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = _data.Customers.FirstOrDefault(x => x.AccountID == user.AccountID);
+            User customer = _data.Users.FirstOrDefault(x => x.UserID == user.UserID);
             if (customer == null)
             {
                 return RedirectToAction("Create");
@@ -161,17 +135,28 @@ namespace DucVuSport.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Customer customer)
+        public ActionResult Edit(User customer)
         {
-            var user = Session["user"] as DucVuSport.Models.Entities.Account;
-            if (user == null)
+            var userSession = Session[Common.Constans.LOGIN_SESSION] as User;
+            if (userSession == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             if (ModelState.IsValid)
             {
-                customer = _data.Customers.FirstOrDefault(x=>x.AccountID == user.AccountID);
-                _data.SaveChanges();
+                var user = _data.Users.FirstOrDefault(x=>x.UserID == userSession.UserID);
+                if(user != null)
+                {
+                    user.FullName = customer.FullName;
+                    user.PhoneNumber = customer.PhoneNumber;
+                    user.Email = customer.Email;
+                    user.Province = customer.Province;
+                    user.District = customer.District;
+                    user.Ward = customer.Ward;
+                    user.AddressDetail = customer.AddressDetail;
+                    _data.SaveChanges();
+                }
+                
                 return RedirectToAction("Index", "Home");
             }
             return View(customer);

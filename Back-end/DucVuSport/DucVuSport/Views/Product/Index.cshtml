@@ -48,7 +48,7 @@
     $(".category-btn").click(function () {
         var id = $(this).attr("id");
         $.ajax({
-            url: "/Product/getProductByCart",
+            url: "/Product/GetProductByCart",
             data: { id : id },
             success: function (response) {
                 $("div.product__list-content").html(response);
@@ -69,8 +69,8 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
-                location.reload();
-                alert("Thêm thành công!")
+                var count = @Session["count"];
+                $(".header__cart--notice").text(count);
             }
         })
     })

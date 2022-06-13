@@ -9,6 +9,7 @@ $(document).ready(function () {
         account.removeClass('active');
         shoppingCart.removeClass('active');
     });
+
     $('#search-btn').click(function () {
         if (!searchForm.hasClass('active'))
             searchForm.addClass('active');
@@ -19,6 +20,7 @@ $(document).ready(function () {
         account.removeClass('active');
         navbar.removeClass('active');
     })
+
     $('#cart-btn').click(function () {
         if (!shoppingCart.hasClass('active'))
             shoppingCart.addClass('active');
@@ -29,6 +31,7 @@ $(document).ready(function () {
         account.removeClass('active');
         navbar.removeClass('active');
     });
+
     $('#menu-btn').click(function () {
         if (!navbar.hasClass('active'))
             navbar.addClass('active');
@@ -39,6 +42,7 @@ $(document).ready(function () {
         shoppingCart.removeClass('active');
         account.removeClass('active');
     });
+
     $('#account-btn').click(function () {
         if (!account.hasClass('active'))
             account.addClass('active');
@@ -48,7 +52,6 @@ $(document).ready(function () {
         navbar.removeClass('active');
         shoppingCart.removeClass('active');
     });
-
 
     $('.body').click(function () {
         searchForm.removeClass('active');
@@ -100,9 +103,15 @@ $(document).ready(function () {
         });
     });
 
-
     // Product slider
     $('#autoWidth').lightSlider({
+        autoWidth: true,
+        loop: true,
+        onSliderLoad: function () {
+            $('#autoWidth').removeClass('cs-hidden');
+        }
+    });
+    $('#equipment-s').lightSlider({
         autoWidth: true,
         loop: true,
         onSliderLoad: function () {
@@ -126,7 +135,6 @@ $(document).ready(function () {
     });
 
 
-
     $('input.input-qty').each(function () {
         var $this = $(this),
             qty = $this.parent().find('.is-form'),
@@ -144,14 +152,6 @@ $(document).ready(function () {
             }
             $this.attr('value', d).val(d)
         })
-    })
-});
-
-
-$(".small__img").each(function (index, value) {
-    $(this).click(function () {
-        let img = $(this).find("img").attr("src");
-        $('.big__img img').attr('src', img);
     })
 });
 

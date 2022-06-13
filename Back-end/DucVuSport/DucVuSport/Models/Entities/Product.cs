@@ -4,7 +4,6 @@ namespace DucVuSport.Models.Entities
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
     using System.Web.Mvc;
 
     [Table("Product")]
@@ -13,7 +12,6 @@ namespace DucVuSport.Models.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            FeedBacks = new HashSet<FeedBack>();
             OrderDetails = new HashSet<OrderDetail>();
         }
 
@@ -46,11 +44,7 @@ namespace DucVuSport.Models.Entities
 
         public int? ViewCount { get; set; }
 
-
         public virtual Category Category { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FeedBack> FeedBacks { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

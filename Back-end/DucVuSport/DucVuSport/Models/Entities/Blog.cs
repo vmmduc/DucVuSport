@@ -28,7 +28,7 @@ namespace DucVuSport.Models.Entities
 
         public int? BlogCatID { get; set; }
 
-        public virtual Account Account { get; set; }
+        public virtual User User { get; set; }
 
         public virtual BlogCategory BlogCategory { get; set; }
     }

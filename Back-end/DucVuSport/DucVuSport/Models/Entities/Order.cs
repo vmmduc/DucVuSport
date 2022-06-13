@@ -21,9 +21,6 @@ namespace DucVuSport.Models.Entities
 
         public DateTime? OrderDate { get; set; }
 
-        public DateTime? ShipDate { get; set; }
-
-        public bool? Deleted { get; set; }
 
         public bool? Paid { get; set; }
 
@@ -39,9 +36,11 @@ namespace DucVuSport.Models.Entities
 
         public int? Status { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        public virtual OrderStatus OrderStatu { get; set; }
 
         public virtual Payment Payment { get; set; }
+
+        public virtual User User { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

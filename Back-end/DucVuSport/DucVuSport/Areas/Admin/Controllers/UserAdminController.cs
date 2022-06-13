@@ -11,8 +11,7 @@ namespace DucVuSport.Areas.Admin.Controllers
 {
     public class UserAdminController : Controller
     {
-
-        private dataContext _data = new dataContext();
+        private readonly dataContext _data = new dataContext();
         public const string SESSION_ADMIN = "session_admin";
         public ActionResult Login()
         {
@@ -25,7 +24,7 @@ namespace DucVuSport.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string passwordHash = Encrypt.GetMD5(model.password);
-                Account account = _data.Accounts.FirstOrDefault(x=>x.Email == model.email && x.PasswordHash == model.password);
+                User account = _data.Users.FirstOrDefault(x=>x.Email == model.email && x.PasswordHash == model.password);
                 if (account != null)
                 {
                     Session[SESSION_ADMIN] = account;
@@ -40,7 +39,7 @@ namespace DucVuSport.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateAccount(Account account)
+        public ActionResult CreateAccount(User account)
         {
             return View();
         }

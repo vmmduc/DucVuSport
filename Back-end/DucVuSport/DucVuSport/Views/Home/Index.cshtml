@@ -1,12 +1,10 @@
-﻿@{ 
+﻿@{
     var TopProduct = ViewBag.TopProduct as List<DucVuSport.Models.Entities.Product>;
+    var Equipment = ViewBag.Equipment as List<DucVuSport.Models.Entities.Product>;
 }
 <div class="body__home">
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="~/Images/Banners/slider-bg.jpg" class="d-block w-100" alt="...">
-            </div>
             <div class="carousel-item">
                 <img src="~/Images/Banners/slider-1.jpg" class="d-block w-100" alt="...">
             </div>
@@ -45,14 +43,65 @@
                                 var discount = item.Discount * 100;
                             }
                             <div class="product__discount">-@discount%</div>
-                                @if (@item.Image == null)
-                                {
-                                    <img class="product__img" src="~/Images/Banners/no-image.jpg">
-                                }
-                                else
-                                {
-                                    <img class="product__img" src="~/Images/Products/@item.Image">
-                                }
+                            @if (@item.Image == null)
+                            {
+                                <img class="product__img" src="~/Images/Banners/no-image.jpg">
+                            }
+                            else
+                            {
+                                <img class="product__img" src="~/Images/Products/@item.Image">
+                            }
+                            <h5 class="product__name">@item.ProductName</h5>
+                            <div class="product__price">
+                                <div class="new__price">@String.Format(format, "{0:c0}", price)</div>
+                                <div class="old__price text-decoration-line-through">@String.Format(format, "{0:c0}", item.Price)</div>
+                            </div>
+                            <div class="item__star">
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </a>
+                        <div class="add-cart__btn add-to-cart" id="@item.ProductID">
+                            <span>Thêm vào giỏ</span>
+                        </div>
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </div>
+</div>
+
+<div class="feature-product">
+    <div class="feature-product__heading">
+        <h1>Dụng cụ tập luyện</h1>
+    </div>
+    <div class="feature-product__body">
+        <ul id="equipment-s" class="cs-hidden">
+
+            <!-- for each here-->
+            @foreach (var item in Equipment)
+            {
+                <li class="">
+                    <div class="product__item">
+                        <a class="product__content align-items-center" href="/Product/Detail/@item.ProductID">
+                            @{
+                                var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                                var price = item.Price - item.Price * item.Discount;
+                                var discount = item.Discount * 100;
+                            }
+                            <div class="product__discount">-@discount%</div>
+                            @if (@item.Image == null)
+                            {
+                                <img class="product__img" src="~/Images/Banners/no-image.jpg">
+                            }
+                            else
+                            {
+                                <img class="product__img" src="~/Images/Products/@item.Image">
+                            }
                             <h5 class="product__name">@item.ProductName</h5>
                             <div class="product__price">
                                 <div class="new__price">@String.Format(format, "{0:c0}", price)</div>

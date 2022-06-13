@@ -128,13 +128,59 @@
                             <span>@String.Format(format, "{0:c0}", total_and_VAT)</span>
                         </div>
                     </div>
-
-                    <div class="__payment">
-                        <a href="/Cart/Payment" class="__payment-btn">Thanh toán</a>
-                    </div>
-
                 </div>
             </div>
+        </div>
+
+        <div class="_form-style">
+            <h1>Thông tin giao hàng</h1>
+            @model DucVuSport.Models.Entities.User
+            @using (Html.BeginForm("Order", "Cart", FormMethod.Post, new { @class = "row g-3" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row">
+                    <div class="col">
+                        <label>Họ và tên:</label>
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col">
+                        <label>Số điện thoại:</label>
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col">
+                        <label>Email:</label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <label>Tỉnh / Thành phố:</label>
+                        @Html.EditorFor(model => model.Province, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col">
+                        <label>Quận / Huyện:</label>
+                        @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col">
+                        <label>Phường / Xã:</label>
+                        @Html.EditorFor(model => model.Ward, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Số nhà, đường:</label>
+                        @Html.EditorFor(model => model.AddressDetail, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Thanh toán</button>
+                </div>
+            }
         </div>
     }
 </div>

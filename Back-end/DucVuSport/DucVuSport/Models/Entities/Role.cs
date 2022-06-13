@@ -12,7 +12,7 @@ namespace DucVuSport.Models.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Role()
         {
-            Accounts = new HashSet<Account>();
+            Users = new HashSet<User>();
         }
 
         public int RoleID { get; set; }
@@ -24,6 +24,6 @@ namespace DucVuSport.Models.Entities
         public string Detail { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

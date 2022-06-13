@@ -55,33 +55,5 @@ namespace DucVuSport.Controllers
         {
             return PartialView("__Form-vote");
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Feedback(FeedBack feedBack)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = _data.Products.FirstOrDefault(x => x.ProductID == feedBack.ProductID);
-                if (result != null)
-                {
-                    try
-                    {
-                        _data.FeedBacks.Add(feedBack);
-                        _data.SaveChanges();
-                        return Json(true, JsonRequestBehavior.AllowGet);
-                    }
-                    catch
-                    {
-                        return Json(false, JsonRequestBehavior.AllowGet);
-                    }
-                }
-                else
-                {
-                    return Json(false, JsonRequestBehavior.AllowGet);
-                }
-            }
-            return Json(false, JsonRequestBehavior.AllowGet);
-        }
     }
 }

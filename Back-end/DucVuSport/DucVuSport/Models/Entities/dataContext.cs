@@ -12,29 +12,42 @@ namespace DucVuSport.Models.Entities
         {
         }
 
-        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<BlogCategory> BlogCategories { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<FeedBack> FeedBacks { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<OrderStatus> OrderStatus { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>()
-                .HasMany(e => e.Blogs)
-                .WithOptional(e => e.Account)
-                .HasForeignKey(e => e.CreateBy);
+            modelBuilder.Entity<OrderStatus>()
+                .HasMany(e => e.Orders)
+                .WithOptional(e => e.OrderStatu)
+                .HasForeignKey(e => e.Status);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.OrderDetails)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.AddressDetail)
+                .IsFixedLength();
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Blogs)
+                .WithOptional(e => e.User)
+                .HasForeignKey(e => e.CreateBy);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Orders)
+                .WithOptional(e => e.User)
+                .HasForeignKey(e => e.CustomerID);
         }
     }
 }

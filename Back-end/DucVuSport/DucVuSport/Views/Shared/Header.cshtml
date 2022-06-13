@@ -1,7 +1,7 @@
 ﻿@{
     var cart = Session["Cart"] as List<DucVuSport.Models.CartModel>;
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-    var user = Session["user"] as DucVuSport.Models.Entities.Account;
+    var user = Session["user"] as DucVuSport.Models.Entities.User;
     var total = 0;
 }
 <div class="_top">
@@ -67,7 +67,7 @@
                             }
                             else
                             {
-                                <img src="~/Images/Product/@item.product.Image" alt="" class="header__cart-list-item-img">
+                                <img src="~/Images/Products/@item.product.Image" alt="" class="header__cart-list-item-img">
                             }
                             <div class="header__cart-list-item-info">
                                 <div class="header__cart-list-item-head">
@@ -122,7 +122,7 @@
         {
             <a class="header__account-item" href="/User/Edit">Tài khoản</a>
             <a class="header__account-item" data-bs-toggle="modal" data-bs-target="#change-pass">Đổi mật khẩu</a>
-            <a class="header__account-item" href="User/Logout">Đăng xuất</a>
+            <a class="header__account-item" href="/User/Logout">Đăng xuất</a>
         }
         else
         {
