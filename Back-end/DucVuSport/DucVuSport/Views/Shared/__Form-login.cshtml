@@ -42,7 +42,7 @@
         if (response == true) {
             location.reload();
         } else {
-            alert("Đăng nhập thất bại!");
+            toastr.warning('Email hoặc mật khẩu sai', 'Warning');
         }
     }
 </script>

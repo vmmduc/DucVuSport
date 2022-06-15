@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DucVuSport.Models.Entities.User>
+@{
+    ViewBag.Label = "Danh sách tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+    var stt = 0;
+}
+<div class="bill-index-content">
+    <div class="d-flex justify-content-between">
+        <form class="header__search">
+            <label for="search-box" class="fas fa-search"></label>
+            <input type="search" id="search-box" placeholder="Nhập thông tin...">
+        </form>
+
+        <p class="add-new">
+            @Html.ActionLink("Tạo mới", "Create")
+        </p>
+    </div>
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>STT</th>
+            <th>Họ và tên</th>
+            <th>SĐT</th>
+            <th>Email</th>
+            <th>Hoạt động</th>
+            <th>Quyền</th>
+            <th>Trạng thái</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(stt+=1)</td>
+                <td>@item.FullName</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.Email</td>
+                <td>@item.LastActivity</td>
+                <td>@item.Role.RoleName</td>
+                <td>
+                    @if (item.Unlock == true)
+                    {
+                        <div class="payment-status payment-pending">
+                            <div class="dot"></div>
+                            <span>Khóa</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="payment-status payment-paid">
+                            <div class="dot"></div>
+                            <span>Đang hoạt động</span>
+                        </div>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.UserID }, new { @class = "btn btn-outline-primary" })
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.UserID }, new { @class = "btn btn-outline-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -3,41 +3,57 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Data;
 using System.Data.Entity;
+using System.Net;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
     [RouteArea("admin")]
-    public class HomeAdminController : Controller
+    public class HomeAdminController : BaseController
     {
         private readonly DataContext data = new DataContext();
         public ActionResult Index()
         {
-            var waitingConfirm = data.OrderStatus.FirstOrDefault(x=>x.Name != null && x.Name.Trim().ToLower() == Common.Constans.Status.WaitingConfirm);
+            var waitingConfirm = data.OrderStatus.FirstOrDefault(x => x.Name != null && x.Name.Trim().ToLower() == Common.Constans.Status.WaitingConfirm.Trim().ToLower());
+            var approve = data.OrderStatus.FirstOrDefault(x => x.Name != null && x.Name.Trim().ToLower() == Common.Constans.Status.Approve.Trim().ToLower());
+            var success = data.OrderStatus.FirstOrDefault(x => x.Name != null && x.Name.Trim().ToLower() == Common.Constans.Status.Success.Trim().ToLower());
+
+            ViewBag.turnover = data.Orders.Where(x => x.Status == success.ID).Sum(x => x.Total);
             ViewBag.viewTotal = data.Products.Sum(x => x.ViewCount);
             ViewBag.top10 = data.Products.OrderByDescending(x => x.Sold).Take(10).ToList();
-            ViewBag.totalOrder = data.Orders.Count(x => x.Status == 1 || x.Status == 2);
-            var order = data.Orders.Include(o => o.OrderStatu).Include(o => o.Payment).Include(o => o.User).Where(x => x.Status == 1 || x.Status == 2).ToList();
+            ViewBag.totalOrder = data.Orders.Count(x => x.Status == waitingConfirm.ID || x.Status == approve.ID);
+            var order = data.Orders.Include(o => o.OrderStatu).Include(o => o.Payment).Include(o => o.User).Where(x => x.Status != success.ID).ToList();
             return View(order);
         }
-        public ActionResult OrderDetail(int id)
+        public ActionResult OrderDetail(int? id)
         {
-            var order = data.Orders.Include(x => x.OrderStatu).FirstOrDefault(x => x.OrderID == id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = data.Orders.Find(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
             var customer = data.Users.FirstOrDefault(x => x.UserID == order.CustomerID);
             var orderDetails = data.OrderDetails.Include(o => o.Order).Include(o => o.Product).Where(x => x.OrderID == id);
-            ViewBag.order = order;
             ViewBag.customer = customer;
-            ViewBag.Status = new SelectList(data.OrderStatus, "ID", "Name", order.Status);
-            return View(orderDetails.ToList());
+            ViewBag.status = new SelectList(data.OrderStatus, "ID", "Name", order.Status);
+            ViewBag.orderDetail = orderDetails.ToList();
+            return View(order);
         }
-        public ActionResult Confirm(int id)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult OrderDetail(Order order)
         {
-            var order = data.Orders.Where(x => x.OrderID == id).FirstOrDefault();
-            if (order != null)
+            if (ModelState.IsValid)
             {
-                order.Status = 2;
+                data.Entry(order).State = EntityState.Modified;
                 data.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(order);
         }
     }
 }

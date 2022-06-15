@@ -1,98 +1,62 @@
 ﻿@model DucVuSport.Models.Entities.Order
-
 @{
-    Layout = null;
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+    var customer = ViewBag.customer as DucVuSport.Models.Entities.User;
+    var orderDetail = ViewBag.orderDetail as List<DucVuSport.Models.Entities.OrderDetail>;
+    ViewBag.label = "Chi tiết đơn đặt hàng";
+
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>Order</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.OrderStatu.Name)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.OrderStatu.Name)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Payment.PaymentMethod)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Payment.PaymentMethod)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.User.FullName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.User.FullName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.OrderDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Paid)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Paid)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.PaymentDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PaymentDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Total)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Total)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Note)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Note)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ShipID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ShipID)
-            </dd>
-    
-        </dl>
+<div class="bill-index-content">
+    <div class="alert alert-success">
+        @Model.OrderStatu.Name
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+    <div class="order-infor">
+        <h5>Thông tin đơn hàng</h5>
+        <div class="customer-infor">
+            <div>@customer.FullName</div>
+            <div>@customer.Email</div>
+            <div>@customer.PhoneNumber</div>
+            <div>@customer.District, @customer.Province, @customer.Ward, @customer.AddressDetail</div>
+        </div>
+    </div>
+
+    <div class="product-list-order">
+        <h5>Danh sách sản phẩm</h5>
+        <table class="table table-hover">
+            <tr>
+                <th>Ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giảm giá</th>
+                <th>Giá bán</th>
+            </tr>
+
+            @foreach (var item in orderDetail)
+            {
+                <tr>
+                    <td>
+                        @if (item.Product.Image == null)
+                        {
+                            <img src="~/Images/Banners/no-image.jpg" class="order-product-img" />}
+                        else
+                        {
+                            <img src="~/Images/Products/@item.Product.Image" class="order-product-img" />
+                        }
+                    </td>
+                    <td>
+                        @item.Product.ProductName
+                    </td>
+                    <td> @item.Quantity</td>
+                    <td>@Convert.ToInt32(item.Discount)%</td>
+                    <td class="main-color">@String.Format(format, "{0:c0}", item.Total)</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <h4>Tổng cộng: @String.Format(format, "{0:c0}", Model.Total)</h4>
+    <div>
+        <a href="/Admin/Bill/Index" class="text-decoration-none btn btn-warning"><i class="fas fa-arrow-left"></i> Quay lại</a>
+    </div>
+</div>

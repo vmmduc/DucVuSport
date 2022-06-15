@@ -26,9 +26,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    @{ 
+        var account = Session[DucVuSport.Common.Constans.Session.ADMIN_SESSION] as DucVuSport.Models.Entities.User;
+    }
     <div class="sidebar">
         <div class="sidebar-logo">
-            <a href="#home" class="header__logo"> <i class="fas fa-shopping-basket"></i> DucVuStore </a>
+            <a href="/Admin/HomeAdmin/Index" class="header__logo"> <i class="fas fa-shopping-basket"></i> DucVuSport </a>
             <div class="sidebar-close" id="sidebar-close">
                 <i class='bx bx-left-arrow-alt'></i>
             </div>
@@ -36,12 +39,15 @@
         <div class="sidebar-user">
             <div class="sidebar-user-info">
                 <div class="sidebar-user-name">
-                    Vũ Mạnh Đức
+                    @if (account != null)
+                    {
+                        @account.FullName
+                    }
                 </div>
             </div>
-            <button class="btn btn-outline">
-                <i class='bx bx-log-out bx-flip-horizontal'></i>
-            </button>
+            <div class="btn btn-outline">
+                <a href="/Admin/UserAdmin/Logout" class="admin-logout"><i class='bx bx-log-out bx-flip-horizontal'></i></a>
+            </div>
         </div>
         <ul class="sidebar-menu active">
             @Html.Partial("__Sidebar-menu")

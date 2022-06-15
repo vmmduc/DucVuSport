@@ -153,6 +153,38 @@ $(document).ready(function () {
             $this.attr('value', d).val(d)
         })
     })
-});
 
-$('.desc-content').html($('.desc-content').text());
+    $(function () {
+        if ($('#success').val()) {
+            displayMessage($('#success').val(), 'success');
+        }
+        if ($('#info').val()) {
+            displayMessage($('#info').val(), 'info');
+        }
+        if ($('#warning').val()) {
+            displayMessage($('#warning').val(), 'warning');
+        }
+        if ($('#error').val()) {
+            displayMessage($('#error').val(), 'error');
+        }
+    });
+
+    var displayMessage = function (message, msgType) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-right",
+            "showDuration": "10",
+            "hideDuration": "10",
+            "timeOut": "10",
+            "extendedTimeOut": "10",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr[msgType](message);
+    };
+
+    $('.desc-content').html($('.desc-content').text());
+});

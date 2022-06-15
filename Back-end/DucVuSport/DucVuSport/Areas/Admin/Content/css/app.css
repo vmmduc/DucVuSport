@@ -351,7 +351,6 @@ table thead tr {
 table th,
 table td {
     padding: 20px 0;
-    border-bottom: 1px solid var(--border-color);
 }
 
 .order-ready {
@@ -403,15 +402,12 @@ table td {
 }
 
 .add-new {
-    padding: 1rem;
+    width: 15%;
+    padding: .5rem;
     background-color: var(--main-color);
     text-align: center;
     color: white;
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-    border-radius: 1rem;
-    opacity: 0.6;
+    border-radius: .5rem;
 }
 
     .add-new:hover {
@@ -421,6 +417,7 @@ table td {
 
     .add-new a {
         text-decoration: none;
+        color: white;
     }
 
         .add-new a:hover {
@@ -483,6 +480,10 @@ table td {
     }
 
 @media only screen and (max-width: 1280px) {
+    body {
+        font-size: 30%;
+    }
+
     .sidebar {
         transition: transform 0.3s ease-in-out;
         max-width: 100%;
@@ -519,6 +520,11 @@ table td {
 
     .header__logo {
         font-size: 1.5rem;
+    }
+
+    .header__search {
+        border: 0.5px solid var(--light-grey);
+        width: 70%;
     }
 }
 
@@ -583,8 +589,8 @@ table td {
     position: relative;
     top: 110%;
     right: 0;
-    width: 30rem;
-    height: 3rem;
+    width: 50%;
+    height: 2.5rem;
     background: #fff;
     border-radius: .5rem;
     overflow: hidden;
@@ -618,6 +624,42 @@ table td {
     margin: auto;
 }
 
-.bill-list{
-    margin-top: 2rem;
+.admin-message {
+    padding-left: 1rem;
+}
+
+.admin-logout {
+    color: var(--main-color);
+}
+
+    .admin-logout:hover {
+        color: white;
+    }
+
+.form-in4-group {
+    padding-top: 1.5rem;
+}
+
+.payment-paid .dot {
+    background-color: #04d182;
+}
+
+.payment-status {
+    display: flex;
+    align-items: center;
+}
+
+    .payment-status .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+.payment-paid .dot {
+    background-color: #04d182;
+}
+
+.payment-pending .dot {
+    background-color: #ffc542;
 }

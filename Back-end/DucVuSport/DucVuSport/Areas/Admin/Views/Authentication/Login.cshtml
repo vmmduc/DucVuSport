@@ -12,7 +12,7 @@
     <script src="~/Scripts/bootstrap.bundle.js"></script>
 </head>
 <body>
-    <section class="vh-100" style="background-color: #9A616D;">
+    <section class="vh-100" style="background-color: #FFFACD; ">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
@@ -25,21 +25,21 @@
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
 
-                                    @using (Html.BeginForm("Login", "HomeAdmin", FormMethod.Post))
+                                    @using (Html.BeginForm("Login", "Authentication", FormMethod.Post))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        <div class="form-floating mb-4">
-                                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-                                            @Html.TextBoxFor(model => model.email, new { @class = "form-control", id = "input-email", placeholder = "name@example.com" })
-                                            <label for="input-email">Email</label>
-                                        </div>
+                                    <div class="form-floating mb-4">
+                                        @Html.TextBoxFor(model => model.email, new { @class = "form-control", id = "input-email"})
+                                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "admin-message text-danger" })
+                                        <label for="input-email">Email</label>
+                                    </div>
 
-                                        <div class="form-floating mb-4">
-                                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-                                            @Html.PasswordFor(model => model.password, new { @class = "form-control", id = "input-email", placeholder = "name@example.com" })
-                                            <label for="input-email">Mật khẩu</label>
-                                        </div>
+                                    <div class="form-floating mb-4">
+                                        @Html.PasswordFor(model => model.password, new { @class = "form-control", id = "input-email"})
+                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "admin-message text-danger" })
+                                        <label for="input-email">Mật khẩu</label>
+                                    </div>
 
                                         <div class="pt-1 mb-4">
                                             <button class="btn btn-dark btn-lg btn-block" type="submit">Đăng nhập</button>

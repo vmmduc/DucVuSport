@@ -1,13 +1,14 @@
-﻿@model DucVuSport.Models.Entities.Product
-
-@{
+﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
 }
 
+@model DucVuSport.Models.Entities.Product
+
 @using (Html.BeginForm("Edit", "ProductAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
     <div class="form-horizontal">
+
+        @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ProductID)
 
@@ -73,6 +74,7 @@
 
         @*Image*@
         <div class="group">
+            @Html.HiddenFor(model => model.Image)
             <input type="file" name="image" class="form-control" />
         </div>
 
@@ -118,11 +120,11 @@
         @*Submit btn*@
         <div class="button-group">
             <div class="col-md-offset-2 come-back">
-                @Html.ActionLink("Trở về", "Index", new { @class = "btn btn-primary" })
+                <a href="/Admin/ProductAdmin/Index" class="text-decoration-none btn btn-warning"><i class="fas fa-arrow-left"></i> Quay lại</a>
             </div>
 
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Sửa" class="btn btn-primary" />
+                <input type="submit" value="Cập nhật" class="btn btn-primary" />
             </div>
         </div>
     </div>

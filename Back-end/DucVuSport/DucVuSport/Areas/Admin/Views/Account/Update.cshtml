@@ -1,9 +1,11 @@
 ﻿@model DucVuSport.Models.Entities.User
-
-<div class="_form-style">
-    <h1 class="text-center">Thông tin tài khoản</h1>
+@{
+    ViewBag.label = "Thông tin tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+<div class="bill-index-content">
     <div class="message"></div>
-    @using (Ajax.BeginForm("Edit", "User", new AjaxOptions { HttpMethod = "POST", OnSuccess = "fnSuccess" }, new { @class = "row g-3" }))
+    @using (Ajax.BeginForm("Update", "UserAdmin", new AjaxOptions { HttpMethod = "POST", OnSuccess = "fnSuccess" }, new { @class = "row g-3" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -46,11 +48,12 @@
         </div>
 
         <div class="col-12" style="padding-left: 1rem;">
-            <a href="#" class="text-decoration-none btn btn-warning"><i class="fas fa-arrow-left"></i> Quay lại</a>
+            <a href="/Admin/HomeAdmin/Index" class="text-decoration-none btn btn-warning"><i class="fas fa-arrow-left"></i> Quay lại</a>
             <button class="btn btn-primary btn-block" type="submit">Cập nhật</button>
         </div>
     }
 </div>
+
 <script type="text/javascript">
     function fnSuccess(response) {
         if (response.status == true) {

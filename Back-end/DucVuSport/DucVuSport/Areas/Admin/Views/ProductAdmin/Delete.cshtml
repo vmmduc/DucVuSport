@@ -95,7 +95,7 @@
     {
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">
-            @Html.ActionLink("Hủy", "Index")
+            <a href="/Admin/ProductAdmin/Index"" class="text-decoration-none btn btn-warning"><i class="fas fa-arrow-left"></i> Quay lại</a>
             <input type="submit" value="Xóa" class="btn btn-danger" />
         </div>
     }

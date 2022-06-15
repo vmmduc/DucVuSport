@@ -6,12 +6,12 @@ using DucVuSport.Models.Entities;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
-    public class BillController : Controller
+    public class BillController : BaseController
     {
-        private DataContext db = new DataContext();
+        private DataContext _data = new DataContext();
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.OrderStatu).Include(o => o.Payment).Include(o => o.User);
+            var orders = _data.Orders.Include(o => o.OrderStatu).Include(o => o.Payment).Include(o => o.User);
             return View(orders.ToList());
         }
         public ActionResult Details(int? id)
@@ -20,11 +20,16 @@ namespace DucVuSport.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
+            Order order = _data.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
             }
+            var customer = _data.Users.FirstOrDefault(x => x.UserID == order.CustomerID);
+            var orderDetails = _data.OrderDetails.Include(o => o.Order).Include(o => o.Product).Where(x => x.OrderID == id);
+            ViewBag.customer = customer;
+            ViewBag.status = new SelectList(_data.OrderStatus, "ID", "Name", order.Status);
+            ViewBag.orderDetail = orderDetails.ToList();
             return View(order);
         }
     }

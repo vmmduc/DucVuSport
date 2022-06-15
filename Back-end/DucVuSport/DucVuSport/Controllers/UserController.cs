@@ -37,13 +37,8 @@ namespace DucVuSport.Controllers
                     }
                     return Json(true, JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    return Json(false, JsonRequestBehavior.AllowGet);
-                }
             }
-            else
-                return null;
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -114,33 +109,25 @@ namespace DucVuSport.Controllers
             return Redirect("/Home/Index");
         }
 
-        // Edit infor
-        [Route("Edit")]
         public ActionResult Edit()
         {
-            if (!(Session["user"] is User user))
+            if (!(Session[Common.Constans.Session.LOGIN_SESSION] is User user))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             User customer = _data.Users.FirstOrDefault(x => x.UserID == user.UserID);
-            if (customer == null)
-            {
-                return RedirectToAction("Create");
-            }
-            else
-            {
-                return View(customer);
-            }
+            if (customer == null) return HttpNotFound();
+            return View(customer);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(User customer)
+        public JsonResult Edit(User customer)
         {
             var userSession = Session[Common.Constans.Session.LOGIN_SESSION] as User;
             if (userSession == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json(new { status = false, message = "Bạn chưa đăng nhập" }, JsonRequestBehavior.AllowGet);
             }
             if (ModelState.IsValid)
             {
@@ -156,10 +143,9 @@ namespace DucVuSport.Controllers
                     user.AddressDetail = customer.AddressDetail;
                     _data.SaveChanges();
                 }
-
-                return RedirectToAction("Index", "Home");
+                return Json(new { status = true, message = "Cập nhật thành công" }, JsonRequestBehavior.AllowGet);
             }
-            return View(customer);
+            return Json(new { status = false, message = "Cập nhật thất bại" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

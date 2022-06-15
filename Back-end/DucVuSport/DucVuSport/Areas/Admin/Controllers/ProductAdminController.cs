@@ -9,7 +9,7 @@ using DucVuSport.Models.Entities;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
-    public class ProductAdminController : Controller
+    public class ProductAdminController : BaseController
     {
         private DataContext db = new DataContext();
         public ActionResult Index()

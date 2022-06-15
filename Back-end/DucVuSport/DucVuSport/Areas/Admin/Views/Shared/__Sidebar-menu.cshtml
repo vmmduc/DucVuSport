@@ -1,4 +1,7 @@
-﻿<li>
+﻿@{
+    var account = Session[DucVuSport.Common.Constans.Session.ADMIN_SESSION] as DucVuSport.Models.Entities.User;
+}
+<li>
     <a class="menu" href="/Admin/HomeAdmin/Index">
         <i class='bx bx-home'></i>
         <span>Bảng điều khiển</span>
@@ -31,18 +34,18 @@
     </a>
     <ul class="sidebar-menu sidebar-menu-dropdown-content">
         <li>
-            <a class="menu">
-                Thông tin cá nhân
+            <a class="menu" href="/Admin/Account/Update/@account.UserID">
+                Thông tin tài khoản
+            </a>
+        </li>
+        <li>
+            <a class="menu" href="/Admin/Account/Index">
+                Quản lý tài khoản
             </a>
         </li>
         <li>
             <a class="menu">
-                Cài đặt tài khoản
-            </a>
-        </li>
-        <li>
-            <a class="menu">
-                Quyền truy cập
+                Đổi mật khẩu
             </a>
         </li>
     </ul>

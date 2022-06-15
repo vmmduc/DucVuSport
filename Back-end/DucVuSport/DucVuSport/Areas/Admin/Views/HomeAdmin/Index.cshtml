@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<DucVuSport.Models.Entities.Order>
 @{
-    var topProduct = ViewBag.top10 as IEnumerable<DucVuSport.Models.Entities.Product>;
     ViewBag.label = "Trang chủ";
+    var topProduct = ViewBag.top10 as IEnumerable<DucVuSport.Models.Entities.Product>;
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 <div class="main-content">
     <div class="row">
@@ -44,7 +45,7 @@
                     </div>
                     <div class="counter-info">
                         <div class="counter-count">
-                            $9,780
+                            @String.Format(format, "{0:c0}", ViewBag.turnover)
                         </div>
                         <i class='bx bx-line-chart'></i>
                     </div>
@@ -120,9 +121,10 @@
                     <div class="table">
                         <div class="row">
                             <div class="col-md-1 col-1">ID</div>
-                            <div class="col-md-3 col-3">Họ và tên</div>
-                            <div class="col-md-3 col-3">Phương thức thanh toán</div>
+                            <div class="col-md-2 col-2">Họ và tên</div>
+                            <div class="col-md-2 col-2">Phương thức</div>
                             <div class="col-md-3 col-3">Ngày đặt</div>
+                            <div class="col-md-2 col-2">Tổng cộng</div>
                             <div class="col-md-2 col-2">Trạng thái đơn hàng</div>
                         </div>
                         <div class="order-table">
@@ -135,12 +137,12 @@
                                             @Html.DisplayFor(modelItem => item.OrderID)
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-3">
+                                    <div class="col-md-2 col-2">
                                         <div class="order-owner">
                                             @Html.DisplayFor(modelItem => item.User.FullName)
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-3">
+                                    <div class="col-md-2 col-2">
                                         <div class="order-owner">
                                             @Html.DisplayFor(modelItem => item.Payment.PaymentMethod)
                                         </div>
@@ -152,12 +154,16 @@
                                     </div>
                                     <div class="col-md-2 col-2">
                                         <div class="order-owner">
+                                            @String.Format(format, "{0:c0}", @Html.DisplayFor(modelItem => item.Total))
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-2">
+                                        <div class="order-owner">
                                             @Html.DisplayFor(modelItem => item.OrderStatu.Name)
                                         </div>
                                     </div>
                                 </a>
                             }
-
                         </div>
                     </div>
                 </div>

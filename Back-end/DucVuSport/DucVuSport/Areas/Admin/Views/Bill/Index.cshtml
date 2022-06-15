@@ -14,21 +14,11 @@
                 <th>
                     STT
                 </th>
-                <th>
-                    Mã hóa đơn
-                </th>
-                <th>
-                    Họ tên
-                </th>
-                <th>
-                    Ngày đặt 
-                </th>
-                <th>
-                    Tổng cộng
-                </th>
-                <th>
-                    Trạng thái
-                </th>
+                <th>Mã hóa đơn</th>
+                <th>Họ tên</th>
+                <th>Ngày đặt</th>
+                <th>Tổng cộng</th>
+                <th>Trạng thái</th>
                 <th></th>
             </tr>
             @foreach (var item in Model)
@@ -37,24 +27,12 @@
                     <td>
                         @(stt += 1)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.FullName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PaymentDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Total)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Xem", "Details", new { id = item.OrderID })
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.User.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PaymentDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderStatu.Name)</td>
+                    <td>@Html.ActionLink("Xem", "Details", new { id = item.OrderID })</td>
                 </tr>
             }
         </table>

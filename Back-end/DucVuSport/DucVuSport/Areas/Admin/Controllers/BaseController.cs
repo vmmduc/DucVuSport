@@ -11,7 +11,7 @@ namespace DucVuSport.Areas.Admin.Controllers
             if (Session[Common.Constans.Session.ADMIN_SESSION] == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new
-                    RouteValueDictionary(new { controller = "UserAdmin", action = "Login", Area = "Admin" }));
+                    RouteValueDictionary(new { controller = "Authentication", action = "Login", Area = "Admin" }));
             }
             base.OnActionExecuting(filterContext);
         }

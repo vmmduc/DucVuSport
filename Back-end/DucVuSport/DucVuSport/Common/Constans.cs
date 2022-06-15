@@ -14,7 +14,7 @@
             public const string Cancel = "Hủy";
             public const string Approve = "Đã xác nhận";
             public const string Delivering = "Đang giao";
-            public const string Success = "Giao hàng thành công";
+            public const string Success = "Giao thành công";
         }
     }
 }
