@@ -169,10 +169,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BillController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserAdminController.cs" />
-    <Compile Include="Areas\Admin\Models\OrderObj.cs" />
     <Compile Include="Common\Constans.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -190,13 +191,12 @@
     <Compile Include="Models\Entities\DataContext.cs" />
     <Compile Include="Models\Entities\Order.cs" />
     <Compile Include="Models\Entities\OrderDetail.cs" />
-    <Compile Include="Models\Entities\OrderStatus.cs" />
+    <Compile Include="Models\Entities\OrderStatu.cs" />
     <Compile Include="Models\Entities\Payment.cs" />
     <Compile Include="Models\Entities\Product.cs" />
     <Compile Include="Models\Entities\Role.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\CustomerRoleProvider.cs" />
@@ -229,6 +229,8 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\templatemo-xtra-blog.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Images\Banners\banner-img.png" />
+    <Content Include="Images\Banners\sport.png" />
     <Content Include="Images\img\about-01.jpg" />
     <Content Include="Images\img\about-02.jpg" />
     <Content Include="Images\img\about-03.jpg" />
@@ -267,6 +269,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Banners\success.png" />
     <Content Include="Note.txt" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -285,8 +288,10 @@
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <Content Include="Areas\Admin\Views\ProductAdmin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\OrderDetail.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductAdmin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Bill\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Bill\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -311,7 +316,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
@@ -329,11 +333,11 @@
     <Content Include="Views\Shared\__Form-vote.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Detail.cshtml" />
-    <Content Include="Views\Cart\Payment.cshtml" />
-    <Content Include="Views\Cart\Order.cshtml" />
+    <Content Include="Views\Cart\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -17,7 +17,6 @@ namespace DucVuSport.Models
         [Required(ErrorMessage = "Nhập mật khẩu")]
         public string password { get; set; }
 
-
         public bool remember { get; set; }
     }
 }

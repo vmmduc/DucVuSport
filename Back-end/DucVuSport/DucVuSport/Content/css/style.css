@@ -82,7 +82,8 @@ ul li {
     border-radius: 2rem;
 }
 
-    .btn button:hover {
+    .btn button:hover,
+    .btn a:hover {
         opacity: 0.8;
     }
 
@@ -460,18 +461,20 @@ ul li {
     box-sizing: border-box;
     font-size: var(--size);
 }
-.form-group{
+
+.form-group {
     padding-top: 2rem;
 }
-    .form-group .text-danger{
+
+    .form-group .text-danger {
         padding-left: 1rem;
     }
 
-    .form__message {
-        color: var(--main-color);
-        font-size: 2rem;
-        font-weight: bold;
-    }
+.form__message {
+    color: var(--main-color);
+    font-size: 2rem;
+    font-weight: bold;
+}
 
 .form__input {
     width: 100%;
@@ -609,6 +612,7 @@ ul li {
     position: absolute;
     left: 1rem;
 }
+
 .product__img {
     width: 95%;
     height: 175px;

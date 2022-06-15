@@ -15,6 +15,7 @@
     --shadow: 0 1px 4px -1px rgb(0 0 0 / 15%);
     --bg-color: #fcf8f8;
     --light-grey: rgb(240, 240, 240);
+    --box-shadow: 0 .5rem 1.5rem rgba(95, 95, 95, 0.1);
 }
 
 * {
@@ -331,20 +332,6 @@ table {
     width: 100%;
 }
 
-.tb-header tr {
-    text-align: center;
-}
-
-.tb-body tr {
-    box-sizing: border-box;
-    text-align: center;
-}
-
-    .tb-body tr .r-name {
-        padding-left: 1rem;
-        text-align: left;
-    }
-
 .order-owner {
     align-items: center;
     text-transform: capitalize;
@@ -360,6 +347,7 @@ table {
 table thead tr {
     text-align: left;
 }
+
 table th,
 table td {
     padding: 20px 0;
@@ -483,9 +471,17 @@ table td {
     margin-top: 2rem;
 }
 
-.order-table tr:hover {
-    background-color: var(--body-bg);
+.order-detail {
+    text-decoration: none;
+    color: black;
 }
+
+    .order-detail:hover {
+        background-color: var(--body-bg);
+        color: var(--main-color);
+        cursor: pointer;
+    }
+
 @media only screen and (max-width: 1280px) {
     .sidebar {
         transition: transform 0.3s ease-in-out;
@@ -550,3 +546,78 @@ table td {
     ::-webkit-scrollbar-thumb:hover {
         background: #b30000;
     }
+
+
+.order-content {
+    padding-top: 1rem;
+    margin: auto;
+}
+
+.order-infor {
+    padding-bottom: 2rem;
+}
+
+    .order-infor div {
+        font-size: 1rem;
+    }
+
+.order-content h5 {
+    color: var(--main-color);
+    border-bottom: 1px solid var(--main-color);
+}
+
+.order-content h4 {
+    color: var(--main-color);
+    padding-bottom: 2rem;
+}
+
+.order-product-img {
+    width: 100px;
+}
+
+.main-color {
+    color: var(--main-color);
+}
+
+.header__search {
+    position: relative;
+    top: 110%;
+    right: 0;
+    width: 30rem;
+    height: 3rem;
+    background: #fff;
+    border-radius: .5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+}
+
+    .header__search input {
+        height: 100%;
+        width: 100%;
+        background: none;
+        text-transform: none;
+        font-size: 1.1rem;
+        color: var(--black);
+        padding: 0 1.5rem;
+        border: none;
+    }
+
+    .header__search label {
+        font-size: 1.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        color: var(--black);
+        cursor: pointer;
+    }
+
+.bill-index-content {
+    width: 98%;
+    padding-top: 2rem;
+    margin: auto;
+}
+
+.bill-list{
+    margin-top: 2rem;
+}

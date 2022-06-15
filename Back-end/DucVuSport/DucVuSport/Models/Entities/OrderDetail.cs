@@ -18,7 +18,7 @@ namespace DucVuSport.Models.Entities
 
         public int? Quantity { get; set; }
 
-        public float? Discount { get; set; }
+        public double? Discount { get; set; }
 
         public long? Total { get; set; }
 

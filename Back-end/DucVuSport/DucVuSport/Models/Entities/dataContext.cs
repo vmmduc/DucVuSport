@@ -8,7 +8,7 @@ namespace DucVuSport.Models.Entities
     public partial class DataContext : DbContext
     {
         public DataContext()
-            : base("name=dataContext")
+            : base("name=DataContext")
         {
         }
 
@@ -17,7 +17,7 @@ namespace DucVuSport.Models.Entities
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<OrderStatus> OrderStatus { get; set; }
+        public virtual DbSet<OrderStatu> OrderStatus { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -25,19 +25,15 @@ namespace DucVuSport.Models.Entities
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<OrderStatus>()
+            modelBuilder.Entity<OrderStatu>()
                 .HasMany(e => e.Orders)
-                .WithOptional(e => e.OrderStatus)
+                .WithOptional(e => e.OrderStatu)
                 .HasForeignKey(e => e.Status);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.OrderDetails)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.AddressDetail)
-                .IsFixedLength();
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Blogs)

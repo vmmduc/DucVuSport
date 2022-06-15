@@ -1,7 +1,7 @@
 ﻿@{
-    var cart = Session[DucVuSport.Common.Constans.CART_SESSION] as List<DucVuSport.Models.CartModel>;
+    var cart = Session[DucVuSport.Common.Constans.Session.CART_SESSION] as List<DucVuSport.Models.CartModel>;
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-    var user = Session["user"] as DucVuSport.Models.Entities.User;
+    var user = Session[DucVuSport.Common.Constans.Session.LOGIN_SESSION] as DucVuSport.Models.Entities.User;
     var total = 0;
 }
 <div class="_top">

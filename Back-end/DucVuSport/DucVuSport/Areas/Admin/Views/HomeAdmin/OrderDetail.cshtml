@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DucVuSport.Models.Entities.OrderDetail>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+    var customer = ViewBag.customer as DucVuSport.Models.Entities.User;
+    var order = ViewBag.order as DucVuSport.Models.Entities.Order;
+    ViewBag.label = "Chi tiết đơn đặt hàng";
+
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+<div class="order-content col-md-11 col-12">
+    <div class="order-infor">
+        <h5>Thông tin đơn hàng</h5>
+        <div class="customer-infor">
+            <div>@customer.FullName</div>
+            <div>@customer.Email</div>
+            <div>@customer.PhoneNumber</div>
+            <div>@customer.District, @customer.Province, @customer.Ward, @customer.AddressDetail</div>
+        </div>
+    </div>
+
+    <div class="product-list-order">
+        <h5>Danh sách sản phẩm</h5>
+        <table class="table table-hover">
+            <tr>
+                <th>Ảnh</th>
+                <th>
+                    Tên sản phẩm
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th>
+                    Giảm giá
+                </th>
+                <th>
+                    Giá bán
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td>
+                        @if (item.Product.Image == null)
+                        {
+                            <img src="~/Images/Banners/no-image.jpg" class="order-product-img" />}
+                        else
+                        {
+                            <img src="~/Images/Products/@item.Product.Image" class="order-product-img" />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Convert.ToInt32(item.Discount)%
+                    </td>
+                    <td class="main-color">
+                        @String.Format(format, "{0:c0}", item.Total)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <h4>Tổng cộng: @String.Format(format, "{0:c0}", order.Total)</h4>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div>
+            <a href="/Admin/HomeAdmin/Confirm/@order.OrderID" class="btn btn-primary">Xác nhận</a>
+        </div>
+    }
+</div>

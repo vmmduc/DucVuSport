@@ -19,15 +19,14 @@ namespace DucVuSport.Models.Entities
 
         public int? CustomerID { get; set; }
 
-        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? OrderDate { get; set; }
-
 
         public bool? Paid { get; set; }
 
         public DateTime? PaymentDate { get; set; }
 
         public int? PaymentID { get; set; }
+        public long? Total { get; set ;} 
 
         [StringLength(255)]
         public string Note { get; set; }
@@ -37,7 +36,7 @@ namespace DucVuSport.Models.Entities
 
         public int? Status { get; set; }
 
-        public virtual OrderStatus OrderStatus { get; set; }
+        public virtual OrderStatu OrderStatu { get; set; }
 
         public virtual Payment Payment { get; set; }
 

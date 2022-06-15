@@ -2,6 +2,7 @@
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+    ViewBag.Label = "Thêm sản phẩm";
 }
 
 @using (Html.BeginForm("Create", "ProductAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -16,7 +17,7 @@
             <div class="form-floating">
                 @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
                 @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
-                <label for="floatingTextarea">Tên sản phẩm</label>
+                <label for="floatingTextarea">Tên sản phẩm (<span style="color:red;">*</span>)</label>
             </div>
         </div>
 
@@ -26,7 +27,7 @@
             <div class="form-floating">
                 @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
                 @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
-                <label for="floatingTextarea">Mô tả ngắn</label>
+                <label for="floatingTextarea">Mô tả ngắn (<span style="color:red;">*</span>)</label>
             </div>
         </div>
 
@@ -38,7 +39,7 @@
 
         @*Image*@
         <div class="group">
-            <input type="file" name="imageFile" class="form-control" />
+            <input type="file" name="imageFile" class="form-control"/>
         </div>
 
         <div class="group">
@@ -56,7 +57,7 @@
                 <div class="form-floating">
                     @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
                     @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                    <label for="floatingTextarea">Giá</label>
+                    <label for="floatingTextarea">Giá (<span style="color:red;">*</span>)</label>
                 </div>
             </div>
 
@@ -65,7 +66,7 @@
                 <div class="form-floating">
                     @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
                     @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
-                    <label for="floatingTextarea">Giảm giá</label>
+                    <label for="floatingTextarea">Giảm giá (<span style="color:red;">*</span>)</label>
                 </div>
             </div>
 
@@ -74,7 +75,7 @@
                 <div class="form-floating">
                     @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @id = "floatingTextarea" } })
                     @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-                    <label for="floatingTextarea">Số lượng</label>
+                    <label for="floatingTextarea">Số lượng (<span style="color:red;">*</span>)</label>
                 </div>
             </div>
         </div>
@@ -82,7 +83,7 @@
         @*Submit btn*@
         <div class="button-group">
             <div>
-                @Html.ActionLink("Trở về", "Index", new { @class = "btn btn-primary" })
+                <a href="/Admin/ProductAdmin/Index" class="btn btn-danger"><i class="fas fa-arrow-left"></i> Quay lại</a>
             </div>
 
             <div class="col-md-10">

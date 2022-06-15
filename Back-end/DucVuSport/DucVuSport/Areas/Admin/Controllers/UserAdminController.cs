@@ -1,10 +1,6 @@
 ﻿using DucVuSport.Models;
 using DucVuSport.Models.Entities;
-using DucVuSport.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DucVuSport.Areas.Admin.Controllers
@@ -12,25 +8,22 @@ namespace DucVuSport.Areas.Admin.Controllers
     public class UserAdminController : Controller
     {
         private readonly DataContext _data = new DataContext();
-        public const string SESSION_ADMIN = "session_admin";
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-         public ActionResult Login(LoginModel model)
+        public ActionResult Login(LoginModel model)
         {
-            if (ModelState.IsValid)
+            var passwordHash = Utilities.Encrypt.GetMD5(model.password);
+            var user = _data.Users.FirstOrDefault(x => x.Email == model.email && x.PasswordHash == passwordHash);
+            if (user != null)
             {
-                string passwordHash = Encrypt.GetMD5(model.password);
-                User account = _data.Users.FirstOrDefault(x=>x.Email == model.email && x.PasswordHash == model.password);
-                if (account != null)
-                {
-                    Session[SESSION_ADMIN] = account;
-                }
+                Session[Common.Constans.Session.ADMIN_SESSION] = user;
+                return RedirectToAction("Index");
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         public ActionResult CreateAccount()

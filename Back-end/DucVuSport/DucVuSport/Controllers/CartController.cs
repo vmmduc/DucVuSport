@@ -15,7 +15,7 @@ namespace DucVuSport.Controllers
         [Route("cart")]
         public ActionResult Index()
         {
-            var user = Session[Common.Constans.LOGIN_SESSION];
+            var user = Session[Common.Constans.Session.LOGIN_SESSION];
             return View(user);
         }
 
@@ -25,7 +25,7 @@ namespace DucVuSport.Controllers
             {
                 Product product = _data.Products.Where(x => x.ProductID == id).FirstOrDefault();
                 {
-                    if (Session[Common.Constans.CART_SESSION] == null)
+                    if (Session[Common.Constans.Session.CART_SESSION] == null)
                     {
                         List<CartModel> cartList = new List<CartModel>();
                         cartList.Add(new CartModel
@@ -33,12 +33,12 @@ namespace DucVuSport.Controllers
                             product = product,
                             quantity = quantity
                         });
-                        Session[Common.Constans.CART_SESSION] = cartList;
+                        Session[Common.Constans.Session.CART_SESSION] = cartList;
                         Session["count"] = cartList.Count;
                     }
                     else
                     {
-                        List<CartModel> cartList = Session[Common.Constans.CART_SESSION] as List<CartModel>;
+                        List<CartModel> cartList = Session[Common.Constans.Session.CART_SESSION] as List<CartModel>;
                         int index = IsExist(id);
                         if (index != -1) // Nếu đã có trong giỏ hàng thì tăng số lượng lên 1
                         {
@@ -53,7 +53,7 @@ namespace DucVuSport.Controllers
                                 quantity = quantity
                             });
                         }
-                        Session[Common.Constans.CART_SESSION] = cartList;
+                        Session[Common.Constans.Session.CART_SESSION] = cartList;
                         Session["count"] = cartList.Count;
                     }
                 }
@@ -68,7 +68,7 @@ namespace DucVuSport.Controllers
 
         public ActionResult Remove(int id)
         {
-            List<CartModel> cartList = Session[Common.Constans.CART_SESSION] as List<CartModel>;
+            List<CartModel> cartList = Session[Common.Constans.Session.CART_SESSION] as List<CartModel>;
             cartList.RemoveAll(x => x.product.ProductID == id);
             Session["cart"] = cartList;
             Session["count"] = cartList.Count;
@@ -84,7 +84,7 @@ namespace DucVuSport.Controllers
         }
         private int IsExist(int id)
         {
-            List<CartModel> cart = Session[Common.Constans.CART_SESSION] as List<CartModel>;
+            List<CartModel> cart = Session[Common.Constans.Session.CART_SESSION] as List<CartModel>;
             for (int i = 0; i < cart.Count; i++)
                 if (cart[i].product.ProductID == id)
                     return i;
@@ -95,7 +95,7 @@ namespace DucVuSport.Controllers
         [HttpPost]
         public ActionResult Order(User model)
         {
-            var user = Session[Common.Constans.LOGIN_SESSION] as User;
+            var user = Session[Common.Constans.Session.LOGIN_SESSION] as User;
             if (user != null)
             {
                 var customer = _data.Users.Find(user.UserID);
@@ -107,11 +107,12 @@ namespace DucVuSport.Controllers
                 _data.SaveChanges();
                 CreateOrder(model);
             }
-            return View();
+            return RedirectToAction("Success");
         }
         public void CreateOrder(User user)
         {
-            var cart = Session[Common.Constans.CART_SESSION] as List<CartModel>;
+            long? orderTotal = 0;
+            var cart = Session[Common.Constans.Session.CART_SESSION] as List<CartModel>;
             // Table order
             var order = new Order();
             order.CustomerID = user.UserID;
@@ -135,10 +136,16 @@ namespace DucVuSport.Controllers
                     orderDetail.Quantity = item.quantity;
                     orderDetail.Total = ((long?)(product.Price - product.Price * product.Discount) * orderDetail.Quantity);
                     _data.OrderDetails.Add(orderDetail);
+                    orderTotal += orderDetail.Total;
                 }
             }
+            order.Total = orderTotal;
             _data.SaveChanges();
-            Session.Remove(Common.Constans.CART_SESSION);
+            Session.Remove(Common.Constans.Session.CART_SESSION);
+        }
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }

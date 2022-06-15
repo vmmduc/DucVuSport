@@ -1,0 +1,98 @@
+﻿@model DucVuSport.Models.Entities.Order
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Order</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.OrderStatu.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.OrderStatu.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Payment.PaymentMethod)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Payment.PaymentMethod)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.User.FullName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.User.FullName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.OrderDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Paid)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Paid)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PaymentDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PaymentDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Total)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Total)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Note)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Note)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ShipID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ShipID)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

@@ -27,7 +27,7 @@ namespace DucVuSport.Controllers
                 var result = _data.Users.FirstOrDefault(x => x.Email == login.email && x.PasswordHash == passwordHash);
                 if (result != null)
                 {
-                    Session[Common.Constans.LOGIN_SESSION] = result;
+                    Session[Common.Constans.Session.LOGIN_SESSION] = result;
                     if (login.remember)
                     {
                         Response.Cookies["email"].Value = result.Email;
@@ -66,7 +66,7 @@ namespace DucVuSport.Controllers
                     _data.SaveChanges();
 
                     var _user = _data.Users.Where(x => x.Email == model.email && x.PasswordHash == passwordHash).FirstOrDefault();
-                    Session[Common.Constans.LOGIN_SESSION] = _user;
+                    Session[Common.Constans.Session.LOGIN_SESSION] = _user;
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
@@ -82,16 +82,16 @@ namespace DucVuSport.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Session[Common.Constans.LOGIN_SESSION] != null)
+                if (Session[Common.Constans.Session.LOGIN_SESSION] != null)
                 {
                     var oldPass = Encrypt.GetMD5(model.oldPassword);
-                    var user = _data.Users.Find(((User)Session[Common.Constans.LOGIN_SESSION]).UserID);
+                    var user = _data.Users.Find(((User)Session[Common.Constans.Session.LOGIN_SESSION]).UserID);
                     if (user.PasswordHash == oldPass)
                     {
                         var newPass = Encrypt.GetMD5(model.newPassword);
                         user.PasswordHash = newPass;
                         _data.SaveChanges();
-                        Session[Common.Constans.LOGIN_SESSION] = user;
+                        Session[Common.Constans.Session.LOGIN_SESSION] = user;
                         return Json(true, JsonRequestBehavior.AllowGet);
                     }
                 }
@@ -110,7 +110,7 @@ namespace DucVuSport.Controllers
             var _user = _data.Users.Find(((User)Session["user"]).UserID);
             _user.LastActivity = now;
             _data.SaveChanges();
-            Session.Remove(Common.Constans.LOGIN_SESSION);
+            Session.Remove(Common.Constans.Session.LOGIN_SESSION);
             return Redirect("/Home/Index");
         }
 
@@ -137,7 +137,7 @@ namespace DucVuSport.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(User customer)
         {
-            var userSession = Session[Common.Constans.LOGIN_SESSION] as User;
+            var userSession = Session[Common.Constans.Session.LOGIN_SESSION] as User;
             if (userSession == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
