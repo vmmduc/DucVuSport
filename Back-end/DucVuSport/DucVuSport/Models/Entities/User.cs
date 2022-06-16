@@ -47,6 +47,7 @@ namespace DucVuSport.Models.Entities
 
         [StringLength(50)]
         public string AddressDetail { get; set; }
+        public bool? IsDeleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Blog> Blogs { get; set; }

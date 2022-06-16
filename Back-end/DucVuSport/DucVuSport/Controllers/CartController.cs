@@ -137,6 +137,7 @@ namespace DucVuSport.Controllers
                     orderDetail.Total = ((long?)(product.Price - product.Price * product.Discount) * orderDetail.Quantity);
                     _data.OrderDetails.Add(orderDetail);
                     orderTotal += orderDetail.Total;
+                    product.Quantity -= item.quantity;
                 }
             }
             order.Total = orderTotal;

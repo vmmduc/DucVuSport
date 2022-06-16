@@ -24,8 +24,17 @@ namespace DucVuSport.Areas.Admin.Controllers
                 var user = _data.Users.FirstOrDefault(x => x.Email == model.email && x.PasswordHash == passwordHash);
                 if (user != null)
                 {
-                    Session[Common.Constans.Session.ADMIN_SESSION] = user;
-                    return RedirectToAction("Index", "HomeAdmin");
+                    var role = _data.Roles.FirstOrDefault(x => x.RoleName != null && x.RoleName.Trim().ToLower() == Common.Constans.Role.Customer);
+                    if(user.RoleID != role.RoleID)
+                    {
+                        Session[Common.Constans.Session.ADMIN_SESSION] = user;
+                        return RedirectToAction("Index", "HomeAdmin");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Bạn không có quyền đăng nhập vào trang này");
+                        return View("Login");
+                    }
                 }
                 else
                 {

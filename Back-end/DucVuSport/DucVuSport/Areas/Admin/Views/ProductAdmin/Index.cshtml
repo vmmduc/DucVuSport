@@ -49,7 +49,7 @@
 
                 @*Product name*@
                 <td class="r-name">
-                    @item.ProductName
+                    @Html.DisplayFor(modelItem => item.ProductName)
                 </td>
 
                 @*Price*@
@@ -61,8 +61,6 @@
                 <td>
                     @discount%
                 </td>
-
-
                 <td>
                     @item.Quantity
                 </td>

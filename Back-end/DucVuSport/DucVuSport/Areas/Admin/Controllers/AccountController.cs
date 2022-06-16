@@ -6,27 +6,17 @@ using System.Net;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
+/*
+ * Thay đổi quyền truy cập
+ * Khóa / mở khóa tài khoản
+ */
     public class AccountController : BaseController
     {
         private readonly DataContext _data = new DataContext();
         public ActionResult Index()
         {
-            var users = _data.Users.Include(x => x.Role);
+            var users = _data.Users.Where(x=>x.PasswordHash != null && x.IsDeleted != true).Include(x => x.Role);
             return View(users.ToList());
-        }
-
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = _data.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
         }
 
         #region Create account
@@ -47,38 +37,6 @@ namespace DucVuSport.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleID = new SelectList(_data.Roles, "RoleID", "RoleName", user.RoleID);
-            return View(user);
-        }
-        #endregion
-
-        #region Update account
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = _data.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.RoleID = new SelectList(_data.Roles, "RoleID", "RoleName", user.RoleID);
-            return View(user);
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(User user)
-        {
-            if (ModelState.IsValid)
-            {
-                _data.Entry(user).State = EntityState.Modified;
-                _data.SaveChanges();
-                return RedirectToAction("Index");
-            }
             ViewBag.RoleID = new SelectList(_data.Roles, "RoleID", "RoleName", user.RoleID);
             return View(user);
         }
@@ -124,5 +82,21 @@ namespace DucVuSport.Areas.Admin.Controllers
             return Json(new { status = false, message = "" }, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = _data.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            user.IsDeleted = true;
+            _data.SaveChanges();
+            return RedirectToAction("Index", "Account");
+        }
     }
 }

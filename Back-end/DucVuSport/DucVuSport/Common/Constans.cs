@@ -16,5 +16,11 @@
             public const string Delivering = "Đang giao";
             public const string Success = "Giao thành công";
         }
+        public static class Role
+        {
+            public const string Admin = "Admin";
+            public const string Employee = "Employee";
+            public const string Customer = "CUSTOMER";
+        }
     }
 }

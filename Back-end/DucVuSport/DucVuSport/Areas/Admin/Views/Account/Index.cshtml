@@ -31,11 +31,11 @@
         {
             <tr>
                 <td>@(stt+=1)</td>
-                <td>@item.FullName</td>
-                <td>@item.PhoneNumber</td>
-                <td>@item.Email</td>
-                <td>@item.LastActivity</td>
-                <td>@item.Role.RoleName</td>
+                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastActivity)</td>
+                <td>@Html.DisplayFor(modelItem => item.Role.RoleName)</td>
                 <td>
                     @if (item.Unlock == true)
                     {

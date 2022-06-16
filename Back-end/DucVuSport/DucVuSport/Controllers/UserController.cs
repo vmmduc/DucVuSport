@@ -52,11 +52,14 @@ namespace DucVuSport.Controllers
                     return Json(false, JsonRequestBehavior.AllowGet);
                 else
                 {
+                    var role = _data.Roles.FirstOrDefault(x => x.RoleName != null && x.RoleName.Trim().ToLower() == Common.Constans.Role.Customer.Trim().ToLower());
                     User user = new User();
+                    user.FullName = model.fullName;
+                    user.PhoneNumber = model.phoneNumber;
                     user.Email = model.email;
                     var passwordHash = Encrypt.GetMD5(model.password);
                     user.PasswordHash = passwordHash;
-                    user.RoleID = 3;
+                    user.RoleID = role.RoleID;
                     _data.Users.Add(user);
                     _data.SaveChanges();
 

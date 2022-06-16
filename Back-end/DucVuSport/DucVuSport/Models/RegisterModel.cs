@@ -8,6 +8,12 @@ namespace DucVuSport.Models
 {
     public class RegisterModel
     {
+        [Required(ErrorMessage = "Nhập họ và tên")]
+        public string fullName { get; set; }
+
+        [Required(ErrorMessage = "Nhập số điện thoại")]
+        public string phoneNumber { get; set; }
+
         [Required(ErrorMessage = "Nhập email")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Chưa đúng định dạng email")]
         public string email { get; set; }
