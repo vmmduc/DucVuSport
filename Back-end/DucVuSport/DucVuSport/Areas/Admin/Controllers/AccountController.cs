@@ -6,17 +6,33 @@ using System.Net;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
-/*
- * Thay đổi quyền truy cập
- * Khóa / mở khóa tài khoản
- */
+    /*
+     * Thay đổi quyền truy cập
+     * Khóa / mở khóa tài khoản
+     * Cấp lại mật khẩu
+     */
     public class AccountController : BaseController
     {
         private readonly DataContext _data = new DataContext();
         public ActionResult Index()
         {
-            var users = _data.Users.Where(x=>x.PasswordHash != null && x.IsDeleted != true).Include(x => x.Role);
+            var users = _data.Users.Where(x => x.PasswordHash != null && x.IsDeleted != true);
+            ViewBag.RoleID = new SelectList(_data.Roles, "RoleID", "RoleName");
             return View(users.ToList());
+        }
+
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = _data.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
         }
 
         #region Create account
@@ -32,6 +48,8 @@ namespace DucVuSport.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var passwordHash = Utilities.Encrypt.GetMD5(user.Email);
+                user.PasswordHash = passwordHash;
                 _data.Users.Add(user);
                 _data.SaveChanges();
                 return RedirectToAction("Index");
@@ -70,7 +88,6 @@ namespace DucVuSport.Areas.Admin.Controllers
                 {
                     user.FullName = account.FullName;
                     user.PhoneNumber = account.PhoneNumber;
-                    user.Email = account.Email;
                     user.Province = account.Province;
                     user.District = account.District;
                     user.Ward = account.Ward;
@@ -97,6 +114,51 @@ namespace DucVuSport.Areas.Admin.Controllers
             user.IsDeleted = true;
             _data.SaveChanges();
             return RedirectToAction("Index", "Account");
+        }
+
+        public ActionResult LockedStaus(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = _data.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            user.Unlock = (user.Unlock == true ? false : true);
+            _data.SaveChanges();
+            return RedirectToAction("Index", "Account");
+        }
+        public ActionResult ResetPassword(int? id) {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = _data.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var passwordHash = Utilities.Encrypt.GetMD5(user.Email.Trim().ToLower());
+            user.PasswordHash = passwordHash;
+            _data.SaveChanges();
+            return RedirectToAction("Index", "Account");
+        }
+        public JsonResult ChangeRole(int? id, int? roleId)
+        {
+            var user = _data.Users.Find(id);
+            if (user == null)
+            {
+                return Json(new { status = false, message = "Không tìm thấy tài khoản" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                user.RoleID = roleId;
+                _data.SaveChanges();
+                return Json(new { status = true, message = "Thành công" }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

@@ -663,3 +663,7 @@ table td {
 .payment-pending .dot {
     background-color: #ffc542;
 }
+
+.bill-list{
+    padding-top: 1rem;
+}

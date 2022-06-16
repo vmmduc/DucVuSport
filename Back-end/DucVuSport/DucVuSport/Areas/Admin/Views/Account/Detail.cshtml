@@ -1,0 +1,75 @@
+﻿@model DucVuSport.Models.Entities.User
+
+@{
+    ViewBag.label = "Thông tin tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<div class="order-content col-md-11 col-12">
+    <table class="table">
+        <tr>
+            <th>Họ và tên</th>
+            <td>@Html.DisplayFor(model => model.FullName)</td>
+        </tr>
+        <tr>
+            <th>Số điện thoại</th>
+            <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>@Html.DisplayFor(model => model.Email)</td>
+        </tr>
+        <tr>
+            <th>Mật khẩu</th>
+            <td>@Html.DisplayFor(model => model.PasswordHash)</td>
+        </tr>
+        <tr>
+            <th>Địa chỉ</th>
+            <td>
+                @Html.DisplayFor(model => model.AddressDetail), @Html.DisplayFor(model => model.Ward),
+                @Html.DisplayFor(model => model.District), @Html.DisplayFor(model => model.Province)
+            </td>
+        </tr>
+        <tr>
+            <th>Trạng thái</th>
+            @if (Model.Unlock == true)
+            {
+                <td>
+                    <div class="payment-status payment-paid">
+                        <div class="dot"></div>
+                        <span>Đang hoạt động</span>
+                    </div>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <div class="payment-status payment-pending">
+                        <div class="dot"></div>
+                        <span>Khóa</span>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <th>Quyền</th>
+            <td>@Html.DisplayFor(model => model.Role.RoleName)</td>
+        </tr>
+        <tr>
+            <th>Hoạt động gần nhất</th>
+            <td>@Html.DisplayFor(model => model.LastActivity)</td>
+        </tr>
+    </table>
+    <p>
+        <a href="/Admin/Account/Index" class="text-decoration-none btn btn-primary">Quay lại</a>
+        <a href="/Admin/Account/ResetPassword/@Model.UserID" class="text-decoration-none btn btn-info">Đặt lại mật khẩu</a>
+        @if (Model.Unlock)
+        {
+            <a href="/Admin/Account/LockedStaus/@Model.UserID" class="text-decoration-none btn btn-warning">Khóa tài khoản</a>}
+        else
+        {
+            <a href="/Admin/Account/LockedStaus/@Model.UserID" class="text-decoration-none btn btn-warning">Mở khóa</a>
+        }
+        <a href="/Admin/Account/Delete/@Model.UserID" class="text-decoration-none btn btn-danger">Xóa tài khoản</a>
+    </p>
+</div>

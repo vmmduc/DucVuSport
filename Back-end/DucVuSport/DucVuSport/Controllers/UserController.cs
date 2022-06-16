@@ -139,7 +139,6 @@ namespace DucVuSport.Controllers
                 {
                     user.FullName = customer.FullName;
                     user.PhoneNumber = customer.PhoneNumber;
-                    user.Email = customer.Email;
                     user.Province = customer.Province;
                     user.District = customer.District;
                     user.Ward = customer.Ward;

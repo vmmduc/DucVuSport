@@ -19,7 +19,7 @@
             </div>
             <div class="col">
                 <label>Email:</label>
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
             </div>
         </div>
 
@@ -60,5 +60,4 @@
             $('.message').addClass('alert').addClass('alert-danger')
             $('.message').text(response.message);
         }
-    }
 </script>

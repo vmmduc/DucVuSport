@@ -25,15 +25,25 @@ namespace DucVuSport.Areas.Admin.Controllers
                 if (user != null)
                 {
                     var role = _data.Roles.FirstOrDefault(x => x.RoleName != null && x.RoleName.Trim().ToLower() == Common.Constans.Role.Customer);
-                    if(user.RoleID != role.RoleID)
+                    if (user.IsDeleted == true)
                     {
-                        Session[Common.Constans.Session.ADMIN_SESSION] = user;
-                        return RedirectToAction("Index", "HomeAdmin");
+                        ModelState.AddModelError("", "Tài khoản không tồn tại");
+                        return View("Login");
                     }
-                    else
+                    else if (user.Unlock == false)
+                    {
+                        ModelState.AddModelError("", "Tài khoản đã bị khóa, vui lòng liên hệ với quản trị viên");
+                        return View("Login");
+                    }
+                    else if (user.RoleID == role.RoleID)
                     {
                         ModelState.AddModelError("", "Bạn không có quyền đăng nhập vào trang này");
                         return View("Login");
+                    }
+                    else
+                    {
+                        Session[Common.Constans.Session.ADMIN_SESSION] = user;
+                        return RedirectToAction("Index", "HomeAdmin");
                     }
                 }
                 else
@@ -42,10 +52,7 @@ namespace DucVuSport.Areas.Admin.Controllers
                     return View("Login");
                 }
             }
-            else
-            {
-                return View("Login");
-            }
+            return View("Login");
         }
 
         public ActionResult Logout()
