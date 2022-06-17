@@ -1,8 +1,10 @@
 ﻿using DucVuSport.Models.Entities;
+using DucVuSport.Models;
 using System.Linq;
 using System.Data.Entity;
 using System.Web.Mvc;
 using System.Net;
+using DucVuSport.Utilities;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
@@ -32,6 +34,7 @@ namespace DucVuSport.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.RoleID = new SelectList(_data.Roles, "RoleID", "RoleName", user.RoleID);
             return View(user);
         }
 
@@ -100,64 +103,117 @@ namespace DucVuSport.Areas.Admin.Controllers
         }
         #endregion
 
-        public ActionResult Delete(int? id)
+        public ActionResult ChangePassword()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var user = _data.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            user.IsDeleted = true;
-            _data.SaveChanges();
-            return RedirectToAction("Index", "Account");
+            return View();
         }
 
-        public ActionResult LockedStaus(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult ChangePassword(ChangePasswordModel model)
         {
-            if (id == null)
+            var session = Session[Common.Constans.Session.ADMIN_SESSION] as User;
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (session != null)
+                {
+                    var oldPass = Encrypt.GetMD5(model.oldPassword.Trim().ToLower());
+                    var user = _data.Users.Find(session.UserID);
+                    if (user.PasswordHash != oldPass)
+                    {
+                        return Json(new { status = true, message = "Mật khẩu cũ không đúng" }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        var newPass = Encrypt.GetMD5(model.newPassword.Trim().ToLower());
+                        user.PasswordHash = newPass;
+                        _data.SaveChanges();
+                        Session[Common.Constans.Session.ADMIN_SESSION] = user;
+                        return Json(new { status = true, message = "Thay đổi thành công" }, JsonRequestBehavior.AllowGet);
+                    }
+                }
             }
-            var user = _data.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            user.Unlock = (user.Unlock == true ? false : true);
-            _data.SaveChanges();
-            return RedirectToAction("Index", "Account");
+            return Json(new { status = false, message = "Thay đổi thất bại" }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult ResetPassword(int? id) {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var user = _data.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            var passwordHash = Utilities.Encrypt.GetMD5(user.Email.Trim().ToLower());
-            user.PasswordHash = passwordHash;
-            _data.SaveChanges();
-            return RedirectToAction("Index", "Account");
-        }
-        public JsonResult ChangeRole(int? id, int? roleId)
+        [HttpPost]
+        public JsonResult ChangeRole(User account)
         {
-            var user = _data.Users.Find(id);
+            var user = _data.Users.Find(account.UserID);
             if (user == null)
             {
                 return Json(new { status = false, message = "Không tìm thấy tài khoản" }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                user.RoleID = roleId;
+                user.RoleID = account.RoleID;
                 _data.SaveChanges();
-                return Json(new { status = true, message = "Thành công" }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = true, message = "Đã cấp quyền " + user.Role.RoleName + " cho tài khoản" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult ResetPassword(int? id)
+        {
+            if (id == null)
+            {
+                return Json(new { status = false, message = "Lỗi!" }, JsonRequestBehavior.AllowGet);
+            }
+            var user = _data.Users.Find(id);
+            if (user == null)
+            {
+                return Json(new { status = false, message = "Không tìm thấy tài khoản!" }, JsonRequestBehavior.AllowGet);
+            }
+            var passwordHash = Utilities.Encrypt.GetMD5(user.Email.Trim().ToLower());
+            user.PasswordHash = passwordHash;
+            _data.SaveChanges();
+            return Json(new { status = true, message = "Đã đặt lại mật khẩu!" }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult LockedStaus(int? id)
+        {
+            if (id == null)
+            {
+                return Json(new { status = false, message = "Lỗi!" }, JsonRequestBehavior.AllowGet);
+            }
+            var user = _data.Users.Find(id);
+            if (user == null)
+            {
+                return Json(new { status = false, message = "Không tìm thấy tài khoản!" }, JsonRequestBehavior.AllowGet);
+            }
+            user.Unlock = (user.Unlock == true ? false : true);
+            _data.SaveChanges();
+            if (!user.Unlock)
+            {
+                return Json(new { status = true, message = "Đã mở khóa tài khoản!" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { status = true, message = "Đã khóa tài khoản!" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return Json(new { status = false, message = "Lỗi!" }, JsonRequestBehavior.AllowGet);
+            }
+            var role = _data.Roles.FirstOrDefault(x => x.RoleName.Trim().ToLower() == Common.Constans.Role.Admin);
+            var user = _data.Users.Find(id);
+            if (user == null)
+            {
+                return Json(new { status = false, message = "Không tìm thấy tài khoản!" }, JsonRequestBehavior.AllowGet);
+            }
+            else if (user.RoleID == role.RoleID)
+            {
+                return Json(new { status = false, message = "Không thể xóa tài khoản " + role.RoleName }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                user.IsDeleted = true;
+                _data.SaveChanges();
+                return Json(new { status = true, message = "Xóa thành công!" }, JsonRequestBehavior.AllowGet);
             }
         }
     }

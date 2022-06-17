@@ -23,8 +23,8 @@ namespace DucVuSport.Controllers
         {
             if (ModelState.IsValid)
             {
-                var passwordHash = Encrypt.GetMD5(login.password);
-                var result = _data.Users.FirstOrDefault(x => x.Email == login.email && x.PasswordHash == passwordHash);
+                var passwordHash = Encrypt.GetMD5(login.password.Trim().ToLower());
+                var result = _data.Users.FirstOrDefault(x => x.Email.Trim().ToLower() == login.email.Trim().ToLower() && x.PasswordHash == passwordHash);
                 if (result != null)
                 {
                     Session[Common.Constans.Session.LOGIN_SESSION] = result;
@@ -57,7 +57,7 @@ namespace DucVuSport.Controllers
                     user.FullName = model.fullName;
                     user.PhoneNumber = model.phoneNumber;
                     user.Email = model.email;
-                    var passwordHash = Encrypt.GetMD5(model.password);
+                    var passwordHash = Encrypt.GetMD5(model.password.Trim().ToLower());
                     user.PasswordHash = passwordHash;
                     user.RoleID = role.RoleID;
                     _data.Users.Add(user);
@@ -78,15 +78,16 @@ namespace DucVuSport.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult ChangePassword(ChangePasswordModel model)
         {
+            var session = Session[Common.Constans.Session.LOGIN_SESSION] as User;
             if (ModelState.IsValid)
             {
-                if (Session[Common.Constans.Session.LOGIN_SESSION] != null)
+                if (session != null)
                 {
-                    var oldPass = Encrypt.GetMD5(model.oldPassword);
-                    var user = _data.Users.Find(((User)Session[Common.Constans.Session.LOGIN_SESSION]).UserID);
+                    var oldPass = Encrypt.GetMD5(model.oldPassword.Trim().ToLower());
+                    var user = _data.Users.Find(session.UserID);
                     if (user.PasswordHash == oldPass)
                     {
-                        var newPass = Encrypt.GetMD5(model.newPassword);
+                        var newPass = Encrypt.GetMD5(model.newPassword.Trim().ToLower());
                         user.PasswordHash = newPass;
                         _data.SaveChanges();
                         Session[Common.Constans.Session.LOGIN_SESSION] = user;

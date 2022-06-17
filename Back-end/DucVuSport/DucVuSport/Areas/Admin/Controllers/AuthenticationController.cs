@@ -20,8 +20,8 @@ namespace DucVuSport.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var passwordHash = Utilities.Encrypt.GetMD5(model.password);
-                var user = _data.Users.FirstOrDefault(x => x.Email == model.email && x.PasswordHash == passwordHash);
+                var passwordHash = Utilities.Encrypt.GetMD5(model.password.Trim().ToLower());
+                var user = _data.Users.FirstOrDefault(x => x.Email.Trim().ToLower() == model.email.Trim().ToLower() && x.PasswordHash == passwordHash);
                 if (user != null)
                 {
                     var role = _data.Roles.FirstOrDefault(x => x.RoleName != null && x.RoleName.Trim().ToLower() == Common.Constans.Role.Customer);

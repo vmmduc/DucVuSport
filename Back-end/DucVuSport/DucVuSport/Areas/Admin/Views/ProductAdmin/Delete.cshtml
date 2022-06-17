@@ -18,7 +18,7 @@
         padding: 3rem;
     }
 
-    table tr td{
+    table tr td {
         height: 3rem;
     }
 
@@ -26,15 +26,16 @@
         font-weight: bold;
     }
 
-    .form-actions{
-       padding-top:2rem;
+    .form-actions {
+        padding-top: 2rem;
     }
-    .form-actions a{
-        margin-right: 1rem;
-        text-decoration: none;
-        padding: 1rem;
-        cursor: pointer;
-    }
+
+        .form-actions a {
+            margin-right: 1rem;
+            text-decoration: none;
+            padding: 1rem;
+            cursor: pointer;
+        }
 </style>
 <div class="content">
     <h3>Bạn có muốn xóa sản phẩm này?</h3>
@@ -95,8 +96,9 @@
     {
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">
-            <a href="/Admin/ProductAdmin/Index"" class="text-decoration-none btn btn-warning"><i class="fas fa-arrow-left"></i> Quay lại</a>
+            <a href="/Admin/ProductAdmin/Index" class="text-decoration-none btn btn-primary">Quay lại</a>
             <input type="submit" value="Xóa" class="btn btn-danger" />
         </div>
     }
+
 </div>

@@ -12,7 +12,7 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <div class="control-label col-md-2">Họ và tên</div>
+            <div class="control-label col-md-2">Họ và tên (<span style="color:red;">*</span>):</div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
@@ -20,7 +20,7 @@
         </div>
 
         <div class="form-group">
-            <div class="control-label col-md-2">Số điện thoại</div>
+            <div class="control-label col-md-2">Số điện thoại (<span style="color:red;">*</span>):</div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            <div class="control-label col-md-2">Email</div>
+            <div class="control-label col-md-2">Email (<span style="color:red;">*</span>):</div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-            <div class="control-label col-md-2">Quyền</div>
+            <div class="control-label col-md-2">Quyền (<span style="color:red;">*</span>):</div>
             <div class="col-md-10">
                 @Html.DropDownList("RoleID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
@@ -54,7 +54,7 @@
 
         <div class="form-group d-flex">
             <div>
-                <a href="/Admin/HomeAdmin/Index" class="text-decoration-none btn btn-warning"><i class="fas fa-arrow-left"></i> Quay lại</a>
+                <a href="/Admin/HomeAdmin/Index" class="text-decoration-none btn btn-warning">Quay lại</a>
             </div>
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-primary" />
