@@ -55,5 +55,10 @@ namespace DucVuSport.Areas.Admin.Controllers
             }
             return View(order);
         }
+
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

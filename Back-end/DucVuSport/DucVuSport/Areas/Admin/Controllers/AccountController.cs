@@ -1,21 +1,18 @@
-﻿using DucVuSport.Models.Entities;
+﻿using DucVuSport.Common;
 using DucVuSport.Models;
+using DucVuSport.Models.Entities;
 using System.Linq;
-using System.Data.Entity;
-using System.Web.Mvc;
 using System.Net;
-using DucVuSport.Utilities;
+using System.Web.Mvc;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
-    /*
-     * Thay đổi quyền truy cập
-     * Khóa / mở khóa tài khoản
-     * Cấp lại mật khẩu
-     */
     public class AccountController : BaseController
     {
         private readonly DataContext _data = new DataContext();
+
+
+        [Authorize(Roles = Constans.Role.ADMIN)]
         public ActionResult Index()
         {
             var users = _data.Users.Where(x => x.PasswordHash != null && x.IsDeleted != true);
@@ -23,6 +20,8 @@ namespace DucVuSport.Areas.Admin.Controllers
             return View(users.ToList());
         }
 
+
+        [Authorize(Roles = Constans.Role.ADMIN)]
         public ActionResult Detail(int? id)
         {
             if (id == null)
@@ -39,6 +38,7 @@ namespace DucVuSport.Areas.Admin.Controllers
         }
 
         #region Create account
+        [Authorize(Roles = Constans.Role.ADMIN)]
         public ActionResult Create()
         {
             ViewBag.RoleID = new SelectList(_data.Roles, "RoleID", "RoleName");
@@ -47,11 +47,12 @@ namespace DucVuSport.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Constans.Role.ADMIN)]
         public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {
-                var passwordHash = Utilities.Encrypt.GetMD5(user.Email);
+                var passwordHash = Common.Encrypt.GetMD5(user.Email);
                 user.PasswordHash = passwordHash;
                 _data.Users.Add(user);
                 _data.SaveChanges();
@@ -66,7 +67,7 @@ namespace DucVuSport.Areas.Admin.Controllers
         #region Update account
         public ActionResult Update()
         {
-            if (!(Session[Common.Constans.Session.ADMIN_SESSION] is User user))
+            if (!(Session[Constans.Session.ADMIN_SESSION] is User user))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -79,7 +80,7 @@ namespace DucVuSport.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Update(User account)
         {
-            var userSession = Session[Common.Constans.Session.ADMIN_SESSION] as User;
+            var userSession = Session[Constans.Session.ADMIN_SESSION] as User;
             if (userSession == null)
             {
                 return Json(new { status = false, message = "Bạn chưa đăng nhập" }, JsonRequestBehavior.AllowGet);
@@ -103,6 +104,7 @@ namespace DucVuSport.Areas.Admin.Controllers
         }
         #endregion
 
+        #region Change password
         public ActionResult ChangePassword()
         {
             return View();
@@ -112,7 +114,7 @@ namespace DucVuSport.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult ChangePassword(ChangePasswordModel model)
         {
-            var session = Session[Common.Constans.Session.ADMIN_SESSION] as User;
+            var session = Session[Constans.Session.ADMIN_SESSION] as User;
             if (ModelState.IsValid)
             {
                 if (session != null)
@@ -135,7 +137,10 @@ namespace DucVuSport.Areas.Admin.Controllers
             }
             return Json(new { status = false, message = "Thay đổi thất bại" }, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
         [HttpPost]
+        [Authorize(Roles = Constans.Role.ADMIN)]
         public JsonResult ChangeRole(User account)
         {
             var user = _data.Users.Find(account.UserID);
@@ -152,6 +157,7 @@ namespace DucVuSport.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Constans.Role.ADMIN)]
         public JsonResult ResetPassword(int? id)
         {
             if (id == null)
@@ -163,13 +169,14 @@ namespace DucVuSport.Areas.Admin.Controllers
             {
                 return Json(new { status = false, message = "Không tìm thấy tài khoản!" }, JsonRequestBehavior.AllowGet);
             }
-            var passwordHash = Utilities.Encrypt.GetMD5(user.Email.Trim().ToLower());
+            var passwordHash = Encrypt.GetMD5(user.Email.Trim().ToLower());
             user.PasswordHash = passwordHash;
             _data.SaveChanges();
             return Json(new { status = true, message = "Đã đặt lại mật khẩu!" }, JsonRequestBehavior.AllowGet);
         }
 
-
+        [HttpPost]
+        [Authorize(Roles = Constans.Role.ADMIN)]
         public JsonResult LockedStaus(int? id)
         {
             if (id == null)
@@ -193,13 +200,15 @@ namespace DucVuSport.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        [Authorize(Roles = Constans.Role.ADMIN)]
         public JsonResult Delete(int? id)
         {
             if (id == null)
             {
                 return Json(new { status = false, message = "Lỗi!" }, JsonRequestBehavior.AllowGet);
             }
-            var role = _data.Roles.FirstOrDefault(x => x.RoleName.Trim().ToLower() == Common.Constans.Role.Admin);
+            var role = _data.Roles.FirstOrDefault(x => x.RoleName.Trim().ToLower() == Constans.Role.ADMIN);
             var user = _data.Users.Find(id);
             if (user == null)
             {

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace DucVuSport.Controllers
 {
+    [AllowAnonymous]
     public class BlogController : Controller
     {
         [Route("Blog")]

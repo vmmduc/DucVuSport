@@ -8,6 +8,7 @@ using DucVuSport.Models.Entities;
 
 namespace DucVuSport.Controllers
 {
+    [AllowAnonymous]
     public class ProductController : Controller
     {
         private readonly DataContext _data = new DataContext();

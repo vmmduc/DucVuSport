@@ -1,11 +1,9 @@
 ﻿using DucVuSport.Models.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Security;
 
-namespace DucVuSport.Utilities
+namespace DucVuSport.Common
 {
     public class CustomerRoleProvider : RoleProvider
     {
@@ -39,12 +37,14 @@ namespace DucVuSport.Utilities
         public override string[] GetRolesForUser(string userID)
         {
             DataContext data = new DataContext();
-            User account = data.Users.Single(x => x.UserID == Convert.ToInt32(userID));
+            var id = Convert.ToInt32(userID);
+            User account = data.Users.Single(x => x.UserID == id);
             if (account != null)
             {
-                return new String[] { account.Role.RoleName };
+                return new string[] { account.Role.RoleName };
             }
-            else return new string[] { };
+            else 
+                return new string[] { };
 
         }
 

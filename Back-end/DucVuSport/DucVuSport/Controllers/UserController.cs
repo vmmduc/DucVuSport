@@ -1,6 +1,6 @@
-﻿using DucVuSport.Models;
+﻿using DucVuSport.Common;
+using DucVuSport.Models;
 using DucVuSport.Models.Entities;
-using DucVuSport.Utilities;
 using System;
 using System.Linq;
 using System.Net;
@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace DucVuSport.Controllers
 {
+    [AllowAnonymous]
     public class UserController : Controller
     {
         private readonly DataContext _data = new DataContext();
@@ -52,7 +53,7 @@ namespace DucVuSport.Controllers
                     return Json(false, JsonRequestBehavior.AllowGet);
                 else
                 {
-                    var role = _data.Roles.FirstOrDefault(x => x.RoleName != null && x.RoleName.Trim().ToLower() == Common.Constans.Role.Customer.Trim().ToLower());
+                    var role = _data.Roles.FirstOrDefault(x => x.RoleName != null && x.RoleName.Trim().ToLower() == Common.Constans.Role.CUSTOMER.Trim().ToLower());
                     User user = new User();
                     user.FullName = model.fullName;
                     user.PhoneNumber = model.phoneNumber;

@@ -18,9 +18,9 @@
         }
         public static class Role
         {
-            public const string Admin = "Admin";
-            public const string Employee = "Employee";
-            public const string Customer = "CUSTOMER";
+            public const string ADMIN = "admin";
+            public const string EMPLOYEE = "employee";
+            public const string CUSTOMER = "customer";
         }
     }
 }

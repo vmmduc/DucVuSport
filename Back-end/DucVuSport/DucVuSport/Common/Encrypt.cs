@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
-namespace DucVuSport.Utilities
+namespace DucVuSport.Common
 {
     public class Encrypt
     {

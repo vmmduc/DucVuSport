@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ssport.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly DataContext _data = new DataContext();

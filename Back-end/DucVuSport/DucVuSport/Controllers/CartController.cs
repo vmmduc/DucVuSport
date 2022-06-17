@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace DucVuSport.Controllers
 {
+    [AllowAnonymous]
     public class CartController : Controller
     {
         private readonly DataContext _data = new DataContext();

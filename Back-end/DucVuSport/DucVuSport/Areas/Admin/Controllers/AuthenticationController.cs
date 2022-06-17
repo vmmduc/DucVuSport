@@ -1,10 +1,14 @@
-﻿using DucVuSport.Models;
+﻿using DucVuSport.Common;
+using DucVuSport.Models;
 using DucVuSport.Models.Entities;
+using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DucVuSport.Areas.Admin.Controllers
 {
+    [AllowAnonymous]
     public class AuthenticationController : Controller
     {
         private readonly DataContext _data = new DataContext();
@@ -20,11 +24,11 @@ namespace DucVuSport.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var passwordHash = Utilities.Encrypt.GetMD5(model.password.Trim().ToLower());
+                var passwordHash = Encrypt.GetMD5(model.password.Trim().ToLower());
                 var user = _data.Users.FirstOrDefault(x => x.Email.Trim().ToLower() == model.email.Trim().ToLower() && x.PasswordHash == passwordHash);
                 if (user != null)
                 {
-                    var role = _data.Roles.FirstOrDefault(x => x.RoleName != null && x.RoleName.Trim().ToLower() == Common.Constans.Role.Customer);
+                    var role = _data.Roles.FirstOrDefault(x => x.RoleName != null && x.RoleName.Trim().ToLower() == Common.Constans.Role.CUSTOMER);
                     if (user.IsDeleted == true)
                     {
                         ModelState.AddModelError("", "Tài khoản không tồn tại");
@@ -42,7 +46,8 @@ namespace DucVuSport.Areas.Admin.Controllers
                     }
                     else
                     {
-                        Session[Common.Constans.Session.ADMIN_SESSION] = user;
+                        Session[Constans.Session.ADMIN_SESSION] = user;
+                        FormsAuthentication.SetAuthCookie(user.UserID.ToString(), false);
                         return RedirectToAction("Index", "HomeAdmin");
                     }
                 }
