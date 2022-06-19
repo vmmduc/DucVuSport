@@ -1,4 +1,5 @@
-﻿using DucVuSport.Models;
+﻿using DucVuSport.Common;
+using DucVuSport.Models;
 using DucVuSport.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace DucVuSport.Controllers
                             product = product,
                             quantity = quantity
                         });
-                        Session[Common.Constans.Session.CART_SESSION] = cartList;
+                        Session[Constans.Session.CART_SESSION] = cartList;
                         Session["count"] = cartList.Count;
                     }
                     else
@@ -96,24 +97,31 @@ namespace DucVuSport.Controllers
         [HttpPost]
         public ActionResult Order(User model)
         {
-            var user = Session[Common.Constans.Session.LOGIN_SESSION] as User;
+            var user = Session[Constans.Session.LOGIN_SESSION] as User;
             if (user != null)
             {
                 var customer = _data.Users.Find(user.UserID);
+                customer.PhoneNumber = model.PhoneNumber;
+                customer.Province = model.Province;
+                customer.District = model.District;
+                customer.Ward = model.Ward;
+                customer.AddressDetail = model.AddressDetail;
+                _data.SaveChanges();
                 CreateOrder(customer);
             }
             else
             {
-                _data.Users.Add(model);
+                user = model;
+                _data.Users.Add(user);
                 _data.SaveChanges();
-                CreateOrder(model);
+                CreateOrder(user);
             }
             return RedirectToAction("Success");
         }
-        public void CreateOrder(User user)
+        private void CreateOrder(User user)
         {
             long? orderTotal = 0;
-            var cart = Session[Common.Constans.Session.CART_SESSION] as List<CartModel>;
+            var cart = Session[Constans.Session.CART_SESSION] as List<CartModel>;
             // Table order
             var order = new Order();
             order.CustomerID = user.UserID;
@@ -142,9 +150,28 @@ namespace DucVuSport.Controllers
                 }
             }
             order.Total = orderTotal;
+            //SendEmail(user);
             _data.SaveChanges();
             Session.Remove(Common.Constans.Session.CART_SESSION);
         }
+        private void SendEmail(User user)
+        {
+            try
+            {
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Common/MailTemplate/Template01.htm"));
+                content = content.Replace("[FullName]", user.FullName);
+                content = content.Replace("[PhoneNumber]", user.PhoneNumber);
+                content = content.Replace("[Email]", user.Email);
+                content = content.Replace("[Address]", user.AddressDetail + user.Ward + user.District + user.Province);
+
+                new SendEmail().Send(user.Email, "Thông báo đặt hàng thành công", content);
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+            }
+        }
+
         public ActionResult Success()
         {
             return View();

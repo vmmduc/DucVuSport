@@ -110,14 +110,17 @@
                         <div class="row">
                             <div class="col">
                                 <label>Họ và tên (<span style="color:red;">*</span>):</label>
+                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
                                 @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                             <div class="col">
                                 <label>Số điện thoại (<span style="color:red;">*</span>):</label>
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                                 @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                             <div class="col">
                                 <label>Email (<span style="color:red;">*</span>):</label>
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                         </div>
@@ -126,20 +129,24 @@
                         <div class="row">
                             <div class="col">
                                 <label>Tỉnh / Thành phố (<span style="color:red;">*</span>):</label>
+                                @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
                                 @Html.EditorFor(model => model.Province, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                             <div class="col">
                                 <label>Quận / Huyện (<span style="color:red;">*</span>):</label>
+                                @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
                                 @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                             <div class="col">
                                 <label>Phường / Xã (<span style="color:red;">*</span>):</label>
+                                @Html.ValidationMessageFor(model => model.Ward, "", new { @class = "text-danger" })
                                 @Html.EditorFor(model => model.Ward, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label>Số nhà, đường (<span style="color:red;">*</span>):</label>
+                                @Html.ValidationMessageFor(model => model.AddressDetail, "", new { @class = "text-danger" })
                                 @Html.EditorFor(model => model.AddressDetail, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                         </div>

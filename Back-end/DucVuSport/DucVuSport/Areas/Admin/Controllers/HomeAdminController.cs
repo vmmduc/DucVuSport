@@ -21,7 +21,7 @@ namespace DucVuSport.Areas.Admin.Controllers
             ViewBag.viewTotal = data.Products.Sum(x => x.ViewCount);
             ViewBag.top10 = data.Products.OrderByDescending(x => x.Sold).Take(10).ToList();
             ViewBag.totalOrder = data.Orders.Count(x => x.Status == waitingConfirm.ID || x.Status == approve.ID);
-            var order = data.Orders.Include(o => o.OrderStatu).Include(o => o.Payment).Include(o => o.User).Where(x => x.Status != success.ID).ToList();
+            var order = data.Orders.Include(x => x.OrderStatu).Include(x => x.Payment).Include(x => x.User).Where(x => x.Status != success.ID).ToList();
             return View(order);
         }
         public ActionResult OrderDetail(int? id)
@@ -36,7 +36,7 @@ namespace DucVuSport.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             var customer = data.Users.FirstOrDefault(x => x.UserID == order.CustomerID);
-            var orderDetails = data.OrderDetails.Include(o => o.Order).Include(o => o.Product).Where(x => x.OrderID == id);
+            var orderDetails = data.OrderDetails.Include(x => x.Order).Include(x => x.Product).Where(x => x.OrderID == id);
             ViewBag.customer = customer;
             ViewBag.status = new SelectList(data.OrderStatus, "ID", "Name", order.Status);
             ViewBag.orderDetail = orderDetails.ToList();
@@ -56,9 +56,19 @@ namespace DucVuSport.Areas.Admin.Controllers
             return View(order);
         }
 
+        public JsonResult GetInfor()
+        {
+            int tpbs = data.OrderDetails.Include(x => x.Product).Count(x => x.Product.CategoryID == 1);
+            int dctl = data.OrderDetails.Include(x => x.Product).Count(x => x.Product.CategoryID == 2);
+            int tltt = data.OrderDetails.Include(x => x.Product).Count(x => x.Product.CategoryID == 3);
+            int hpcn = data.OrderDetails.Include(x => x.Product).Count(x => x.Product.CategoryID == 4);
+            return Json(new { tpbs = tpbs, dctl = dctl, tltt = tltt, hpcn = hpcn }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Error()
         {
             return View();
         }
+
     }
 }

@@ -176,6 +176,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthenticationController.cs" />
     <Compile Include="Common\Constans.cs" />
+    <Compile Include="Common\SendEmail.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -207,6 +208,7 @@
     <Content Include="Areas\Admin\Content\css\app.css" />
     <Content Include="Areas\Admin\Content\css\grid.css" />
     <Content Include="Areas\Admin\Content\js\app.js" />
+    <Content Include="Common\MailTemplate\Template01.htm" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />

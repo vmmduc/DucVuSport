@@ -622,6 +622,7 @@ table td {
     width: 98%;
     padding-top: 2rem;
     margin: auto;
+    padding-bottom: 2rem;
 }
 
 .admin-message {

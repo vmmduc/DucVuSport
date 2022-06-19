@@ -61,6 +61,7 @@ namespace DucVuSport.Controllers
                     var passwordHash = Encrypt.GetMD5(model.password.Trim().ToLower());
                     user.PasswordHash = passwordHash;
                     user.RoleID = role.RoleID;
+                    user.Unlock = false;
                     _data.Users.Add(user);
                     _data.SaveChanges();
 

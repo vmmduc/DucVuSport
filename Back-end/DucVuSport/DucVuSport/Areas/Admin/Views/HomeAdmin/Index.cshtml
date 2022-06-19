@@ -3,6 +3,7 @@
     ViewBag.label = "Trang chủ";
     var topProduct = ViewBag.top10 as IEnumerable<DucVuSport.Models.Entities.Product>;
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    var turnover = ViewBag.turnover == null ? 0 : ViewBag.turnover;
 }
 <div class="main-content">
     <div class="row">
@@ -45,7 +46,7 @@
                     </div>
                     <div class="counter-info">
                         <div class="counter-count">
-                            @String.Format(format, "{0:c0}", ViewBag.turnover)
+                            @String.Format(format, "{0:c0}", turnover)
                         </div>
                         <i class='bx bx-line-chart'></i>
                     </div>
@@ -96,7 +97,7 @@
                                 </div>
                                 <div class="item-sale-info">
                                     <div class="text-second">Sales</div>
-                                    <div class="product-sales">@item.Price</div>
+                                    <div class="product-sales">@String.Format(format, "{0:c0}", item.Price)</div>
                                 </div>
                             </li>
                         }
