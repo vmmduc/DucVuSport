@@ -179,7 +179,6 @@
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthenticationController.cs" />
     <Compile Include="Common\Constans.cs" />
-    <Compile Include="Common\ConvertToUnSign.cs" />
     <Compile Include="Common\SendEmail.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />

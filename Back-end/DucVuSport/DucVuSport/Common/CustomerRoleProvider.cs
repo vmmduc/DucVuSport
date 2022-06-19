@@ -45,7 +45,6 @@ namespace DucVuSport.Common
             }
             else 
                 return new string[] { };
-
         }
 
         public override string[] GetUsersInRole(string roleName)
