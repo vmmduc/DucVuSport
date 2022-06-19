@@ -1,75 +1,36 @@
-﻿<div class="container-fluid">
-    <main class="tm-main">
-        <div class="row tm-row">
-            <article class="col-12 col-md-6 tm-post">
-                <a href="/Blog/Detail" class="effect-lily tm-post-link tm-pt-60">
-                    <div class="tm-post-link-inner">
-                        <img src="~/Images/img/img-01.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <span class="position-absolute tm-new-badge">New</span>
-                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">Simple and useful HTML layout</h2>
-                </a>
-                <p class="tm-pt-30">
-                    There is a clickable image with beautiful hover effect and active title link for each post item.
-                    Left side is a sticky menu bar. Right side is a blog content that will scroll up and down.
-                </p>
-                <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="tm-color-primary">Travel . Events</span>
-                    <span class="tm-color-primary">June 24, 2020</span>
+﻿<section class="travel-area section-gap" id="travel">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-70 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">Tin tức</h1>
                 </div>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span>36 comments</span>
-                    <span>by Admin Nat</span>
-                </div>
-            </article>
-
-
-            <article class="col-12 col-md-6 tm-post">
-                <a href="/Blog/Detail" class="effect-lily tm-post-link tm-pt-60">
-                    <div class="tm-post-link-inner">
-                        <img src="~/Images/img/img-01.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <span class="position-absolute tm-new-badge">New</span>
-                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">Simple and useful HTML layout</h2>
-                </a>
-                <p class="tm-pt-30">
-                    There is a clickable image with beautiful hover effect and active title link for each post item.
-                    Left side is a sticky menu bar. Right side is a blog content that will scroll up and down.
-                </p>
-                <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="tm-color-primary">Travel . Events</span>
-                    <span class="tm-color-primary">June 24, 2020</span>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span>36 comments</span>
-                    <span>by Admin Nat</span>
-                </div>
-            </article>
-
-            <article class="col-12 col-md-6 tm-post">
-                <a href="/Blog/Detail" class="effect-lily tm-post-link tm-pt-60">
-                    <div class="tm-post-link-inner">
-                        <img src="~/Images/img/img-01.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <span class="position-absolute tm-new-badge">New</span>
-                    <h2 class="tm-pt-30 tm-color-primary tm-post-title">Simple and useful HTML layout</h2>
-                </a>
-                <p class="tm-pt-30">
-                    There is a clickable image with beautiful hover effect and active title link for each post item.
-                    Left side is a sticky menu bar. Right side is a blog content that will scroll up and down.
-                </p>
-                <div class="d-flex justify-content-between tm-pt-45">
-                    <span class="tm-color-primary">Travel . Events</span>
-                    <span class="tm-color-primary">June 24, 2020</span>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span>36 comments</span>
-                    <span>by Admin Nat</span>
-                </div>
-            </article>
+            </div>
         </div>
-    </main>
-</div>
+        <div class="row row-cols-2 row-cols-sm-1 row-cols-xs-1">
+            @for (var i = 0; i < 10; i++)
+            {
+                <div class="single-travel d-flex col-md-6">
+                    <img class="img-fluid d-flex  mr-3" src="~/Images/img/t1.jpg" alt="">
+                    <div class="dates">
+                        <span>20</span>
+                        <p>Dec</p>
+                    </div>
+                    <div class="media-body align-self-center">
+                        <h4 class="mt-0">
+                            <a href="/Blog/Detail">Tiêu đề sẽ nằm ở chỗ này</a>
+                        </h4>
+                        <p>Một đoạn của phần bài viết sẽ nằm ở đây</p>
+                        <div class="meta-bottom d-flex justify-content-between">
+                            <p><i class="far fa-heart"></i> 15 Likes</p>
+                            <p><i class="far fa-comment"></i> 02 Comments</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div style="text-align: center">
+            <a href="#" class="primary-btn load-more pbtn-2 text-uppercase mx-auto mt-60">Xem thêm</a>
+        </div>
+    </div>
+</section>
