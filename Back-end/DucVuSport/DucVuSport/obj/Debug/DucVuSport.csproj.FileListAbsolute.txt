@@ -163,3 +163,4 @@ D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\PagedList.dll
 D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\PagedList.Mvc.dll
 D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\PagedList.xml
 D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\PagedList.Mvc.xml
+D:\DATN\DucVuSport\Back-end\DucVuSport\DucVuSport\bin\Rotativa.dll

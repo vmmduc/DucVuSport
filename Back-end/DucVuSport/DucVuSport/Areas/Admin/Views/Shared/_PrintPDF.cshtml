@@ -1,0 +1,80 @@
+﻿@model DucVuSport.Models.Entities.Order
+@{
+    Layout = null;
+    var customer = ViewBag.customer as DucVuSport.Models.Entities.User;
+    var orderDetail = ViewBag.orderDetail as List<DucVuSport.Models.Entities.OrderDetail>;
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    var stt = 0;
+}
+<style>
+    .title {
+        text-align: center;
+    }
+
+    .bill-index-content {
+        width: 85%;
+        margin: auto;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .customer-infor {
+        font-size: 1rem;
+    }
+
+    .product-list-order {
+        width: 100%;
+    }
+
+    .info {
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, tr, th, td {
+        border: solid 1px;
+    }
+</style>
+<div class="bill-index-content">
+    <div class="order-infor">
+        <h2 class="title">Hóa đơn mua hàng</h2>
+        <div class="d-flex flex-column">
+            <div>Mã hóa đơn: <span class="info"><span>HD000</span>@Model.OrderID</span></div>
+            <div>Ngày đặt: <span class="info">@Model.OrderDate</span></div>
+        </div>
+        <hr />
+        <div class="customer-infor row">
+            <div>
+                <div>Họ và tên: <span class="info" style=" text-transform: uppercase">@customer.FullName</span></div>
+                <div>Email: <span class="info">@customer.Email</span></div>
+                <div>Số điện thoại: <span class="info">@customer.PhoneNumber</span></div>
+                <div>Địa chỉ: <span class="info">@customer.AddressDetail, @customer.Ward, @customer.District, @customer.Province</span></div>
+            </div>
+        </div>
+    </div> <br /> <br /> <br />
+
+    <table class="table">
+        <tr>
+            <th>STT</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giảm giá</th>
+            <th>Thành tiền</th>
+        </tr>
+
+        @foreach (var item in orderDetail)
+        {
+            <tr>
+                <td style="text-align: center;">@(stt+=1)</td>
+                <td>@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
+                <td style="text-align: center;">@item.Quantity</td>
+                <td style="text-align: center;">@Convert.ToInt32(item.Discount)%</td>
+                <td style="text-align: center;">@String.Format(format, "{0:c0}", item.Total)</td>
+            </tr>
+        }
+    </table>
+    <h4>Tổng cộng: <span style="color: red; font-weight: bold">@String.Format(format, "{0:c0}", Model.Total)</span></h4>
+</div>

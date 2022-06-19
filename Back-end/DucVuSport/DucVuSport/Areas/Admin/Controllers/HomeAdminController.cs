@@ -69,6 +69,5 @@ namespace DucVuSport.Areas.Admin.Controllers
         {
             return View();
         }
-
     }
 }
