@@ -405,7 +405,6 @@
     <Content Include="Views\Shared\__Form-login.cshtml" />
     <Content Include="Views\Shared\__Form-change-password.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Views\Shared\__Form-vote.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Detail.cshtml" />
     <Content Include="Views\Cart\Success.cshtml" />

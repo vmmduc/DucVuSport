@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using DucVuSport.Models;
 using DucVuSport.Models.Entities;
 
 namespace DucVuSport.Controllers
@@ -52,9 +49,11 @@ namespace DucVuSport.Controllers
             return View();
         }
 
-        public ActionResult SearchProduct()
+
+        public ActionResult SearchProduct(string keyword)
         {
-            return View();
+            var product_list = _data.Products.Where(x => x.ProductName.Contains(keyword)).ToList();
+            return PartialView("__header-search-result", product_list);
         }
     }
 }

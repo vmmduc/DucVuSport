@@ -56,20 +56,21 @@ else
         </ul>
 
         <script>
-                    $('.header__cart-list-item-trash').click(function () {
-                    var model = {};
-                    model.id = $(this).attr('id');
-                    $.ajax({
-                        type: "POST",
-                        url: '@Url.Action("Remove", "Cart")',
-                        data: JSON.stringify(model),
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        success: function () {
-                            location.reload();
-                        }
-                    });
-                    })
+            $('.header__cart-list-item-trash').click(function () {
+            var model = {};
+            model.id = $(this).attr('id');
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Remove", "Cart")',
+                data: JSON.stringify(model),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    location.reload();
+                    @*toastr.success('Xóa sản phẩm thành công', 'Thông báo');*@
+                }
+            });
+            })
         </script>
 
         <div class="header__cart-total">

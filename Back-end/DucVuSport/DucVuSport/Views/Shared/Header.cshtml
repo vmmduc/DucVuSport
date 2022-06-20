@@ -31,15 +31,16 @@
 
     <form class="header__search col-md-4">
         <div class="header__search-input">
-            <input type="search" id="search-box" placeholder="search here...">
+            <input type="search" id="search-box" placeholder="Tìm kiếm..." class="search-change">
             <label for="search-box" class="fas fa-search"></label>
         </div>
-        @Html.Partial("__header-search-result")
+        <div class="s-result">
+            @Html.Action("SearchProduct", "Product")
+        </div>
     </form>
 </div>
 
-<div class="header__cart">
-</div>
+<div class="header__cart"></div>
 
 <div class="col-5 col-md-3 header__account">
     @if (Session["user"] != null)
@@ -61,3 +62,17 @@
         </a>
     }
 </div>
+
+
+<script>
+    $('.search-change').change(function () {
+        var keyword = $(this).val();
+        alert(keyword);
+        @*$.ajax({
+            url: '/Product/SearchProduct/' + keyword,
+            success: function (response) {
+                $('.s-result').html(response);
+            },
+        });*@
+    })
+</script>

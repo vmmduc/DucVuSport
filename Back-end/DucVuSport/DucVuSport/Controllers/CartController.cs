@@ -77,7 +77,7 @@ namespace DucVuSport.Controllers
             cartList.RemoveAll(x => x.product.ProductID == id);
             Session["cart"] = cartList;
             Session["count"] = cartList.Count;
-            return RedirectToAction("GetCartHeader");
+            return RedirectToAction("GetCartHeader", "Cart");
         }
 
         public ActionResult Update(int id, int quantity)
