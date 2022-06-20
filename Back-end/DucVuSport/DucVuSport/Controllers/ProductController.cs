@@ -49,10 +49,9 @@ namespace DucVuSport.Controllers
             return View();
         }
 
-
         public ActionResult SearchProduct(string keyword)
-        {
-            var product_list = _data.Products.Where(x => x.ProductName.Contains(keyword)).ToList();
+        { 
+            var product_list = _data.Products.Where(x => x.ProductName.Trim().ToLower().Contains(keyword.Trim().ToLower())).ToList();
             return PartialView("__header-search-result", product_list);
         }
     }

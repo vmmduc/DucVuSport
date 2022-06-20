@@ -184,7 +184,7 @@ $(document).ready(function () {
             "positionClass": "toast-top-right",
             "showDuration": "10",
             "hideDuration": "10",
-            "timeOut": "10",
+            "timeOut": "5",
             "extendedTimeOut": "10",
             "showEasing": "swing",
             "hideEasing": "linear",

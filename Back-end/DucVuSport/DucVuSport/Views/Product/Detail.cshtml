@@ -165,16 +165,18 @@
         model.quantity = $('.input-qty').val();
         $.ajax({
             type: "POST",
-            url: '@Url.Action("AddToCart", "Cart")',
+            url: '/Cart/AddToCart',
             data: JSON.stringify(model),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            success: function () {
-                location.reload();
-                alert("Thêm thành công!")
-            },
-            error: function () {
-                alert("Thêm thất bại!");
+            success: function (response) {
+                if (response.status == true) {
+                    $('.header__cart--notice').text(response.count);
+                    toastr.success(response.message, 'Thông báo');
+                }
+                else {
+                    toastr.success(response.message, 'Thông báo');
+                }
             }
         });
     })

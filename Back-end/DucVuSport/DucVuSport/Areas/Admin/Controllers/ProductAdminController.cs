@@ -14,10 +14,28 @@ namespace DucVuSport.Areas.Admin.Controllers
         private DataContext db = new DataContext();
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
+            return View();
         }
 
+        public ActionResult GetAllProduct()
+        {
+            var products = db.Products.Include(p => p.Category);
+            return PartialView("__product", products);
+        }
+
+        public ActionResult SearchProduct(string keyword)
+        {
+            if(keyword.Trim().ToLower() == "")
+            {
+                var product_list = db.Products.ToList();
+                return PartialView("__product", product_list);
+            }
+            else
+            {
+                var product_list = db.Products.Where(x => x.ProductName.Trim().ToLower().Contains(keyword.Trim().ToLower())).ToList();
+                return PartialView("__product", product_list);
+            }
+        }
 
         public ActionResult Details(int? id)
         {

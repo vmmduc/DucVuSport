@@ -34,9 +34,7 @@
             <input type="search" id="search-box" placeholder="Tìm kiếm..." class="search-change">
             <label for="search-box" class="fas fa-search"></label>
         </div>
-        <div class="s-result">
-            @Html.Action("SearchProduct", "Product")
-        </div>
+        <div class="s-result"></div>
     </form>
 </div>
 
@@ -65,14 +63,14 @@
 
 
 <script>
-    $('.search-change').change(function () {
-        var keyword = $(this).val();
-        alert(keyword);
-        @*$.ajax({
-            url: '/Product/SearchProduct/' + keyword,
+    $('.search-change').keypress(function () {
+        var keyword = $('.search-change').val();
+        $.ajax({
+            url: "/Product/SearchProduct",
+            data: { keyword: keyword },
             success: function (response) {
                 $('.s-result').html(response);
             },
-        });*@
+        });
     })
 </script>

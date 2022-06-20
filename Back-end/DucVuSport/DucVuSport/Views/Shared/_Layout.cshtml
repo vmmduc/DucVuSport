@@ -34,8 +34,33 @@
         </div>
     </div> <!-- Home conten-->
 
-
     @Html.Partial("Footer")    <!-- Footer -->
     @Scripts.Render("~/bundles/myscript")
+
+    <script>
+        $('.add-to-cart').each(function () {
+            $(this).click(function () {
+                var model = {};
+                model.id = $(this).attr('id');
+                model.quantity = 1;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AddToCart", "Cart")',
+                    data: JSON.stringify(model),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                        if (response.status == true) {
+                            $('.header__cart--notice').text(response.count);
+                            toastr.success(response.message, 'Thông báo');
+                        }
+                        else {
+                            toastr.success(response.message, 'Thông báo');
+                        }
+                    }
+                });
+            });
+        })
+    </script>
 </body>
 </html>

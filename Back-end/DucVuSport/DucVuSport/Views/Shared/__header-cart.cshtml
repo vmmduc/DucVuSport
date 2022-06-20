@@ -50,29 +50,24 @@ else
                             <span class="header__cart-list-item-trash __delete" id="@item.product.ProductID">Xoá</span>
                         </div>
                     </div>
+                    <script>
+                        $('.header__cart-list-item-trash').click(function () {
+                            var id = $(this).attr('id');
+                            $.ajax({
+                                url: '/Cart/Remove/' + id,
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                success: function () {
+                                    alert("Xóa thành công");
+                                    window.location.reload();
+                                }
+                            });
+                        })
+                    </script>
                 </li>
                 <li><hr width="90%" style="margin: 0 auto;" /></li>
             }
         </ul>
-
-        <script>
-            $('.header__cart-list-item-trash').click(function () {
-            var model = {};
-            model.id = $(this).attr('id');
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("Remove", "Cart")',
-                data: JSON.stringify(model),
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function () {
-                    location.reload();
-                    @*toastr.success('Xóa sản phẩm thành công', 'Thông báo');*@
-                }
-            });
-            })
-        </script>
-
         <div class="header__cart-total">
             <div class="total"> Tổng cộng: <span>@String.Format(format, "{0:c0}", total)</span> </div>
             <a href="/cart" class="header__cart-check-btn">Kiểm tra giỏ hàng</a>

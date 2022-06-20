@@ -24,7 +24,7 @@ namespace DucVuSport.Controllers
             var cartList = Session[Common.Constans.Session.CART_SESSION] as List<DucVuSport.Models.CartModel>;
             return PartialView("__header-cart", cartList);
         }
-        public ActionResult AddToCart(int id, int quantity)
+        public JsonResult AddToCart(int id, int quantity)
         {
             try
             {
@@ -62,30 +62,30 @@ namespace DucVuSport.Controllers
                         Session["count"] = cartList.Count;
                     }
                 }
-
-                return Json(true, JsonRequestBehavior.AllowGet);
+                var count = Session["count"];
+                return Json(new {status = true, count = count, message = "Thêm thành công"}, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return Json(false, JsonRequestBehavior.AllowGet);
+                return Json(new { status = false, message = "Không thể thêm sản phẩm" }, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public ActionResult Remove(int id)
+        public JsonResult Remove(int id)
         {
             List<CartModel> cartList = Session[Common.Constans.Session.CART_SESSION] as List<CartModel>;
             cartList.RemoveAll(x => x.product.ProductID == id);
             Session["cart"] = cartList;
             Session["count"] = cartList.Count;
-            return RedirectToAction("GetCartHeader", "Cart");
+            return Json(new {message = "Xóa thành công"}, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Update(int id, int quantity)
+        public JsonResult Update(int id, int quantity)
         {
             List<CartModel> cartList = Session["cart"] as List<CartModel>;
             cartList.Find(x => x.product.ProductID == id).quantity = quantity;
             Session["cart"] = cartList;
-            return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
+            return Json(new {message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
         }
         private int IsExist(int id)
         {

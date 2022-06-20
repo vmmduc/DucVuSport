@@ -361,6 +361,7 @@
     <Content Include="Areas\Admin\Views\HomeAdmin\Error.cshtml" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Areas\Admin\Views\Shared\_PrintPDF.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\__product.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

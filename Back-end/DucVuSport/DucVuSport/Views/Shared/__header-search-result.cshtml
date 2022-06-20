@@ -1,8 +1,8 @@
 ﻿@model List<DucVuSport.Models.Entities.Product>
 <div class="header__search-result">
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
-        <a class="row item" href="#">
+        <a class="row item" href="/Product/Detail/@item.ProductID">
             <div class="s-img col-2 col-md-3"><img src="~/Images/Products/@item.Image" /></div>
             <div class="col-10 col-md-9 product-name">@item.ProductName</div>
         </a>

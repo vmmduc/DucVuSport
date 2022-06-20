@@ -91,7 +91,8 @@
                         data: JSON.stringify(model),
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
-                        success: function () {
+                        success: function (response) {
+                            toastr.success(response.message, 'Thông báo');
                         }
                     });
                 })

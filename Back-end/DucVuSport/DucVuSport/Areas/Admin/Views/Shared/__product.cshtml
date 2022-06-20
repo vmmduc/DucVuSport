@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DucVuSport.Models.Entities.Product>
+@{
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+@foreach (var item in Model)
+{
+    var price = item.Price - item.Price * item.Discount;
+    var discount = item.Discount * 100;
+
+    <tr>
+        @*Image*@
+        <td>
+            <div class="order-owner">
+                @if (item.Image != null)
+                {
+                    <img src="~/Images/Products/@item.Image" />
+                }
+                else
+                {
+                    <img src="~/Images/Banners/no-image.jpg" />
+                }
+            </div>
+        </td>
+
+        @*Product name*@
+        <td class="r-name">
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+
+        @*Price*@
+        <td>
+            @String.Format(format, "{0:c0}", price)
+        </td>
+
+        @*Discount*@
+        <td>
+            @discount%
+        </td>
+        <td>
+            @item.Quantity
+        </td>
+
+        <td class="button">
+            @Html.ActionLink("Sửa", "Edit", new { id = item.ProductID }, new { @class = "btn btn-outline-primary" })
+            @Html.ActionLink("Xóa", "Delete", new { id = item.ProductID }, new { @class = "btn btn-outline-danger" })
+        </td>
+    </tr>
+}
+
