@@ -180,14 +180,8 @@ ul li {
     position: absolute;
     top: 110%;
     right: -110%;
-    width: 50rem;
-    height: 5rem;
-    background: #fff;
-    border-radius: .5rem;
-    overflow: hidden;
     display: flex;
-    align-items: center;
-    box-shadow: var(--box-shadow);
+    flex-direction: column;
 }
 
     .header__search.active {
@@ -195,8 +189,18 @@ ul li {
         transition: var(--slider);
     }
 
+.header__search-input {
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: .5rem;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    background: #fff;
+}
 
-    .header__search input {
+    .header__search-input input {
         height: 100%;
         width: 100%;
         background: none;
@@ -206,17 +210,45 @@ ul li {
         padding: 0 1.5rem;
     }
 
-    .header__search label {
+    .header__search-input label {
         font-size: 2.2rem;
         padding-right: 1.5rem;
         color: var(--black);
         cursor: pointer;
     }
 
-        .header__search label:hover {
-            color: var(--main-color);
-        }
+.header__search label:hover {
+    color: var(--main-color);
+}
 
+.header__search-result {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    box-shadow: var(--box-shadow);
+    background: #fff;
+    max-height: 50rem;
+    overflow-y: scroll;
+    padding: 2rem;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+}
+
+.s-img img {
+    width: 5rem;
+}
+
+.product-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.item {
+    padding: 1rem;
+}
+
+.item:hover {
+    background-color: var(--light-grey);
+}
 /* Header shopping cart */
 .header__cart {
     position: absolute;

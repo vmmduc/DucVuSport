@@ -409,6 +409,8 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Detail.cshtml" />
     <Content Include="Views\Cart\Success.cshtml" />
+    <Content Include="Views\Shared\__header-search-result.cshtml" />
+    <Content Include="Views\Shared\__header-cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

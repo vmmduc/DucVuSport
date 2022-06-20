@@ -1,0 +1,80 @@
+﻿@model List<DucVuSport.Models.CartModel>
+@{
+    var total = 0;
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+@if (Model == null)
+{
+    @*No item*@
+    <div class="header__no-cart">
+        <img src="~/Images/Banners/no-cart.png" alt="">
+        <span>Bạn chưa có sản phẩm nào</span>
+        <a href="/Product">Mua sắm ngay</a>
+    </div>
+    <script>
+        $('.header__cart--notice').css({ 'display': 'none' });
+    </script>
+}
+else
+{
+    @*Has item*@
+    <div class="header__has-cart">
+        <div class="header__has-cart--style">Sản phẩm bạn đã chọn</div>
+        <ul class="box header__cart-list">
+            @foreach (var item in Model)
+            {
+                <!-- Item -->
+                <li class="header__cart-list-item">
+                    @if (item.product.Image == null)
+                    {
+                        <img src="~/Images/Banners/no-image.jpg" alt="" class="header__cart-list-item-img">
+                    }
+                    else
+                    {
+                        <img src="~/Images/Products/@item.product.Image" alt="" class="header__cart-list-item-img">
+                    }
+                    <div class="header__cart-list-item-info">
+                        <div class="header__cart-list-item-head">
+                            <h5 class="header__cart-list-item-name">@item.product.ProductName</h5>
+                        </div>
+                        @{
+                            var price = item.product.Price - item.product.Price * item.product.Discount;
+                            total += Convert.ToInt32(price * item.quantity);
+                        }
+                        <div class="header__cart-list-item-body">
+                            <div class="header__cart-list-item-rice-wrap">
+                                <span class="header__cart-list-item-price">@String.Format(format, "{0:c0}", price)</span>
+                                <span class="header__cart-list-item-mul">x</span>
+                                <span class="header__cart-list-item-quantity">@item.quantity</span>
+                            </div>
+                            <span class="header__cart-list-item-trash __delete" id="@item.product.ProductID">Xoá</span>
+                        </div>
+                    </div>
+                </li>
+                <li><hr width="90%" style="margin: 0 auto;" /></li>
+            }
+        </ul>
+
+        <script>
+                    $('.header__cart-list-item-trash').click(function () {
+                    var model = {};
+                    model.id = $(this).attr('id');
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Remove", "Cart")',
+                        data: JSON.stringify(model),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            location.reload();
+                        }
+                    });
+                    })
+        </script>
+
+        <div class="header__cart-total">
+            <div class="total"> Tổng cộng: <span>@String.Format(format, "{0:c0}", total)</span> </div>
+            <a href="/cart" class="header__cart-check-btn">Kiểm tra giỏ hàng</a>
+        </div>
+    </div>
+}

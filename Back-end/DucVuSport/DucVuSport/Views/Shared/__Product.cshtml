@@ -50,8 +50,7 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
-                location.reload();
-                alert("Thêm thành công!")
+                toastr.success('Thêm sản phẩm thành công', 'Thông báo');
             }
         });
     });

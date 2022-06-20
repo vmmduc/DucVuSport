@@ -22,10 +22,18 @@ $(document).ready(function () {
     })
 
     $('#cart-btn').click(function () {
-        if (!shoppingCart.hasClass('active'))
-            shoppingCart.addClass('active');
-        else
+        if (!shoppingCart.hasClass('active')) {
+            $.ajax({
+                url: "/Cart/GetCartHeader",
+                success: function (response) {
+                    shoppingCart.html(response);
+                    shoppingCart.addClass('active');
+                }
+            })
+        }
+        else {
             shoppingCart.removeClass('active');
+        }
 
         searchForm.removeClass('active');
         account.removeClass('active');
@@ -187,4 +195,15 @@ $(document).ready(function () {
     };
 
     $('.desc-content').html($('.desc-content').text());
+
+    $(".category-btn").click(function () {
+        var id = $(this).attr("id");
+        $.ajax({
+            url: "/Product/GetProductByCart",
+            data: { id: id },
+            success: function (response) {
+                $("div.product__list-content").html(response);
+            }
+        })
+    })
 });

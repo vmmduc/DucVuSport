@@ -4,7 +4,6 @@ using DucVuSport.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DucVuSport.Controllers
@@ -20,7 +19,11 @@ namespace DucVuSport.Controllers
             var user = Session[Common.Constans.Session.LOGIN_SESSION];
             return View(user);
         }
-
+        public ActionResult GetCartHeader()
+        {
+            var cartList = Session[Common.Constans.Session.CART_SESSION] as List<DucVuSport.Models.CartModel>;
+            return PartialView("__header-cart", cartList);
+        }
         public ActionResult AddToCart(int id, int quantity)
         {
             try
@@ -74,7 +77,7 @@ namespace DucVuSport.Controllers
             cartList.RemoveAll(x => x.product.ProductID == id);
             Session["cart"] = cartList;
             Session["count"] = cartList.Count;
-            return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
+            return RedirectToAction("GetCartHeader");
         }
 
         public ActionResult Update(int id, int quantity)
