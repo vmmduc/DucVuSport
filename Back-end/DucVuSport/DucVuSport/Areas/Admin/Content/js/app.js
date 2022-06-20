@@ -32,17 +32,4 @@ $(document).ready(function () {
             category_chart.render()
         }
     })
-
-    function getResponse(response) {
-        if (response.status == true) {
-            $('.message').addClass('alert').addClass('alert-success')
-            $('.message').text(response.message);
-        } else {
-            $('.message').addClass('alert').addClass('alert-danger')
-            $('.message').text(response.message);
-        }
-    }
-    function fnSuccess(response) {
-        getResponse(response)
-    }
 })

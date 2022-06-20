@@ -88,6 +88,17 @@
 </div>
 
 <script type="text/javascript">
+    function getResponse(response) {
+        if (response.status == true) {
+            $('.message').addClass('alert').addClass('alert-success')
+            $('.message').text(response.message);
+        } else {
+            $('.message').addClass('alert').addClass('alert-danger')
+            $('.message').text(response.message);
+        }
+    }
+
+
     $('.reset-pwd-btn').click(function () {
         var id =  @Model.UserID;
         $.ajax({

@@ -11,7 +11,6 @@ namespace DucVuSport.Areas.Admin.Controllers
     {
         private readonly DataContext _data = new DataContext();
 
-
         [Authorize(Roles = Constans.Role.ADMIN)]
         public ActionResult Index()
         {
