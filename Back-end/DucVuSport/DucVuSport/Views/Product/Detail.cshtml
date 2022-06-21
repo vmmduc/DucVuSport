@@ -173,6 +173,7 @@
                 if (response.status == true) {
                     $('.header__cart--notice').text(response.count);
                     toastr.success(response.message, 'Thông báo');
+                    $('.header__cart--notice').css({ "display": "block" });
                 }
                 else {
                     toastr.success(response.message, 'Thông báo');

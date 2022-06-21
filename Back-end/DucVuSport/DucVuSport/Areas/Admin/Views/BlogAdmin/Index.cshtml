@@ -1,0 +1,50 @@
+﻿@model IEnumerable<DucVuSport.Models.Entities.Blog>
+
+@{
+    ViewBag.label = "Danh sách bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<div class="bill-index-content">
+    <div class="d-flex justify-content-between">
+        <form class="header__search">
+            <label for="search-box" class="fas fa-search"></label>
+            <input type="search" id="search-box" placeholder="Nhập thông tin...">
+        </form>
+
+        <p class="add-new">
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    </div>
+    <table class="table">
+        <tr>
+            <th>Thể loại</th>
+            <th>Tiêu đề</th>
+            <th>Ngày tạo</th>
+            <th>Tác giả</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogCategory.CatName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.FullName)
+                </td>
+                <td class="button">
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.BlogID }, new { @class = "btn btn-outline-primary" }) | 
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.BlogID }, new { @class = "btn btn-outline-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

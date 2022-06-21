@@ -63,7 +63,12 @@ namespace DucVuSport.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             if (Session[Common.Constans.Session.ADMIN_SESSION] != null)
+            {
+                var account = Session[Common.Constans.Session.ADMIN_SESSION] as DucVuSport.Models.Entities.User;
+                account.LastActivity = DateTime.Now;
+                _data.SaveChanges();
                 Session.Remove(Common.Constans.Session.ADMIN_SESSION);
+            }
             return RedirectToAction("Login");
         }
         #endregion

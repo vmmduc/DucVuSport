@@ -33,7 +33,7 @@
                     <td>@Html.DisplayFor(modelItem => item.PaymentDate)</td>
                     <td>@Html.DisplayFor(modelItem => item.Total)</td>
                     <td>@Html.DisplayFor(modelItem => item.OrderStatu.Name)</td>
-                    <td>@Html.ActionLink("Xem", "Details", new { id = item.OrderID })</td>
+                    <td>@Html.ActionLink("Xem", "Details", new { id = item.OrderID }, new { @class = "btn btn-outline-primary" })</td>
                 </tr>
             }
         </table>

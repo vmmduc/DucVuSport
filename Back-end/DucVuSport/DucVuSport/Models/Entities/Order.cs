@@ -26,7 +26,8 @@ namespace DucVuSport.Models.Entities
         public DateTime? PaymentDate { get; set; }
 
         public int? PaymentID { get; set; }
-        public long? Total { get; set ;} 
+
+        public long? Total { get; set; }
 
         [StringLength(255)]
         public string Note { get; set; }

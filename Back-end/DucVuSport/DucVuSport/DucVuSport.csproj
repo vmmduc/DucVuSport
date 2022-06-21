@@ -175,6 +175,7 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\BillController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthenticationController.cs" />
@@ -356,12 +357,15 @@
     <Content Include="Areas\Admin\Views\Account\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\Account\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Error.cshtml" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Areas\Admin\Views\Shared\_PrintPDF.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\__product.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogAdmin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogAdmin\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

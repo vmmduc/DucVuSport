@@ -46,18 +46,14 @@
         </div>
 
         <div class="col-12" style="padding-left: 1rem;">
-            <a href="#" class="text-decoration-none btn btn-warning"><i class="fas fa-arrow-left"></i> Quay lại</a>
+            <a href="/Home/Index" class="text-decoration-none btn btn-warning"><i class="fas fa-arrow-left"></i> Quay lại</a>
             <button class="btn btn-primary btn-block" type="submit">Cập nhật</button>
         </div>
     }
 </div>
 <script type="text/javascript">
     function fnSuccess(response) {
-        if (response.status == true) {
-            $('.message').addClass('alert').addClass('alert-success')
-            $('.message').text(response.message);
-        } else {
-            $('.message').addClass('alert').addClass('alert-danger')
-            $('.message').text(response.message);
-        }
+        $('.message').addClass('alert').addClass('alert-success')
+        $('.message').text("Cập nhật thành công");
+    }
 </script>

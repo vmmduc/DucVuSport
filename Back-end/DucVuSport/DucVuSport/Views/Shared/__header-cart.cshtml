@@ -3,7 +3,7 @@
     var total = 0;
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
-@if (Model == null)
+@if (Convert.ToInt32(Session["count"]) == 0)
 {
     @*No item*@
     <div class="header__no-cart">
@@ -50,20 +50,6 @@ else
                             <span class="header__cart-list-item-trash __delete" id="@item.product.ProductID">Xoá</span>
                         </div>
                     </div>
-                    <script>
-                        $('.header__cart-list-item-trash').click(function () {
-                            var id = $(this).attr('id');
-                            $.ajax({
-                                url: '/Cart/Remove/' + id,
-                                dataType: "json",
-                                contentType: "application/json; charset=utf-8",
-                                success: function () {
-                                    alert("Xóa thành công");
-                                    window.location.reload();
-                                }
-                            });
-                        })
-                    </script>
                 </li>
                 <li><hr width="90%" style="margin: 0 auto;" /></li>
             }
@@ -74,3 +60,23 @@ else
         </div>
     </div>
 }
+<script>
+    if ($('.header__cart--notice').text() == "" || $('.header__cart--notice').text() == "0") {
+        $('.header__cart--notice').css({ "display": "none" });
+    }
+
+    $('.header__cart-list-item-trash').each(function () {
+        $(this).click(function () {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: '/Cart/Remove/' + id,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Xóa thành công");
+                    window.location.reload();
+                }
+            });
+        })
+    })
+</script>

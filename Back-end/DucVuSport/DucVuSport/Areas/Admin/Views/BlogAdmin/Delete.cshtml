@@ -1,0 +1,42 @@
+﻿@model DucVuSport.Models.Entities.Blog
+
+@{
+    ViewBag.label = "Xác nhận xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+<div class="bill-index-content table-responsive">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <a href="/Admin/ProductAdmin/Index" class="text-decoration-none btn btn-primary">Quay lại</a> | 
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </div>
+    }
+    <table class="table">
+        <tr>
+            <td>Thể loại</td>
+            <td>@Html.DisplayFor(model => model.BlogCategory.CatName)</td>
+        </tr>
+        <tr>
+            <td>Tiêu đề</td>
+            <td>@Html.DisplayFor(model => model.Title)</td>
+        </tr>
+        <tr>
+            <td>Tác giả</td>
+            <td>@Html.DisplayFor(model => model.User.FullName)</td>
+        </tr>
+        <tr>
+            <td>Ngày tạo</td>
+            <td>@Html.DisplayFor(model => model.CreateDate)</td>
+        </tr>
+    </table>
+    <div class="content">
+        @Html.DisplayFor(model => model.Content)
+    </div>
+</div>
+
+<script>
+    $('.content').html($('.content').text());
+</script>

@@ -39,7 +39,7 @@
 
         @*Image*@
         <div class="group">
-            <input type="file" name="imageFile" class="form-control"/>
+            <input type="file" name="imageFile" class="form-control" />
         </div>
 
         <div class="group">
@@ -94,40 +94,40 @@
 }
 
 <script>
-                function UploadImage(file) {
-                    var url = '@Url.Action("UploadFile", "Products")';
-                    var formData = new FormData();
-                    formData.append("UploadedFile", file);
-                    $.ajax({
-                        data: formData,
-                        type: "POST",
-                        url: url,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function (FileUrl) {
-                            var imgNode = document.createElement('img');
-                            imgNode.src = FileUrl;
-                            $('#Content').summernote('insertNode', imgNode);
-                        },
-                        error: function (data) {
-                            alert(data.responseText);
-                        }
-                    });
-                }
+    function UploadImage(file) {
+        var url = '@Url.Action("UploadFile", "Products")';
+        var formData = new FormData();
+        formData.append("UploadedFile", file);
+        $.ajax({
+            data: formData,
+            type: "POST",
+            url: url,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (FileUrl) {
+                var imgNode = document.createElement('img');
+                imgNode.src = FileUrl;
+                $('#Content').summernote('insertNode', imgNode);
+            },
+            error: function (data) {
+                alert(data.responseText);
+            }
+        });
+    }
 
-                $('#summernote').summernote({
-                    placeholder: 'Mô tả sản phẩm',
-                    height: 500,
-                    fontSizes: ['12', '14', '16', '18', '24', '36', '48'],
-                    toolbar: [
-                        ['style', ['style']],
-                        ['font', ['bold', 'underline', 'clear']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['table', ['table']],
-                        ['insert', ['link', 'picture', 'video']],
-                        ['view', ['codeview', 'help']]
-                    ]
-                });
+    $('#summernote').summernote({
+        placeholder: 'Nội dung bài viết ...',
+        height: 500,
+        fontSizes: ['12', '14', '16', '18', '24', '36', '48'],
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['codeview', 'help']]
+        ]
+    });
 </script>

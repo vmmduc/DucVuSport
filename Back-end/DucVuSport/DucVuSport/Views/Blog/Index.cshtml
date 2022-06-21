@@ -1,4 +1,5 @@
-﻿<section class="travel-area section-gap" id="travel">
+﻿@model List<DucVuSport.Models.Entities.Blog>
+<section class="travel-area section-gap" id="travel">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-70 col-lg-8">
@@ -8,19 +9,16 @@
             </div>
         </div>
         <div class="row row-cols-2 row-cols-sm-1 row-cols-xs-1">
-            @for (var i = 0; i < 10; i++)
+            @foreach (var item in Model)
             {
                 <div class="single-travel d-flex col-md-6">
                     <img class="img-fluid d-flex  mr-3" src="~/Images/img/t1.jpg" alt="">
-                    <div class="dates">
-                        <span>20</span>
-                        <p>Dec</p>
-                    </div>
                     <div class="media-body align-self-center">
                         <h4 class="mt-0">
-                            <a href="/Blog/Detail">Tiêu đề sẽ nằm ở chỗ này</a>
+                            <a href="/Blog/Detail/@item.BlogID">@item.Title</a>
                         </h4>
-                        <p>Một đoạn của phần bài viết sẽ nằm ở đây</p>
+                        <p>@item.ShortContent</p>
+                        <p>@item.CreateDate</p>
                         <div class="meta-bottom d-flex justify-content-between">
                             <p><i class="far fa-heart"></i> 15 Likes</p>
                             <p><i class="far fa-comment"></i> 02 Comments</p>

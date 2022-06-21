@@ -61,7 +61,7 @@ namespace DucVuSport.Controllers
                     var passwordHash = Encrypt.GetMD5(model.password.Trim().ToLower());
                     user.PasswordHash = passwordHash;
                     user.RoleID = role.RoleID;
-                    user.Unlock = false;
+                    user.Unlock = true;
                     _data.Users.Add(user);
                     _data.SaveChanges();
 
@@ -148,9 +148,9 @@ namespace DucVuSport.Controllers
                     user.AddressDetail = customer.AddressDetail;
                     _data.SaveChanges();
                 }
-                return Json(new { status = true, message = "Cập nhật thành công" }, JsonRequestBehavior.AllowGet);
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { status = false, message = "Cập nhật thất bại" }, JsonRequestBehavior.AllowGet);
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
     }
 }

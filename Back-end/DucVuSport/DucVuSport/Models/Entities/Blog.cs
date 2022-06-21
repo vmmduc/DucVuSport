@@ -5,6 +5,7 @@ namespace DucVuSport.Models.Entities
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("Blog")]
     public partial class Blog
@@ -14,6 +15,7 @@ namespace DucVuSport.Models.Entities
         [StringLength(255)]
         public string Title { get; set; }
 
+        [AllowHtml]
         public string Content { get; set; }
 
         public DateTime? CreateDate { get; set; }

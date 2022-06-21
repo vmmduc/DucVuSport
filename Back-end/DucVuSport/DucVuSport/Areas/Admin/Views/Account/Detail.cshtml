@@ -61,7 +61,7 @@
                 <th>Quyền</th>
                 <td class="row">
                     <div class="col-8">@Html.DropDownList("RoleID", null, htmlAttributes: new { @class = "form-control" })</div>
-                    <div class="col-4"><button type="submit" class="btn btn-outline-primary">Cấp quyền</button></div>
+                    <div class="col-4"><button type="submit" class="btn btn-outline-primary changeRole-btn">Cấp quyền</button></div>
                 </td>
                 @*<td>@Html.DisplayFor(model => model.Role.RoleName)</td>*@
             </tr>
@@ -134,5 +134,8 @@
                 getResponse(response);
             }
         });
-    })
+     })
+    function fnSuccess(response) {
+        getResponse(response);
+    }
 </script>
