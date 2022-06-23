@@ -63,7 +63,7 @@ namespace DucVuSport.Controllers
                     }
                 }
                 var count = Session["count"];
-                return Json(new {status = true, count = count, message = "Thêm thành công"}, JsonRequestBehavior.AllowGet);
+                return Json(new { status = true, count = count, message = "Thêm thành công" }, JsonRequestBehavior.AllowGet);
             }
             catch
             {
@@ -77,15 +77,18 @@ namespace DucVuSport.Controllers
             cartList.RemoveAll(x => x.product.ProductID == id);
             Session["cart"] = cartList;
             Session["count"] = cartList.Count;
-            return Json(new {message = "Xóa thành công"}, JsonRequestBehavior.AllowGet);
+            return Json(new { message = "Xóa thành công" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Update(int id, int quantity)
         {
             List<CartModel> cartList = Session["cart"] as List<CartModel>;
+            var product = _data.Products.FirstOrDefault(x => x.ProductID == id);
+            if (product.Quantity < quantity)
+                return Json(new { status = false, message = "Số lượng vượt quá sản phẩm trong kho", JsonRequestBehavior.AllowGet });
             cartList.Find(x => x.product.ProductID == id).quantity = quantity;
             Session["cart"] = cartList;
-            return Json(new {message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
+            return Json(new { status = true, message = "Cập nhật thành công", JsonRequestBehavior.AllowGet });
         }
         private int IsExist(int id)
         {
@@ -100,26 +103,34 @@ namespace DucVuSport.Controllers
         [HttpPost]
         public ActionResult Order(User model)
         {
-            var user = Session[Constans.Session.LOGIN_SESSION] as User;
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                var customer = _data.Users.Find(user.UserID);
-                customer.PhoneNumber = model.PhoneNumber;
-                customer.Province = model.Province;
-                customer.District = model.District;
-                customer.Ward = model.Ward;
-                customer.AddressDetail = model.AddressDetail;
-                _data.SaveChanges();
-                CreateOrder(customer);
+                var user = Session[Constans.Session.LOGIN_SESSION] as User;
+                if (user != null)
+                {
+                    var customer = _data.Users.Find(user.UserID);
+                    customer.PhoneNumber = model.PhoneNumber;
+                    customer.Province = model.Province;
+                    customer.District = model.District;
+                    customer.Ward = model.Ward;
+                    customer.AddressDetail = model.AddressDetail;
+                    _data.SaveChanges();
+                    CreateOrder(customer);
+                }
+                else
+                {
+                    user = model;
+                    _data.Users.Add(user);
+                    _data.SaveChanges();
+                    CreateOrder(user);
+                }
+                return RedirectToAction("Success");
             }
             else
             {
-                user = model;
-                _data.Users.Add(user);
-                _data.SaveChanges();
-                CreateOrder(user);
+                ModelState.AddModelError("", "Vui lòng nhập đầy đủ thông tin giao hàng");
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Success");
         }
         private void CreateOrder(User user)
         {

@@ -92,7 +92,12 @@
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function (response) {
-                            toastr.success(response.message, 'Thông báo');
+                            if (response.status = true) {
+                                toastr.success(response.message, 'Thông báo');
+                            }
+                            else {
+                                toastr.warning(response.message, 'Warning');
+                            }
                         }
                     });
                 })

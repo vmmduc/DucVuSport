@@ -19,7 +19,7 @@ namespace DucVuSport.Areas.Admin.Controllers
 
             ViewBag.turnover = data.Orders.Where(x => x.Status == success.ID).Sum(x => x.Total);
             ViewBag.viewTotal = data.Products.Sum(x => x.ViewCount);
-            ViewBag.top10 = data.Products.OrderByDescending(x => x.Sold).Take(10).ToList();
+            ViewBag.top10 = data.Products.Where(x => x.Sold > 0).OrderByDescending(x => x.Sold).Take(10).ToList();
             ViewBag.totalOrder = data.Orders.Count(x => x.Status == waitingConfirm.ID || x.Status == approve.ID);
             var order = data.Orders.Include(x => x.OrderStatu).Include(x => x.Payment).Include(x => x.User).Where(x => x.Status != success.ID).ToList();
             return View(order);

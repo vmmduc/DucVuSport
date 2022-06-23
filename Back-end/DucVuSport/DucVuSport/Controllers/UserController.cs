@@ -62,6 +62,11 @@ namespace DucVuSport.Controllers
                     user.PasswordHash = passwordHash;
                     user.RoleID = role.RoleID;
                     user.Unlock = true;
+                    user.Province = model.Province;
+                    user.Ward = model.Ward;
+                    user.District = model.District;
+                    user.AddressDetail = model.AddressDetail;
+
                     _data.Users.Add(user);
                     _data.SaveChanges();
 

@@ -19,12 +19,16 @@ namespace DucVuSport.Models.Entities
         public int UserID { get; set; }
 
         [StringLength(255)]
+        [Required(ErrorMessage = "Nhap ho ten")]
         public string FullName { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Nhap so dien thoai")]
         public string PhoneNumber { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Nhap email")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Chua dung dinh dang email")]
         public string Email { get; set; }
 
         [StringLength(255)]
@@ -37,15 +41,19 @@ namespace DucVuSport.Models.Entities
         public bool Unlock { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Nhap tinh/thanh pho")]
         public string Province { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Nhap quan/huyen")]
         public string District { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Nhap xa phuong")]
         public string Ward { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "Nhap dia chi")]
         public string AddressDetail { get; set; }
 
         public bool? IsDeleted { get; set; }

@@ -10,7 +10,7 @@
         @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
         <div class="form__input">
             @Html.TextBoxFor(m => m.email, new { @placeholder = "Tên người dùng", @id = "username" })
-            <div class="form__icon"><i class="fas fa-user-circle"></i></div>
+            <div class="form__icon"><span class="fas fa-user-circle"></span></div>
         </div>
     </div>
 
@@ -18,7 +18,7 @@
         @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
         <div class="form__input pwd-input">
             @Html.PasswordFor(m => m.password, new { @placeholder = "Mật khẩu", @class = "pw" })
-            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
+            <div class="form__icon"><span class="fa fa-eye-slash"></span></div>
         </div>
     </div>
 

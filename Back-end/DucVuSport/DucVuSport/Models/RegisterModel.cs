@@ -26,5 +26,17 @@ namespace DucVuSport.Models
         [Required(ErrorMessage = "Nhập lại mật khẩu")]
         [Compare("password", ErrorMessage = "Mật khẩu nhập lại không đúng")]
         public string repassword { get; set; }
+
+        [Required(ErrorMessage = "Nhập tỉnh/thành phố")]
+        public string Province { get; set; }
+
+        [Required(ErrorMessage = "Nhập quận/huyện")]
+        public string District { get; set; }
+
+        [Required(ErrorMessage = "Nhập xã/phường")]
+        public string Ward { get; set; }
+
+        [Required(ErrorMessage = "Nhập địa chỉ")]
+        public string AddressDetail { get; set; }
     }
 }

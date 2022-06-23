@@ -10,7 +10,7 @@
         @Html.ValidationMessageFor(model => model.fullName, "", new { @class = "text-danger" })
         <div class="form__input">
             @Html.TextBoxFor(m => m.fullName, new { @placeholder = "Họ và tên" })
-            <div class="form__icon"><i class="fas fa-envelope"></i></div>
+            <div class="form__icon"><span class="fas fa-envelope"></span></div>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
         @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
         <div class="form__input">
             @Html.TextBoxFor(m => m.phoneNumber, new { @placeholder = "Số điện thoại" })
-            <div class="form__icon"><si class="fas fa-envelope"></si></div>
+            <div class="form__icon"><span class="fas fa-phone"></span></div>
         </div>
     </div>
 
@@ -28,7 +28,43 @@
         @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
         <div class="form__input">
             @Html.TextBoxFor(m => m.email, new { @placeholder = "Email" })
-            <div class="form__icon"><i class="fas fa-envelope"></i></div>
+            <div class="form__icon"><span class="fas fa-envelope"></span></div>
+        </div>
+    </div>
+
+    @*province*@
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+        <div class="form__input">
+            @Html.TextBoxFor(m => m.Province, new { @placeholder = "Tỉnh/Thành phố" })
+            <div class="form__icon"><span class="fas fa-map-marker-alt"></span></div>
+        </div>
+    </div>
+
+    @*distric*@
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+        <div class="form__input">
+            @Html.TextBoxFor(m => m.District, new { @placeholder = "Quận/Huyện" })
+            <div class="form__icon"><span class="fas fa-map-marker-alt"></span></div>
+        </div>
+    </div>
+
+    @*ward*@
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.Ward, "", new { @class = "text-danger" })
+        <div class="form__input">
+            @Html.TextBoxFor(m => m.Ward, new { @placeholder = "Phường/Xã" })
+            <div class="form__icon"><span class="fas fa-map-marker-alt"></span></div>
+        </div>
+    </div>
+
+    @*adress*@
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.AddressDetail, "", new { @class = "text-danger" })
+        <div class="form__input">
+            @Html.TextBoxFor(m => m.AddressDetail, new { @placeholder = "Số nhà/Đường" })
+            <div class="form__icon"><span class="fas fa-map-marker-alt"></span></div>
         </div>
     </div>
 
@@ -37,7 +73,7 @@
         @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
         <div class="form__input pwd-input">
             @Html.PasswordFor(m => m.password, new { @class = "pw", @placeholder = "Mật khẩu" })
-            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
+            <div class="form__icon"><span class="fa fa-eye-slash"></span></div>
         </div>
     </div>
 
@@ -46,7 +82,7 @@
         @Html.ValidationMessageFor(model => model.repassword, "", new { @class = "text-danger" })
         <div class="form__input pwd-input">
             @Html.PasswordFor(m => m.repassword, new { @class = "pw", @placeholder = "Xác nhận mật khẩu" })
-            <div class="form__icon"><i class="fa fa-eye-slash"></i></div>
+            <div class="form__icon"><span class="fa fa-eye-slash"></span></div>
         </div>
     </div>
 
